@@ -129,11 +129,12 @@
     });
 </script>
 <script type="text/javascript">
-  $(document).off('click','.ChangeLanguage');
-  $(document).on('click','.ChangeLanguage',function(e)
+  $(document).off('change','.ChangeLanguage');
+  $(document).on('change','.ChangeLanguage',function(e)
   {
     var url  = window.location.href;
-    var language=$(this).data('language');
+    //var language=$(this).data('language');
+    var language=$(this).val();
     var action="<?php echo base_url(FOLDER_ADMIN) ?>/dashboard/change_language";
     $.ajax({
     type: "POST",

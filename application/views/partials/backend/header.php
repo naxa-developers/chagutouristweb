@@ -91,36 +91,19 @@
         <!--search & user info start-->
         <ul class="nav pull-right top-menu">
             <li class="nav-item dropdown">
-                <a data-toggle="dropdown" class="dropdown-toggle" href="#">
-                    <span class="username"><?php echo $this->lang->line('switch_language'); ?> </span>
-                </a>
                 <?php
                 $urll=$this->uri->segment(1);
                 if($this->session->userdata('Language')==NULL){
                     $this->session->set_userdata('Language','nep');
                 }
                 $lang=$this->session->get_userdata('Language');
-                if($lang['Language']=='en'){ ?>
-            <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle " href="javascript:void(0)" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    <i class="la la-language"></i> : En
-                    <b class="caret"></b>
-                </a>
-                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                    <a class="dropdown-item ChangeLanguage" data-language="nep" href="javascript:void(0)">नेपाली</a>
-                </div>
-            </li>
-            <?php }else{ ?>
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="javascript:void(0)" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        <i class="la la-language"></i> : ने
-                        <b class="caret"></b>
-                    </a>
-                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <a class="dropdown-item ChangeLanguage" data-language="en" href="javascript:void(0)">English</a>
-                    </div>
-                </li>
-            <?php } ?>
+                $language_data = $this->general->get_tbl_data_result('name,alias','publicationsubcat'); ?>
+                <label><?php echo $this->lang->line('switch_language'); ?></label>
+                <select class=" ChangeLanguage">
+                <?php  foreach ($language_data as $key => $value) { ?>
+                    <option class="dropdown-item" value="<?php echo $value['alias'] ?>" data-language="<?php echo $value['alias'] ?>"<?php if($lang['Language'] === $value['alias']) echo "Selected=selectd";?> ><?php echo $value['name'] ?></option>
+                <?php } ?>
+                </select>
             </li>
             <li class="dropdown">
                 <a data-toggle="dropdown" class="dropdown-toggle" href="#">
@@ -226,7 +209,7 @@
                         <li><a href="<?php echo base_url(FOLDER_ADMIN);?>/publication/view_publication"> <?php echo $this->lang->line('about_us_data'); ?></a></li>
                         <li><a href="<?php echo base_url(FOLDER_ADMIN);?>/publication/add_publication_category"><?php echo $this->lang->line('about_us_category'); ?></a></li>
                         <li><a href="<?php echo base_url(FOLDER_ADMIN);?>/publication/add_publication_sub_category"><?php echo $this->lang->line('language_setting'); ?></a></li>
-                        
+
                     </ul>
                 </li>
               <!--   <li class="sub-menu">
