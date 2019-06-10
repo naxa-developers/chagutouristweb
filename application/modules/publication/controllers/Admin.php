@@ -15,20 +15,22 @@ class Admin extends Admin_Controller {
 		$this->load->library('form_validation');
 		$this->form_validation->set_error_delimiters('<div class="error">', '</div>');	
 	}
-	public function index()
-	{
-		# code...
-	}
 	public function view_publication(){
-	  	$this->body= array();
-	    $this->body['data']=$this->Publication_model->get_all_data();
-	    //admin check
+	  	$this->data= array();
+	  	$lang=$this->session->get_userdata('Language');
+        if($lang['Language']=='en') {
+            $emerg_lang='en';
+        }else{
+            $emerg_lang='nep'; 
+        }
+	   // $this->data['data']=$this->Publication_model->get_all_data();
+	    $this->data['data'] = $this->general->get_tbl_data_result('*','publication',array('lang'=>$emerg_lang));
 	    $admin_type=$this->session->userdata('user_type');
-	    $this->body['admin']=$admin_type;
+	    $this->data['admin']=$admin_type;
 	    //admin check
 	    $this->template
                         ->enable_parser(FALSE)
-                        ->build('admin/publication_tbl',$this->body);
+                        ->build('admin/publication_tbl',$this->data);
 
   	}
   	public function filecat()
@@ -85,18 +87,13 @@ class Admin extends Admin_Controller {
   	}
   	public function add_publication_sub_category(){
 	 	$this->data=array();
-	 	$this->form_validation->set_rules('name', 'Publication File Category Name', 'trim|required');
-	 	$lang=$this->session->get_userdata('Language');
-        if($lang['Language']=='en') {
-            $emerg_lang='en';
-        }else{
-            $emerg_lang='nep'; 
-        }
+	 	$this->form_validation->set_rules('name', 'Language  Name', 'trim|required');
+	 	$this->form_validation->set_rules('alias', 'Language Represents', 'trim|required');
 		if ($this->form_validation->run() == TRUE){
 	      	$page_slug_new = strtolower (preg_replace('/[[:space:]]+/', '-', $this->input->post('name')));
 	      	$data=array(
 	        	'name'=>$this->input->post('name'),
-	        	'language'=>$emerg_lang,
+	        	'alias'=>$this->input->post('alias'),
 	        	'slug'=>$page_slug_new,
 	      	);
 	      	$insert=$this->Publication_model->add_publiactioncat('publicationsubcat',$data);
@@ -109,11 +106,11 @@ class Admin extends Admin_Controller {
 	    	$id = base64_decode($this->input->get('id'));
 	    	//print_r($id);die;
 	    	if($id) {
-				$this->data['drrdataeditdata'] = $this->general->get_tbl_data_result('id,name','publicationsubcat',array('id'=>$id));
+				$this->data['drrdataeditdata'] = $this->general->get_tbl_data_result('id,name,alias','publicationsubcat',array('id'=>$id));
 	    	}else{
 	    		$this->data['drrdataeditdata'] = array();	
 	    	}
-	    	$this->data['publicationdata'] = $this->general->get_tbl_data_result('id,name','publicationsubcat');	
+	    	$this->data['publicationdata'] = $this->general->get_tbl_data_result('id,name,alias','publicationsubcat');	
 	      	$admin_type=$this->session->userdata('user_type');
 	      	$this->data['admin']=$admin_type;
 	      	//admin check
@@ -146,13 +143,14 @@ class Admin extends Admin_Controller {
 	    }else{
 	      //admin check
 	    	$id = base64_decode($this->input->get('id'));
-	    	//print_r($id);die;
+	    	
 	    	if($id) {
 				$this->data['drrdataeditdata'] = $this->general->get_tbl_data_result('id,name','publicationcat',array('id'=>$id));
 	    	}else{
 	    		$this->data['drrdataeditdata'] = array();	
 	    	}
-	    	$this->data['publicationdata'] = $this->general->get_tbl_data_result('id,name','publicationcat');	
+	    	$this->data['publicationdata'] = $this->general->get_tbl_data_result('id,name','publicationcat',array('language'=>$emerg_lang));
+	    	//echo "<pre>";print_r($this->data['publicationdata']);die;	
 	      	$admin_type=$this->session->userdata('user_type');
 	      	$this->data['admin']=$admin_type;
 	      	//admin check
@@ -162,9 +160,9 @@ class Admin extends Admin_Controller {
 	    }
 	}
  	public function add_publication(){
- 		$this->body=array();
-    	$this->form_validation->set_rules('category', 'Please Select Hazard category', 'trim|required');
-    	$this->form_validation->set_rules('type', 'Please Select File Type', 'trim|required');
+ 		$this->data=array();
+    	$this->form_validation->set_rules('category', 'Please Select About ', 'trim|required');
+    	$this->form_validation->set_rules('title', 'Please Fill title ', 'trim|required');
     	$lang=$this->session->get_userdata('Language');
 	    if($lang['Language']=='en'){
 	        $language='en';
@@ -173,11 +171,9 @@ class Admin extends Admin_Controller {
 	    }
 		if ($this->form_validation->run() == TRUE){
 	      	$file_name = $_FILES['proj_pic']['name'];
-	      	$attachment=$_FILES['uploadedfile']['name'];
 	      	$audio=$_FILES['audio']['name'];
 	      	//echo "<pre>"; print_r($audio);die;
 	    	$ext = pathinfo($file_name, PATHINFO_EXTENSION);
-	      	$ext_file = pathinfo($attachment, PATHINFO_EXTENSION);
 	      	$ext_file_audio = pathinfo($audio, PATHINFO_EXTENSION);
 	      	$page_slug_new = strtolower (preg_replace('/[[:space:]]+/', '-', $this->input->post('title')));
 	      	if($this->input->post('category') == "other"){
@@ -186,7 +182,6 @@ class Admin extends Admin_Controller {
 	      		$cat =$this->input->post('category');
 	      	}
 	      	$data=array(
-	      		//'slug'=>$page_slug_new,
 	        	'title'=>$this->input->post('title'),
 	        	'summary'=>$this->input->post('summary'),
 	        	'type'=>$this->input->post('type'),
@@ -200,45 +195,32 @@ class Admin extends Admin_Controller {
 	      	if($insert!=""){
 	      		if(!empty($audio)){
 	      			$file_upload_audio=$this->Publication_model->file_do_uploa_audiod($audio,$insert);
+
 	      		}else{
 	      			$file_upload_audio='';
 	      		}
-
 	      		if(!empty($file_name)){
-	      			$img_upload=$this->Publication_model->do_upload($file_name,$insert);
+	      			$img_upload['status']=$this->Publication_model->do_upload($file_name,$insert);
+	      			//print_r($img_upload['status']);die;
 	      		}else{
 	      			$img_upload['status']='';
 	      		}
-	      		if(!empty($attachment)){
-	      			$file_upload=$this->Publication_model->file_do_upload($attachment,$insert);
-	      		}else{
-	      			$file_upload['status']='';
-	      		}
-	      		
-		        if($img_upload['status']== 1 || $file_upload['status']== 1  || $file_upload_audio || $file_upload){
+		        if($img_upload['status']== 1  || $file_upload_audio || $file_upload){
 		            if($img_upload['status']== 1){
 		          		$image_path=base_url() . 'uploads/publication/'.$insert.'.'.$ext;
 		            }else{
 		          		$image_path='';
 		          	}
-		          	//print_r($image_path); die;
-		          	if($file_upload== 1) {
-		          		$file_pathd=base_url() . 'uploads/publication/file/'.$insert.'.'.$ext_file;
-		          	}else{
-		          		$file_pathd='';
-		          	}
 		          	if($file_upload_audio == 1) {
-		          		//$file_path_audiofinal=base_url().$file_upload_audio;
 		          		$file_path_audiofinal=base_url() . 'uploads/publication/file/'.$insert.'.'.$ext_file_audio;//base_url().$file_upload_audio;
 		          	}else{
 		          		$file_path_audiofinal='';
 		          	}
 		          	$img=array(
-			            'photo'=>$image_path,
-			            'file'=>$file_pathd,
+			            'photo'=>$image_path,//
 			            'audio'=>$file_path_audiofinal,
 			        );
-			        //echo "<pre>"; print_r($img);die;
+			       // echo "<pre>"; print_r($img);die;
 		            $update_path=$this->Publication_model->update_path($insert,$img);
 		            $this->session->set_flashdata('msg','Publication successfully added');
 		          	redirect(FOLDER_ADMIN.'/publication/view_publication');
@@ -251,17 +233,13 @@ class Admin extends Admin_Controller {
 		        }
 	        }
 	    }else{
-	      //admin check
-	      $admin_type=$this->session->userdata('user_type');
-	      $this->data['admin']=$admin_type;
-	      //admin check
-	     
-	      $this->data['pub'] = $this->general->get_tbl_data_result('id,name','drrcategory');
-	      $this->data['pubcat'] = $this->general->get_tbl_data_result('id,name','publicationsubcat');
-	      $this->data['subfilecat'] = $this->general->get_tbl_data_result('id,name','publicationfilecat');
-	      $this->data['pubcatfiletype'] =$this->config->item('publicationFileType');
-	      // echo "<pre>"; print_r($this->data['pub']);die;
-	      $this->template
+	        //admin check
+	        $admin_type=$this->session->userdata('user_type');
+	        $this->data['admin']=$admin_type;
+	        //admin check
+	     	$this->data['pub']=$this->general->get_tbl_data_result('*','publicationcat',array('language'=>$language),'id');
+		    //echo "<pre>"; print_r($this->body['pub']);die;
+		    $this->template
 	                        ->enable_parser(FALSE)
 	                        ->build('admin/add_publication',$this->data);
 	    }

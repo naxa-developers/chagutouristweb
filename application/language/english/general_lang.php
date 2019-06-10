@@ -283,5 +283,8 @@ $lang['sliderhome']="Manage Slider.";
 $lang['homepagelabel']="Manage Page Labels.";
 
 
+$lang['about_us_data'] = "About Us Data";
+$lang['about_us_category'] = "About Us Category";
+$lang['language_setting'] = "Language Setting";
 
 ?>

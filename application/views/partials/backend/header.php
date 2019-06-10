@@ -91,9 +91,9 @@
         <!--search & user info start-->
         <ul class="nav pull-right top-menu">
             <li class="nav-item dropdown">
-                <!-- <a data-toggle="dropdown" class="dropdown-toggle" href="#">
+                <a data-toggle="dropdown" class="dropdown-toggle" href="#">
                     <span class="username"><?php echo $this->lang->line('switch_language'); ?> </span>
-                </a> -->
+                </a>
                 <?php
                 $urll=$this->uri->segment(1);
                 if($this->session->userdata('Language')==NULL){
@@ -101,7 +101,7 @@
                 }
                 $lang=$this->session->get_userdata('Language');
                 if($lang['Language']=='en'){ ?>
-            <!-- <li class="nav-item dropdown">
+            <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle " href="javascript:void(0)" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     <i class="la la-language"></i> : En
                     <b class="caret"></b>
@@ -109,9 +109,9 @@
                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                     <a class="dropdown-item ChangeLanguage" data-language="nep" href="javascript:void(0)">नेपाली</a>
                 </div>
-            </li> -->
+            </li>
             <?php }else{ ?>
-                <!-- <li class="nav-item dropdown">
+                <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="javascript:void(0)" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         <i class="la la-language"></i> : ने
                         <b class="caret"></b>
@@ -122,10 +122,6 @@
                 </li>
             <?php } ?>
             </li>
-            <li>
-                <input type="text" class="form-control search" placeholder=" <?php echo $this->lang->line('search'); ?>">
-            </li> -->
-            <!-- user login dropdown start-->
             <li class="dropdown">
                 <a data-toggle="dropdown" class="dropdown-toggle" href="#">
 
@@ -156,7 +152,7 @@
 
                     </a>
                 </li>
-                <!-- <li class="sub-menu <?php if($this->uri->segment(1) == '') { echo "active open"; } ?>">
+                <li class="sub-menu <?php if($this->uri->segment(1) == '') { echo "active open"; } ?>">
                     <a href="javascript:;">
                         <i class="fa fa-laptop"></i>
                         <span><?php echo $this->lang->line('home_page'); ?></span>
@@ -165,7 +161,7 @@
                         <li class="<?php if($this->uri->segment(1) == 'view_proj') { echo "active open"; } ?>"><a href="<?php echo base_url()?>view_proj"><?php echo $this->lang->line('project_partners'); ?></a></li>
                         <li><a href="<?php echo base_url();?>feature_nep"><?php echo $this->lang->line('featured_datasets'); ?></a></li>
                     </ul>
-                </li> -->
+                </li>
 
                 <li class="sub-menu">
                     <a href="javascript:;" class="<?php if($this->uri->segment(1) == '') { echo "dcjq-parent active"; } ?>">
@@ -174,9 +170,6 @@
                     </a>
                     <ul class="sub" style="<?php if($this->uri->segment(1) == 'view_proj') { echo "display: block"; } ?>">
                         <li class="<?php if($this->uri->segment(1) == 'view_proj') { echo "active"; } ?>"><a href="<?php echo base_url(FOLDER_ADMIN)?>/project/view_proj"><?php echo $this->lang->line('project_partners'); ?></a></li>
-                        <!-- <li><a href="<?php echo base_url()?>emergency_contact">Emergency Contact</a></li> -->
-                        <!-- <li><a href="<?php echo base_url()?>background">Background Image</a></li> -->
-
                         <?php
 
                         if($this->session->userdata('Language')==NULL){
@@ -202,12 +195,12 @@
 
                     </ul>
                 </li> -->
-                <li class="sub-menu">
+              <!--   <li class="sub-menu">
                     <a href="<?php echo base_url(FOLDER_ADMIN);?>/calendar">
                         <i class="fa fa-th"></i>
                         <span>मौसमी तयारी पात्रो</span>
                     </a>
-                </li>
+                </li> -->
                 <!-- <li class="sub-menu">
                     <a href="javascript:;">
                         <i class="fa fa-th"></i>
@@ -227,19 +220,16 @@
                   <li class="sub-menu">
                     <a href="javascript:;">
                         <i class="fa fa-th"></i>
-                        <span>जानकारी पोर्टल<!-- <?php// echo $this->lang->line('publication_management'); ?> --></span>
+                        <span><?php echo $this->lang->line('about_us'); ?></span>
                     </a>
                     <ul class="sub">
-                        <li><a href="<?php echo base_url(FOLDER_ADMIN);?>/publication/view_publication">जानकारी थप गर्नुहोस् <?php //echo $this->lang->line('publication'); ?></a></li>
-                        <li><a href="<?php echo base_url(FOLDER_ADMIN);?>/publication/add_publication_category">प्रकोप क्याटोगोरी <!-- <?php// echo $this->lang->line('publication'); ?> --></a></li>
-                        <!-- <li><a href="<?php echo base_url(FOLDER_ADMIN);?>/publication/add_publication">Add Publication<?php //echo $this->lang->line('publication'); ?></a></li> -->
-                        <li><a href="<?php echo base_url(FOLDER_ADMIN);?>/publication/add_publication_sub_category">जानकारी  क्याटोगोरी<?php //echo $this->lang->line('publication'); ?></a></li>
-                         <li><a href="<?php echo base_url(FOLDER_ADMIN);?>/publication/filecat">जानकारी सब क्याटोगोरी<?php //echo $this->lang->line('publication'); ?></a></li>
+                        <li><a href="<?php echo base_url(FOLDER_ADMIN);?>/publication/view_publication"> <?php echo $this->lang->line('about_us_data'); ?></a></li>
+                        <li><a href="<?php echo base_url(FOLDER_ADMIN);?>/publication/add_publication_category"><?php echo $this->lang->line('about_us_category'); ?></a></li>
+                        <li><a href="<?php echo base_url(FOLDER_ADMIN);?>/publication/add_publication_sub_category"><?php echo $this->lang->line('language_setting'); ?></a></li>
                         
-
                     </ul>
                 </li>
-                <li class="sub-menu">
+              <!--   <li class="sub-menu">
                     <a href="javascript:;">
                         <i class="fa fa-th"></i>
                         <span><?php echo $this->lang->line('homepagemanagement'); ?></span>
@@ -249,7 +239,7 @@
                         <li><a href="<?php echo base_url(FOLDER_ADMIN);?>/site_setting/homepagesetup"><?php echo $this->lang->line('homepagelabel'); ?></a></li>
                         <li><a href="<?php echo base_url(FOLDER_ADMIN);?>/site_setting/beready">तयारी हुनुहोस्   </a></li>
                     </ul>
-                </li>
+                </li> -->
                 <!-- <li class="sub-menu">
                     <a href="javascript:;">
                         <i class="fa fa-th"></i>
@@ -261,7 +251,7 @@
 
                     </ul>
                 </li> -->
-                <li class="sub-menu">
+               <!--  <li class="sub-menu">
                     <a href="<?php echo base_url(FOLDER_ADMIN);?>/dictionary">
                         <i class="fa fa-th"></i>
                         <span><?php echo $this->lang->line('dictionary'); ?></span>
@@ -278,16 +268,16 @@
                         <li><a href="<?php echo base_url(FOLDER_ADMIN);?>/about/view_about">नेपाल  इन्फो </a></li>
                       
                     </ul>
-                </li>
-                <li class="sub-menu">
+                </li> -->
+              <!--   <li class="sub-menu">
                     <a href="javascript:;">
                         <i class="fa fa-th"></i>
-                        <span>प्रकोप व्यबस्थान <?php //echo $this->lang->line('about_us'); ?></span>
+                        <span><?php echo $this->lang->line('about_us'); ?></span>
                     </a>
                     <ul class="sub">
                         <li><a href="<?php echo base_url(FOLDER_ADMIN);?>/drrinfo">प्रकोप सूची </a></li>
-                        <li><a href="<?php echo base_url(FOLDER_ADMIN);?>/drrinfo/drrinformation">प्रकोप जानकारी थप्नु  <!-- <?php ///echo $this->lang->line('addrrinformation'); ?> --></a></li>
-                        <li><a href="<?php echo base_url(FOLDER_ADMIN);?>/drrinfo/drrinformationlist">प्रकोप जानकारी सूची<!-- <?php //echo $this->lang->line('drrinformationlist'); ?> --></a></li>
+                        <li><a href="<?php echo base_url(FOLDER_ADMIN);?>/drrinfo/drrinformation">प्रकोप जानकारी थप्नु </a></li>
+                        <li><a href="<?php echo base_url(FOLDER_ADMIN);?>/drrinfo/drrinformationlist">प्रकोप जानकारी सूची</a></li>
 
                     </ul>
                 </li>   
@@ -301,7 +291,7 @@
                         <li><a href="<?php echo base_url(FOLDER_ADMIN);?>/quiz/quiz_question">हाजिरीजवाफ थप्नु </a></li>
 
                     </ul>
-                </li>
+                </li> -->
                 <!-- <li class="sub-menu">
                     <a href="javascript:;">
                         <i class=" fa fa-bar-chart-o"></i>

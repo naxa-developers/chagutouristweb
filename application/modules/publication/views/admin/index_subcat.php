@@ -4,14 +4,18 @@
       <div class="col-lg-12">
         <section class="panel">
           <header class="panel-heading">
-           Publication File Type
+           Language Setting
             <form role="form"  method="POST" action="" enctype="multipart/form-data">
                 <input type="hidden" name="id" value="<?php echo !empty($drrdataeditdata[0]['id'])?$drrdataeditdata[0]['id']:'' ?>">
                 <div class="form-group position-center">
-
-                  <label for="name">Publication File Type Name:</label>
-                  <input type="text" name="name" class="form-control" id="name" value="<?php echo !empty($drrdataeditdata[0]['name'])?$drrdataeditdata[0]['name']:'' ?>" placeholder="ENTER PUBLICATION CATEGORY NAME">
+                  <label for="name">Language :</label>
+                  <input type="text" name="name" class="form-control" id="name" value="<?php echo !empty($drrdataeditdata[0]['name'])?$drrdataeditdata[0]['name']:'' ?>" placeholder="Enter  New Language">
                   <?php echo form_error('name'); ?>
+                </div>
+                <div class="form-group position-center">
+                  <label for="name">Represents :</label>
+                  <input type="text" name="alias" class="form-control" id="name" value="<?php echo !empty($drrdataeditdata[0]['alias'])?$drrdataeditdata[0]['alias']:'' ?>" placeholder="Enter Represents Eg. nepali nep">
+                  <?php echo form_error('alias'); ?>
                 </div>
               <div class="panel-body">
                 <div class="position-center">
@@ -29,7 +33,7 @@
         </div>
 
           <header class="panel-heading">
-             <b><?php echo $this->lang->line('publications'); ?></b>
+             <b><?php echo $this->lang->line('language_setting'); ?></b>
           </header>
           <div class="panel-body">
             <?php

@@ -40,8 +40,8 @@ else
 
     $field_name                     ='proj_pic';
     $config['upload_path']          = './uploads/publication/';
-    $config['allowed_types']        = 'gif|jpg|jpeg|png';
-    $config['max_size']             = 7000;
+    $config['allowed_types']        = 'gif|jpg|jpeg|png|JPEG|JPG|gif|jpg|png';
+    $config['max_size']             = 7000000;
     $config['overwrite']            = TRUE;
     $config['file_name']           = $name;
 
@@ -70,7 +70,7 @@ else
   {
         $configVideo['upload_path']          = './uploads/publication/file/';
           $configVideo['max_size'] = '10240';
-          $configVideo['allowed_types'] = 'avi|flv|wmv|mp3|mpeg|mpg|mp4|mpe|qt|mov';
+          $configVideo['allowed_types'] = 'avi|flv|wmv|mp3|mpeg|mpg|mp4|mpe|qt|mov|m4a';
           $configVideo['overwrite'] = FALSE;
           $configVideo['remove_spaces'] = TRUE;
           //$video_name = $date.$_FILES['audio']['name'];
@@ -81,7 +81,7 @@ else
           $this->load->library('upload', $configVideo);
           $this->upload->initialize($configVideo);
           $data = $this->upload->data();
-          //print_r($data); die;
+          //echo"<pre>";print_r($data); die;
           $pathp = $data['full_path'];
         
           if ( ! $this->upload->do_upload('audio'))
