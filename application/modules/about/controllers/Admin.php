@@ -29,9 +29,15 @@ class Admin extends Admin_Controller {
                         ->build('admin/about',$this->body);
 }
 public function edit_about()
-{	
+{	$lang=$this->session->get_userdata('Language');
+	if($lang['Language']=='en'){
+		$language='en';
+	}else{
+		$language='nep';
+	}
 	$this->body=array();
-	$this->body['categories']=$this->general->get_tbl_data_result('*','about',false,'id');
+	$this->body['categories']=$this->general->get_tbl_data_result('*','about_category',array('lang'=>$language),'id');
+	// echo "<pre>";print_r($this->body['categories']);die;
 	  	$id=base64_decode($this->input->get('id'));
 	  	if(isset($_POST['submit'])){
 	    if( $_FILES['proj_pic']['name']==''){
