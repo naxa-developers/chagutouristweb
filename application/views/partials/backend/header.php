@@ -208,6 +208,16 @@
                         <li><a href="<?php echo base_url(FOLDER_ADMIN);?>/location/add_location_category"><?php echo $this->lang->line('add_location_category'); ?></a></li>
                     </ul>
                 </li>
+                <li class="sub-menu">
+                    <a href="javascript:;">
+                        <i class="fa fa-th"></i>
+                        <span><?php echo $this->lang->line('mayer'); ?></span>
+                    </a>
+                    <ul class="sub">
+                        <li><a href="<?php echo base_url(FOLDER_ADMIN);?>/mayer/view_publication"> <?php echo $this->lang->line('mayer'); ?></a></li>
+                        <li><a href="<?php echo base_url(FOLDER_ADMIN);?>/mayer/add_mayer_message"><?php echo $this->lang->line('mayer_add'); ?></a></li>
+                    </ul>
+                </li>
               <!--   <li class="sub-menu">
                     <a href="javascript:;">
                         <i class="fa fa-th"></i>

@@ -1,6 +1,5 @@
 <script src="https://cdn.ckeditor.com/4.9.2/standard/ckeditor.js"></script>
-<link rel="stylesheet" href="https://unpkg.com/leaflet@1.4.0/dist/leaflet.css" integrity="sha512-puBpdR0798OZvTTbP4A8Ix/l+A4dHDD0DGqYW6RQ+9jxkRFclaxxQb/SJAWZfWAkuyeQUytO7+7N4QKrDh+drA=="
-      crossorigin="" />
+ <link data-require="leaflet@0.7.3" data-semver="0.7.3" rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.3/leaflet.css" />
 <section id="main-content" class="">
     <style>
         .error {
@@ -66,13 +65,6 @@ height: 460px;
                         </div>
                         <div class="form-group">
                             <div class="col-md-3">
-                                <label for="exampleInputEmail1">longitude </label>
-                                <input type="text" name="longitude" class="form-control" id="exampleInputEmail1" placeholder="Enter Title">
-                                <?php echo form_error('longitude'); ?>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <div class="col-md-3">
                                 <label for="exampleInputEmail1">Sort Order </label>
                                 <input type="text" name="sort_order" class="form-control" id="exampleInputEmail1" placeholder="Enter Title">
                                 <?php echo form_error('sort_order'); ?>
@@ -80,12 +72,18 @@ height: 460px;
                         </div>
                         <div class="form-group">
                             <div class="col-md-3">
+                                <label for="exampleInputEmail1">longitude </label>
+                                <input type="text" id="longitude" name="longitude" class="form-control" id="exampleInputEmail1" placeholder="Enter Title">
+                                <?php echo form_error('longitude'); ?>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-md-3">
                                 <label for="exampleInputEmail1">Latitude </label>
-                                <input type="text" name="latitude" class="form-control" id="exampleInputEmail1" placeholder="Enter Latitude">
+                                <input type="text" id="latitude" name="latitude" class="form-control" id="exampleInputEmail1" placeholder="Enter Latitude">
                                 <?php echo form_error('latitude'); ?>
                             </div>
                         </div>
-                        
                         <div class="form-group">
                            <div class="col-md-3" id="AudioUrl" >
                                 <label for="exampleInputFile">Location Audio</label>
@@ -97,6 +95,18 @@ height: 460px;
                            <div class="col-md-3" id="videoUrl" >
                                 <label for="exampleInputFile">Location Video</label>
                                 <input type="file" name="video" id="exampleInputFile"> 
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-md-12">
+                            <label for="exampleInputFile">Drag Marker To Get Location</label>
+                                <div id="map"></div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-sm-12">
+                                <label class="control-label">Summary</label>
+                                <textarea class="form-control ckeditor" name="summary" rows="10"></textarea>
                             </div>
                         </div>
                         <div class="form-group">
@@ -112,12 +122,6 @@ height: 460px;
                             </div>
                         </div>
                         <div class="form-group">
-                            <div class="col-sm-12">
-                                <label class="control-label">Summary</label>
-                                <textarea class="form-control ckeditor" name="summary" rows="10"></textarea>
-                            </div>
-                        </div>
-                        <div class="form-group">
                             <div class="col-md-4">
                                 <label class="control-label" for="">&nbsp;&nbsp;&nbsp;</label>
                                 <button type="submit" name="submit" class="btn btn-info" style="margin-top: 15px;">Submit</button>
@@ -126,74 +130,101 @@ height: 460px;
                         <div class="clearfix"></div>
                     </form>
                 </section>
-               <!--  <section class="main" id="mapid">
-                    <div class="fixedfooter">
-                      <a href="https://play.google.com/store/apps/details?id=org.light.collect.android&hl=en"><button class="maptopBtn" id="addlight" type="button">
-                          <i class="fa fa-lightbulb">
-                          </i>
-                          <h4>sldkfhnksdfbsnjkd</h4>
-                          <span>test</span>
-                          <img class="bulb" src="<?php echo base_url()?>assets/frontend/image/light.svg" alt="">
-                      </button></a>
-
-                      <div class="question">
-                          <h5> Latitude </h5>
-                          <input class="darkInput" type='text' name='latitude' id='latitude' value=''  placeholder='Enter Your Latitude'
-                           required>
-                          <span class="error"> Latitude </span>
-                          <h5> Longitude </h5>
-                          <input class="darkInput" type='text' name='longitude' id='longitude' value=''  placeholder='Enter Your Longitude'
-                              required>
-                          <span class="error"> Longitude </span>
-                        </div>
-                  </div>
-                </section> -->
             </div>
         </div>
     </section>
 </section>
-<!-- <form>
-<label for="latitude">Latitude:</label>
-<input id="latitude" type="text" />
-<label for="longitude">Longitude:</label>
-<input id="longitude" type="text" />
-:: or, enter your own lat-long values and <input type="button" value="Jump there" onClick="updateLatLng(document.getElementById('latitude').value,document.getElementById('longitude').value,1)">
-:: <a href="#" onclick="map.zoomOut(3, {animate:true})">zoom out</a> ::
-:: <a href="#" onclick="map.zoomIn(3, {animate:true})">zoom in</a>
-</form>
-<div id="map"></div>
-<script src="http://cdn.leafletjs.com/leaflet-0.7.3/leaflet.js"></script> <!-- Orginal: http://cdn.leafletjs.com/leaflet-0.7.3/leaflet.js -->
-<script>
-// var tileLayer = new L.TileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-// attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a> Contributors'
-// });
-// //remember last position
-// var rememberLat = document.getElementById('latitude').value;
-// var rememberLong = document.getElementById('longitude').value;
-// if( !rememberLat || !rememberLong ) { rememberLat = 18.53; rememberLong = 73.85;}
-// var map = new L.Map('map', {
-// 'center': [rememberLat, rememberLong],
-// 'zoom': 12,
-// 'layers': [tileLayer]
-// });
-// var marker = L.marker([rememberLat, rememberLong],{
-// draggable: true
-// }).addTo(map);
-// marker.on('dragend', function (e) {
-// updateLatLng(marker.getLatLng().lat, marker.getLatLng().lng);
-// });
-// map.on('click', function (e) {
-// marker.setLatLng(e.latlng);
-// updateLatLng(marker.getLatLng().lat, marker.getLatLng().lng);
-// });
-// function updateLatLng(lat,lng,reverse) {
-// if(reverse) {
-// marker.setLatLng([lat,lng]);
-// map.panTo([lat,lng]);
-// } else {
-// document.getElementById('latitude').value = marker.getLatLng().lat;
-// document.getElementById('longitude').value = marker.getLatLng().lng;
-// map.panTo([lat,lng]);
-// }
-// }
-</script> 
+<style type="text/css">
+    html, body, #map {
+        margin: 0px;
+        width: 100%;
+        height: 350px;
+        padding: 0px;
+
+    }
+</style>
+<script data-require="leaflet@0.7.3" data-semver="0.7.3" src="//cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.3/leaflet.js"></script>
+<script type="text/javascript">
+    // var tileLayer = new L.TileLayer('http://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}.png',{
+    //   attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, &copy; <a href="http://cartodb.com/attributions">CartoDB</a>'
+    // });
+    // var tileLayer = new L.TileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    // attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a> Contributors'
+    // });
+    // var Esri_WorldStreetMap = L.tileLayer(
+    //         'https://server.arcgisonline.com/ArcGIS/rest/services/World_Street_Map/MapServer/tile/{z}/{y}/{x}', {
+    //             attribution: 'Tiles &copy; Esri &mdash; Source: Esri, DeLorme, NAVTEQ, USGS, Intermap, iPC, NRCAN, Esri Japan, METI, Esri China (Hong Kong), Esri (Thailand), TomTom, 2012'
+    //         });
+    // var map = new L.Map('map', {
+    //   'center': [27.608421548604188, 85.3887634444982],
+    //   'zoom': 12,
+    //   'layers': [tileLayer]
+    // });
+     var map = L.map('map').setView([27.701871, 85.315297], 7);
+      L.tileLayer('http://webrd0{s}.is.autonavi.com/appmaptile?lang=zh_cn&size=1&scale=1&style=8&x={x}&y={y}&z={z}', {
+        maxZoom: 20,
+        minZoom: 5,
+        subdomains: ['1', '2', '3', '4']
+      }).addTo(map)
+      var osm = L.tileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      attribution: '&copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors'
+    });
+    var marker = L.marker([27.608421548604188, 85.3887634444982],{
+      draggable: true
+    }).addTo(map);
+
+    marker.on('dragend', function (e) {
+      document.getElementById('latitude').value = marker.getLatLng().lat;
+      document.getElementById('longitude').value = marker.getLatLng().lng;
+    });
+    googleStreets = L.tileLayer('http://{s}.google.com/vt/lyrs=m&x={x}&y={y}&z={z}',{
+        maxZoom: 20,
+        subdomains:['mt0','mt1','mt2','mt3']
+      });
+      googleHybrid = L.tileLayer('http://{s}.google.com/vt/lyrs=s,h&x={x}&y={y}&z={z}',{
+        maxZoom: 20,
+        subdomains:['mt0','mt1','mt2','mt3']
+      });
+      googleSat = L.tileLayer('http://{s}.google.com/vt/lyrs=s&x={x}&y={y}&z={z}',{
+        maxZoom: 20,
+        subdomains:['mt0','mt1','mt2','mt3']
+      });
+      // googleTerrain = L.tileLayer('http://{s}.google.com/vt/lyrs=p&x={x}&y={y}&z={z}',{
+      //   maxZoom: 20,
+      //   subdomains:['mt0','mt1','mt2','mt3']
+      // });
+      //var none = "";
+      var baseLayers = {
+        "OpenStreetMap": osm,
+        "Google Streets": googleStreets,
+        "Google Hybrid": googleHybrid,
+        "Google Satellite": googleSat,
+        "Google Terrain": googleTerrain//,
+        //"None": none
+      };
+    map.addLayer(googleHybrid);
+    layerswitcher = L.control.layers(baseLayers, {}, {collapsed: true}).addTo(map);
+    //this isfor measure 
+      var plugin = L.control.measure({
+        //  control position
+        position: 'topleft',
+        //  weather to use keyboard control for this plugin
+        keyboard: true,
+        //  shortcut to activate measure
+        activeKeyCode: 'M'.charCodeAt(0),
+        //  shortcut to cancel measure, defaults to 'Esc'
+        cancelKeyCode: 27,
+        //  line color
+        lineColor: 'red',
+        //  line weight
+        lineWeight: 2,
+        //  line dash
+        lineDashArray: '6, 6',
+        //  line opacity
+        lineOpacity: 1,
+        //  distance formatter
+        // formatDistance: function (val) {
+        //   return Math.round(1000 * val / 1609.344) / 1000 + 'mile';
+        // }
+      }).addTo(map)
+</script>

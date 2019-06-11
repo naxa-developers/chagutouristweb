@@ -290,6 +290,8 @@ $lang['location'] = "Location Management";
 $lang['locationadd'] = "Location Add";
 $lang['location_list'] = "Location Lists";
 $lang['add_location_category'] = "Add Location category";
+$lang['mayer'] = "Mayer Message";
+$lang['mayer_add'] = "Add Mayer";
 
 
 
