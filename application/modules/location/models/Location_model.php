@@ -1,5 +1,5 @@
 <?php
-class Publication_model extends CI_Model {
+class Location_model extends CI_Model {
 
 
 
@@ -31,7 +31,7 @@ else
   public function update_path($id,$data){
 
     $this->db->where('id',$id);
-    $this->db->update('publication',$data);
+    $this->db->update('locationinformation',$data);
 
   }
 

@@ -11,11 +11,36 @@ class Admin extends Admin_Controller {
 		$this->template->set_layout('admin/default');
 		$this->load->model('Admin_dash_model');
 		$this->load->dbforge();
-		$this->load->model('Publication_model');
+		$this->load->model('Location_model');
 		$this->load->library('form_validation');
+		$this->load->library('ciqrcode');
 		$this->form_validation->set_error_delimiters('<div class="error">', '</div>');	
 	}
-	public function view_publication(){
+	public function tets()
+	{
+		$nim = "barun-prakash";
+		$config['cacheable']    = true; //boolean, the default is true
+        $config['cachedir']     = './assets/'; //string, the default is application/cache/
+        $config['errorlog']     = './assets/'; //string, the default is application/logs/
+        $config['imagedir']     = './uploads/location/qrcode/'; //direktori penyimpanan qr code
+        $config['quality']      = true; //boolean, the default is true
+        $config['size']         = '1024'; //interger, the default is 1024
+        $config['black']        = array(224,255,255); // array, default is array(255,255,255)
+        $config['white']        = array(70,130,180); // array, default is array(0,0,0)
+        $this->ciqrcode->initialize($config);
+ 
+        $image_name=$nim.'.png'; //buat name dari qr code sesuai dengan nim
+ 
+        $params['data'] = $nim; //data yang akan di jadikan QR CODE
+        $params['level'] = 'H'; //H=High
+        $params['size'] = 10;
+        $params['savename'] = './uploads/location/qrcode/'.$image_name; 
+        //$params['savename'] = FCPATH.$config['imagedir'].$image_name; //simpan image QR CODE ke folder assets/images/
+        $ttt = $this->ciqrcode->generate($params); // fungsi untuk generate QR CODE
+        $qrcode = base_url() . 'uploads/location/qrcode/'.$image_name;
+        print_r($qrcode);die;
+	}
+	public function view_location(){
 	  	$this->data= array();
 	  	$lang=$this->session->get_userdata('Language');
         if($lang['Language']=='en') {
@@ -23,8 +48,8 @@ class Admin extends Admin_Controller {
         }else{
             $emerg_lang='nep'; 
         }
-	   // $this->data['data']=$this->Publication_model->get_all_data();
-	    $this->data['data'] = $this->general->get_tbl_data_result('title,summary,photo,videolink,audio as video,id','publication',array('lang'=>$emerg_lang));
+	   // $this->data['data']=$this->Location_model->get_all_data();
+	    $this->data['data'] = $this->general->get_tbl_data_result('id,description,created_at,image,language,audio,video,sort_order,rating,longitude,latitude,qrcode','locationinformation',array('language'=>$emerg_lang));
 	    $admin_type=$this->session->userdata('user_type');
 	    $this->data['admin']=$admin_type;
 	    //admin check
@@ -53,7 +78,7 @@ class Admin extends Admin_Controller {
 	        	'sub_cat_id'=>$this->input->post('category'),
 	        	'slug'=>$page_slug_new,
 	      	);
-	      	$insert=$this->Publication_model->add_publiactioncat('publicationfilecat',$data);
+	      	$insert=$this->Location_model->add_publiactioncat('publicationfilecat',$data);
 	      	if($insert!=""){
 		        $this->session->set_flashdata('msg','Publication successfully added');
 		        redirect(FOLDER_ADMIN.'/publication/filecat');
@@ -67,7 +92,7 @@ class Admin extends Admin_Controller {
 	    		$data['puddata'] = array();	
 	    	}
 	    	//print_r($data['puddata']);die;
-	    	$data['publicationdata'] =$this->Publication_model->get_publication_filecat();	
+	    	$data['publicationdata'] =$this->Location_model->get_publication_filecat();	
 	      	$admin_type=$this->session->userdata('user_type');
 	      	$data['admin']=$admin_type;
 	      	//admin check
@@ -79,7 +104,7 @@ class Admin extends Admin_Controller {
   	}
   	public function delete_filecat(){
 	    $id = $this->input->get('id');
-	    $delete=$this->Publication_model->delete_data($id, 'publicationfilecat');
+	    $delete=$this->Location_model->delete_data($id, 'publicationfilecat');
 
 	    $this->session->set_flashdata('msg','Id number '.$id.' row data was deleted successfully');
 	    // redirect('view_publication');
@@ -96,7 +121,7 @@ class Admin extends Admin_Controller {
 	        	'alias'=>$this->input->post('alias'),
 	        	'slug'=>$page_slug_new,
 	      	);
-	      	$insert=$this->Publication_model->add_publiactioncat('publicationsubcat',$data);
+	      	$insert=$this->Location_model->add_publiactioncat('publicationsubcat',$data);
 	      	if($insert!=""){
 		        $this->session->set_flashdata('msg','Publication successfully added');
 		        redirect(FOLDER_ADMIN.'/publication/add_publication_sub_category');
@@ -119,9 +144,9 @@ class Admin extends Admin_Controller {
 	                        ->build('admin/index_subcat',$this->data);
 	    }
 	}
-  	public function add_publication_category(){
+  	public function add_location_category(){
 	 	$this->data=array();
-	 	$this->form_validation->set_rules('name', 'Publication Category Name', 'trim|required');
+	 	$this->form_validation->set_rules('name', 'Location Category Name', 'trim|required');
 	 	$lang=$this->session->get_userdata('Language');
         if($lang['Language']=='en') {
             $emerg_lang='en';
@@ -135,21 +160,21 @@ class Admin extends Admin_Controller {
 	        	'language'=>$emerg_lang,
 	        	'slug'=>$page_slug_new,
 	      	);
-	      	$insert=$this->Publication_model->add_publiactioncat('publicationcat',$data);
+	      	$insert=$this->Location_model->add_publiactioncat('locationcategory',$data);
 	      	if($insert!=""){
-		        $this->session->set_flashdata('msg','Publication successfully added');
-		        redirect(FOLDER_ADMIN.'/publication/add_publication_category');
+		        $this->session->set_flashdata('msg','Location successfully added');
+		        redirect(FOLDER_ADMIN.'/location/add_location_category');
 	        }
 	    }else{
 	      //admin check
 	    	$id = base64_decode($this->input->get('id'));
 	    	
 	    	if($id) {
-				$this->data['drrdataeditdata'] = $this->general->get_tbl_data_result('id,name','publicationcat',array('id'=>$id));
+				$this->data['drrdataeditdata'] = $this->general->get_tbl_data_result('id,name','locationcategory',array('id'=>$id));
 	    	}else{
 	    		$this->data['drrdataeditdata'] = array();	
 	    	}
-	    	$this->data['publicationdata'] = $this->general->get_tbl_data_result('id,name','publicationcat',array('language'=>$emerg_lang));
+	    	$this->data['publicationdata'] = $this->general->get_tbl_data_result('id,name','locationcategory',array('language'=>$emerg_lang));
 	    	//echo "<pre>";print_r($this->data['publicationdata']);die;	
 	      	$admin_type=$this->session->userdata('user_type');
 	      	$this->data['admin']=$admin_type;
@@ -159,10 +184,10 @@ class Admin extends Admin_Controller {
 	                        ->build('admin/index',$this->data);
 	    }
 	}
- 	public function add_publication(){
+ 	public function add_location(){
  		$this->data=array();
-    	$this->form_validation->set_rules('category', 'Please Select About ', 'trim|required');
-    	$this->form_validation->set_rules('title', 'Please Fill title ', 'trim|required');
+    	$this->form_validation->set_rules('location', 'Please Select Location ', 'trim|required');
+    	$this->form_validation->set_rules('type', 'Please select Type ', 'trim|required');
     	$lang=$this->session->get_userdata('Language');
 	    if($lang['Language']=='en'){
 	        $language='en';
@@ -172,7 +197,7 @@ class Admin extends Admin_Controller {
 		if ($this->form_validation->run() == TRUE){
 	      	$file_name = $_FILES['proj_pic']['name'];
 	      	$audio=$_FILES['audio']['name'];
-	      	//echo "<pre>"; print_r($file_name);die;
+	      	//echo "<pre>"; print_r($this->input->post());die;
 	    	$ext = pathinfo($file_name, PATHINFO_EXTENSION);
 	      	$ext_file_audio = pathinfo($audio, PATHINFO_EXTENSION);
 	      	$page_slug_new = strtolower (preg_replace('/[[:space:]]+/', '-', $this->input->post('title')));
@@ -183,54 +208,77 @@ class Admin extends Admin_Controller {
 	      	}
 	      	$data=array(
 	        	'title'=>$this->input->post('title'),
-	        	'summary'=>$this->input->post('summary'),
-	        	'type'=>$this->input->post('type'),
-	        	'subcat'=>$this->input->post('subcat'),
-	        	'category'=>$cat,
-	        	'videolink'=>$this->input->post('videolink'),
-	        	'filecat'=>$this->input->post('filecat'),
-	        	'lang'=>$language,
+	        	'description'=>$this->input->post('summary'),
+	        	'type_id'=>$this->input->post('type'),
+	        	'longitude'=>$this->input->post('longitude'),
+	        	'latitude'=>$this->input->post('latitude'),
+	        	'sort_order'=>$this->input->post('sort_order'),
+	        	'language'=>$language,
 	      	);
-	      	$insert=$this->Publication_model->add_publication('publication',$data);
+	      	$insert=$this->Location_model->add_publication('locationinformation',$data);
+	      	//print_r($insert);die;
+	      	// qr code generate start from here
+				$config['cacheable']    = true; //boolean, the default is true
+		        $config['cachedir']     = './assets/'; //string, the default is application/cache/
+		        $config['errorlog']     = './assets/'; //string, the default is application/logs/
+		        //$config['imagedir']     = './uploads/location/qrcode/'; //direktori penyimpanan qr code
+		        $config['quality']      = true; //boolean, the default is true
+		        $config['size']         = '1024'; //interger, the default is 1024
+		        $config['black']        = array(224,255,255); // array, default is array(255,255,255)
+		        $config['white']        = array(70,130,180); // array, default is array(0,0,0)
+		        $this->ciqrcode->initialize($config);
+		 
+		        $image_name_qr=$insert.'.png'; //buat name dari qr code sesuai dengan nim
+		 
+		        $params['data'] = $insert; //data yang akan di jadikan QR CODE
+		        $params['level'] = 'H'; //H=High
+		        $params['size'] = 10;
+		        $params['savename'] = './uploads/location/qrcode/'.$image_name_qr;  //simpan image QR CODE ke folder assets/images/
+		        $this->ciqrcode->generate($params);
+		        $qrcode = base_url() . 'uploads/location/qrcode/'.$image_name_qr;
+
+	      	// qr code end
 	      	if($insert!=""){
 	      		if(!empty($audio)){
-	      			$file_upload_audio=$this->Publication_model->file_do_uploa_audiod($audio,$insert);
+	      			$file_upload_audio=$this->Location_model->file_do_uploa_audiod($audio,$insert);
 
 	      		}else{
 	      			$file_upload_audio='';
 	      		}
 	      		if(!empty($file_name)){
-	      			$img_upload=$this->Publication_model->do_upload($file_name,$insert);
+	      			$img_upload=$this->Location_model->do_upload($file_name,$insert);
 	      		}else{
 	      			$img_upload['status']='';
 	      		}
 	      		//echo "<pre>"; print_r($img_upload['status']);die;
 		        if($img_upload['status']== 1  || $file_upload_audio || $file_upload){
 		            if($img_upload['status']== 1){
-		          		$image_path=base_url() . 'uploads/publication/'.$insert.'.'.$ext;
+		          		$image_path=base_url() . 'uploads/location/'.$insert.'.'.$ext;
 		          		//print_r($image_path);die;
 		            }else{
 		          		$image_path='';
 		          	}
 		          	if($file_upload_audio == 1) {
-		          		$file_path_audiofinal=base_url() . 'uploads/publication/file/'.$insert.'.'.$ext_file_audio;//base_url().$file_upload_audio;
+		          		$file_path_audiofinal=base_url() . 'uploads/location/file/'.$insert.'.'.$ext_file_audio;//base_url().$file_upload_audio;
 		          	}else{
 		          		$file_path_audiofinal='';
 		          	}
 		          	$img=array(
-			            'photo'=>$image_path,//
+			            'image'=>$image_path,//
 			            'audio'=>$file_path_audiofinal,
+			            'video'=>$file_path_audiofinal,
+			            'qrcode'=>$qrcode,
 			        );
 			        //echo "<pre>"; print_r($img);die;
-		            $update_path=$this->Publication_model->update_path($insert,$img);
+		            $update_path=$this->Location_model->update_path($insert,$img);
 		            $this->session->set_flashdata('msg','Publication successfully added');
-		          	redirect(FOLDER_ADMIN.'/publication/view_publication');
+		          	redirect(FOLDER_ADMIN.'/location/view_location');
 		        }elseif($this->input->post('videolink')) {
-		        	redirect(FOLDER_ADMIN.'/publication/view_publication');
+		        	redirect(FOLDER_ADMIN.'/location/view_location');
 		        }else{
 		            $code= strip_tags($img_upload['error']);
 		            $this->session->set_flashdata('msg', $code);
-		            redirect(FOLDER_ADMIN.'/publication/add_publication');
+		            redirect(FOLDER_ADMIN.'/location/add_locationn');
 		        }
 	        }
 	    }else{
@@ -238,11 +286,12 @@ class Admin extends Admin_Controller {
 	        $admin_type=$this->session->userdata('user_type');
 	        $this->data['admin']=$admin_type;
 	        //admin check
-	     	$this->data['pub']=$this->general->get_tbl_data_result('*','publicationcat',array('language'=>$language),'id');
+	     	$this->data['destination']=$this->general->get_tbl_data_result('*','destination',array('language'=>$language),'id');
+	     	$this->data['pub']=$this->general->get_tbl_data_result('*','locationcategory',array('language'=>$language),'id');
 		    //echo "<pre>"; print_r($this->body['pub']);die;
 		    $this->template
 	                        ->enable_parser(FALSE)
-	                        ->build('admin/add_publication',$this->data);
+	                        ->build('admin/add_location',$this->data);
 	    }
     }
     public function edit_publication(){
@@ -287,20 +336,20 @@ class Admin extends Admin_Controller {
 			        	'filecat'=>$this->input->post('filecat'),
 			        	'lang'=>$language,
 			      	);
-		        	$insert=$this->Publication_model->update_data($id,$data);
+		        	$insert=$this->Location_model->update_data($id,$data);
 			        if($insert==1){
 			        	if(!empty($audio)){
-		      			$file_upload_audio=$this->Publication_model->file_do_uploa_audiod($audio,$id);
+		      			$file_upload_audio=$this->Location_model->file_do_uploa_audiod($audio,$id);
 			      		}else{
 			      			$file_upload_audio='';
 			      		}
 			      		if(!empty($file_name)){
-			      			$img_upload=$this->Publication_model->do_upload($file_name,$id);
+			      			$img_upload=$this->Location_model->do_upload($file_name,$id);
 			      		}else{
 			      			$img_upload['status']='';
 			      		}
 			      		if(!empty($attachment)){
-			      			$file_upload=$this->Publication_model->file_do_upload($attachment,$id);
+			      			$file_upload=$this->Location_model->file_do_upload($attachment,$id);
 			      		}else{
 			      			$file_upload['status']='';
 			      		}
@@ -329,14 +378,14 @@ class Admin extends Admin_Controller {
 				            'file'=>$file_pathd,
 				            'audio'=>$file_path_audiofinal,
 				        ); 	
-				         	// 	$img_upload=$this->Publication_model->do_upload($file_name,$id);
+				         	// 	$img_upload=$this->Location_model->do_upload($file_name,$id);
 					        // 	if($img_upload==1){
 					        //   $image_path=base_url() . 'uploads/publication/'.$id.'.'.$ext ;
 					        //   $img=array(
 					        //     'photo'=>$image_path,
 					        //   );
 				        //echo "<pre>"; print_r($img);die;
-			            $update_path=$this->Publication_model->update_path($id,$img);
+			            $update_path=$this->Location_model->update_path($id,$img);
 			            $this->session->set_flashdata('msg','Publication successfully Updated');
 			            // redirect('view_publication');
 			            redirect(FOLDER_ADMIN.'/publication/view_publication');
@@ -366,7 +415,7 @@ class Admin extends Admin_Controller {
 		        	'filecat'=>$this->input->post('filecat'),
 		        	'lang'=>$language
 		      	);
-		        $update=$this->Publication_model->update_data($id,$data);
+		        $update=$this->Location_model->update_data($id,$data);
 		        if($update==1){
 		          $this->session->set_flashdata('msg','Data successfully Updated');
 		          // redirect('view_publication');
@@ -375,7 +424,7 @@ class Admin extends Admin_Controller {
 	      }
 	    }else{
 
-	      $this->data['edit_data']=$this->Publication_model->get_edit_data(base64_decode($this->input->get('id')),'publication');
+	      $this->data['edit_data']=$this->Location_model->get_edit_data(base64_decode($this->input->get('id')),'publication');
 	      //admin check
 	      // echo "<pre>"; print_r($this->data['edit_data']);die;
 	      $admin_type=$this->session->userdata('user_type');
@@ -388,7 +437,7 @@ class Admin extends Admin_Controller {
     }
     public function delete_publication(){
 	    $id = $this->input->get('id');
-	    $delete=$this->Publication_model->delete_data($id, 'publication');
+	    $delete=$this->Location_model->delete_data($id, 'publication');
 
 	    $this->session->set_flashdata('msg','Id number '.$id.' row data was deleted successfully');
 	    // redirect('view_publication');
@@ -397,7 +446,7 @@ class Admin extends Admin_Controller {
   	
   	public function delete_publication_sub_category(){
 	    $id = $this->input->get('id');
-	    $delete=$this->Publication_model->delete_data($id,'publicationsubcat');
+	    $delete=$this->Location_model->delete_data($id,'publicationsubcat');
 	    $this->session->set_flashdata('msg','Id number '.$id.' row data was deleted successfully');
 	    redirect(FOLDER_ADMIN.'/publication/add_publication_sub_category');
   	}

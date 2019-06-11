@@ -80,15 +80,7 @@
             <div class="fa fa-bars"></div>
         </div>
     </div>
-    <!--logo end-->
-
-
-    <!--  notification start -->
-
-    <!--  notification end -->
-
     <div class="top-nav clearfix">
-        <!--search & user info start-->
         <ul class="nav pull-right top-menu">
             <li class="nav-item dropdown">
                 <?php
@@ -118,14 +110,10 @@
                 </ul>
             </li>
         </ul>
-        <!--search & user info end-->
     </div>
 </header>
-<!--header end-->
-<!--sidebar start-->
 <aside>
     <div id="sidebar" class="nav-collapse">
-        <!-- sidebar menu start-->
         <div class="leftside-navigation">
             <ul class="sidebar-menu" id="nav-accordion">
                 <li>
@@ -135,7 +123,7 @@
 
                     </a>
                 </li>
-                <li class="sub-menu <?php if($this->uri->segment(1) == '') { echo "active open"; } ?>">
+              <!--   <li class="sub-menu <?php if($this->uri->segment(1) == '') { echo "active open"; } ?>">
                     <a href="javascript:;">
                         <i class="fa fa-laptop"></i>
                         <span><?php echo $this->lang->line('home_page'); ?></span>
@@ -144,9 +132,8 @@
                         <li class="<?php if($this->uri->segment(1) == 'view_proj') { echo "active open"; } ?>"><a href="<?php echo base_url()?>view_proj"><?php echo $this->lang->line('project_partners'); ?></a></li>
                         <li><a href="<?php echo base_url();?>feature_nep"><?php echo $this->lang->line('featured_datasets'); ?></a></li>
                     </ul>
-                </li>
-
-                <li class="sub-menu">
+                </li> -->
+                <!-- <li class="sub-menu">
                     <a href="javascript:;" class="<?php if($this->uri->segment(1) == '') { echo "dcjq-parent active"; } ?>">
                         <i class="fa fa-laptop"></i>
                         <span><?php echo $this->lang->line('home_page'); ?></span>
@@ -165,7 +152,7 @@
                     <li class="<?php if($this->uri->segment(1) == 'feature_nep') { echo "active"; } ?>"><a href="<?php echo base_url(FOLDER_ADMIN);?>/project/feature_nep"><?php echo $this->lang->line('featured_datasets'); ?></a></li>
                           <?php } ?>
                     </ul>
-                </li>
+                </li> -->
                 <!-- <li class="sub-menu">
                     <a href="javascript:;">
                         <i class="fa fa-laptop"></i>
@@ -197,10 +184,8 @@
 
                     </ul>
                 </li>
- -->
-
-
-                  <li class="sub-menu">
+                -->
+                <li class="sub-menu">
                     <a href="javascript:;">
                         <i class="fa fa-th"></i>
                         <span><?php echo $this->lang->line('about_us'); ?></span>
@@ -210,6 +195,17 @@
                         <li><a href="<?php echo base_url(FOLDER_ADMIN);?>/publication/add_publication_category"><?php echo $this->lang->line('about_us_category'); ?></a></li>
                         <li><a href="<?php echo base_url(FOLDER_ADMIN);?>/publication/add_publication_sub_category"><?php echo $this->lang->line('language_setting'); ?></a></li>
 
+                    </ul>
+                </li>
+                <li class="sub-menu">
+                    <a href="javascript:;">
+                        <i class="fa fa-th"></i>
+                        <span><?php echo $this->lang->line('location'); ?></span>
+                    </a>
+                    <ul class="sub">
+                        <li><a href="<?php echo base_url(FOLDER_ADMIN);?>/location/view_location"> <?php echo $this->lang->line('location_list'); ?></a></li>
+                        <li><a href="<?php echo base_url(FOLDER_ADMIN);?>/location/add_location"><?php echo $this->lang->line('locationadd'); ?></a></li>
+                        <li><a href="<?php echo base_url(FOLDER_ADMIN);?>/location/add_location_category"><?php echo $this->lang->line('add_location_category'); ?></a></li>
                     </ul>
                 </li>
               <!--   <li class="sub-menu">
@@ -288,16 +284,14 @@
                     </ul>
                 </li> -->
                 <?php if($admin==1){?>
-                <li class="sub-menu">
+               <!--  <li class="sub-menu">
                     <a href="<?php echo base_url(FOLDER_ADMIN);?>/site_setting/site_setting">
                         <i class=" fa fa-bar-chart-o"></i>
                         <span><?php echo $this->lang->line('site_setting'); ?></span>
                     </a>
-                </li>
+                </li> -->
           <?php  } ?>
-
             </ul>
-          </div>
-        <!-- sidebar menu end-->
+        </div>
     </div>
 </aside>

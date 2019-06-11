@@ -286,5 +286,11 @@ $lang['homepagelabel']="Manage Page Labels.";
 $lang['about_us_data'] = "About Us Data";
 $lang['about_us_category'] = "About Us Category";
 $lang['language_setting'] = "Language Setting";
+$lang['location'] = "Location Management";
+$lang['locationadd'] = "Location Add";
+$lang['location_list'] = "Location Lists";
+$lang['add_location_category'] = "Add Location category";
+
+
 
 ?>
