@@ -37,8 +37,9 @@
     <link href="<?php echo base_url();?>assets/admin/css/style-responsive.css" rel="stylesheet" />
 
     <link href="<?php echo base_url();?>assets/admin/css/element.css" rel="stylesheet">
-    <script src="<?php echo base_url();?>assets/admin/js/jquery-1.9.1.min.js"></script>
-    <script src="<?php echo base_url();?>assets/admin/js/jquery-ui-1.9.2.min.js"></script>
+   
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script type="text/javascript" src="<?php echo base_url('assets/js/print.js');?>" ></script>
     <!-- Just for debugging purposes. Don't actually copy this line! -->
     <!--[if lt IE 9]>
     <script src="js/ie8-responsive-file-warning.js"></script><![endif]-->
