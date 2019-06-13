@@ -7,9 +7,9 @@
             <section class="panel">
               <section class="panel">
                   <header class="panel-heading">
-                     <b>Calendar</b>
+                     <b>User</b>
                       <span class="tools pull-right">
-                        <a href="<?php echo base_url(FOLDER_ADMIN)?>/calendar/add"><button type="submit" name="upload_data" class="btn btn-danger" style="background-color: #1fb5ad;border-color: #1fb5ad;margin-top: -7px;"><i class="fa fa-plus"></i>Calendar Add<?php //echo $this->lang->line('upload_csv'); ?></button></a>
+                        <a href="<?php echo base_url(FOLDER_ADMIN)?>/user/add"><button type="submit" name="upload_data" class="btn btn-danger" style="background-color: #1fb5ad;border-color: #1fb5ad;margin-top: -7px;"><i class="fa fa-plus"></i> User Add<?php //echo $this->lang->line('upload_csv'); ?></button></a>
                         </span>
                   </header>
                   <div class="panel-body">
@@ -63,8 +63,8 @@
                               <a class="btn btn-success" href="<?php echo base_url(FOLDER_ADMIN)?>/csvtable/upload_inventory_data/<?php echo ($v['id']);?>"><?php echo $this->lang->line('upload_csv'); ?></a>
                             </td> -->
                               <td>
-                                <a href="<?php echo base_url(FOLDER_ADMIN)?>/calendar/add?id=<?php echo base64_encode($v['id']);?>"><?php echo $this->lang->line('edit'); ?></a> /
-                                <a onclick="return confirm('Are you sure you want to delete?')" href="<?php echo base_url(FOLDER_ADMIN)?>/calendar/delete?id=<?php echo base64_encode($v['id']);?>"><?php echo $this->lang->line('delete'); ?></a></td>
+                                <a class="btn btn-primary btn-sm" href="<?php echo base_url(FOLDER_ADMIN)?>/user/add?id=<?php echo base64_encode($v['user_id']);?>"><?php echo $this->lang->line('edit'); ?></a>
+                                </td>
                           </tr>
                         <?php  }?>
                           </tbody>

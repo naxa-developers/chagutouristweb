@@ -52,35 +52,37 @@
                               <td><?php echo $v['created_at'] ?></td>
                               <td>
                               <button class="btnprint" id="print-element<?php echo $v['id'] ?>"> Print Barcode </button>
-                              <div id="content-to-print<?php echo $v['id'] ?>">
-                                  <img src="<?php echo $v['image'] ?>">
-                              </div>
+                             
                               </td>
                               <td><?php echo $v['language'] ?></td>
                               <td>
-                              <!-- <audio controls >
+                                <audio controls >
                                     <source src="<?php echo $v['audio'] ?>" type="<?php echo $v['audio'] ?>">
                                     <source src="<?php echo $v['audio'] ?>" type="<?php echo $v['audio'] ?>">
                                   Your browser does not support the audio element.
-                                  </audio> -->
+                                  </audio>
                               
                               </td>
                               <td>
-                              <!-- <video width="150" controls>
+                              <video width="150" controls>
                                 <source src=" <?php echo $v['video'] ?>" type="video/mp4">
                                 <source src="<?php echo $v['video'] ?>" type="video/ogg">
                                 Your browser does not support HTML5 video.
-                              </video> -->
+                              </video>
                              
                               </td>
                               <td><?php echo $v['sort_order'] ?></td>
                               <td><?php echo $v['rating'] ?></td>
                               <td><?php echo $v['longitude'] ?></td>
                               <td><?php echo $v['latitude'] ?></td>
-                              <td><img src="<?php echo $v['qrcode'] ?>" height="100px"></td>
+                              <td> 
+                                <div id="content-to-print<?php echo $v['id'] ?>">
+                                    <img src="<?php echo $v['qrcode'] ?>">
+                                </div>
+                              </td>
                               <td>
-                                  <a href="<?php echo base_url(FOLDER_ADMIN)?>/location/edit_publication?id=<?php echo base64_encode($v['id']);?>"><?php echo $this->lang->line('edit'); ?></a> /
-                                  <a onclick="return confirm('Are you sure you want to delete?')" href="<?php echo base_url(FOLDER_ADMIN)?>/location/delete_publication?id=<?php echo  $v['id'];?>"><?php echo $this->lang->line('delete'); ?></a>
+                                  <a class="btn btn-primary btn-sm" href="<?php echo base_url(FOLDER_ADMIN)?>/location/edit_publication?id=<?php echo base64_encode($v['id']);?>"><?php echo $this->lang->line('edit'); ?></a> /
+                                  <a class="btn btn-danger btn-sm" onclick="return confirm('Are you sure you want to delete?')" href="<?php echo base_url(FOLDER_ADMIN)?>/location/delete_publication?id=<?php echo  $v['id'];?>"><?php echo $this->lang->line('delete'); ?></a>
                               </td>
                             </tr>
                           <?php  } ?>

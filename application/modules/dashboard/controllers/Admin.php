@@ -16,7 +16,7 @@ class Admin extends Admin_Controller {
 		$this->body = array();
 		$this->body['user']=$this->Admin_dash_model->count_data('users');
 	    $this->body['map_data']=$this->Admin_dash_model->count_data('categories_tbl');
-	    $this->body['report']=$this->Admin_dash_model->count_data('report_tbl');
+	    $this->body['report']="";//$this->Admin_dash_model->count_data('report_tbl');
 	    $this->body['max']=$this->Admin_dash_model->max_views();
 	    //var_dump($this->body['max']);
 

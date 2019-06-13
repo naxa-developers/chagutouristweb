@@ -28,8 +28,8 @@
                   <select name="category" class="form-control">
                     <option value="">----- Select Hazard category ------</option>
                     <?php 
-                    if($pub){ 
-                    foreach ($pub as $key => $value) {  ?>
+                    if($country){ 
+                    foreach ($country as $key => $value) {  ?>
                       <option value="<?php echo $value['id']  ?>"><?php echo $value['name'] ?></option>
                     <?php }  } ?>
                   </select>
