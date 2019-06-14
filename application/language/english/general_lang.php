@@ -292,6 +292,9 @@ $lang['location_list'] = "Location Lists";
 $lang['add_location_category'] = "Add Location category";
 $lang['mayer'] = "Mayer Message";
 $lang['mayer_add'] = "Add Mayer";
+$lang['user'] = "User Management";
+$lang['user_add'] = "Add User";
+$lang['user_list'] = "User Lists";
 
 
 

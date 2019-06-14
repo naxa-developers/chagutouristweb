@@ -67,12 +67,14 @@
                   <div class="col-sm-3">
                     <label for="name">Validity Start Date:</label>
                     <input type='text' name="start_date" class="form-control" value="<?php echo !empty($users[0]['start_date'])?$users[0]['start_date']:'' ?>" id='nepaliDate' autocomplete="off" placeholder="Please Select Validity Start Date">
+                     <?=form_error('start_date')?>
                   </div>
                 </div>
                 <div class="form-group">
                   <div class="col-sm-3">
                     <label for="name">Validity End Date:</label>
                     <input type='text' name="end_date" class="form-control" value="<?php echo !empty($users[0]['end_date'])?$users[0]['end_date']:'' ?>" id='nepaliDate2' autocomplete="off" placeholder="Please Select Validity End Date">
+                     <?=form_error('end_date')?>
                   </div>
                 </div>
                 <div class="form-group">
@@ -106,7 +108,6 @@
 </section>
 <script>
   $(document).ready(function(){
-   
     $('#nepaliDate').nepaliDatePicker({
       ndpEnglishInput: 'englishDate'
     });

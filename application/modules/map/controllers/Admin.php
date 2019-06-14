@@ -153,8 +153,8 @@ class Admin extends Admin_Controller {
         	}
             if( $this->db->table_exists($cat_table)==true ){
                 $this->session->set_flashdata('msg', 'Category Already Exists !! Please use another category name');
-                // redirect('categories_tbl');
-                redirect(FOLDER_ADMIN.'categories_tbl');
+                //echo "here";die;
+                redirect(FOLDER_ADMIN.'/map/categories_tbl');
             }else{
                 $file_name = $_FILES['cat_pic']['name'];
                 if($file_name = $_FILES['cat_pic']['name']==""){
@@ -582,6 +582,7 @@ class Admin extends Admin_Controller {
             $tbl=$_GET['tbl'];
             //echo $tbl ;exit();
             $this->body['tbl_name']=$this->Map_model->get_layer('categories_tbl');
+            //echo "<pre>";print_r($this->body['tbl_name']);die;
             $this->body['popup']=$this->Map_model->get_popup($tbl);
             $this->body['table']=$tbl;
             //admin check

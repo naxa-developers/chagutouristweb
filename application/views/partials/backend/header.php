@@ -154,7 +154,7 @@
                           <?php } ?>
                     </ul>
                 </li> -->
-                <!-- <li class="sub-menu">
+               <li class="sub-menu">
                     <a href="javascript:;">
                         <i class="fa fa-laptop"></i>
                         <span><?php echo $this->lang->line('categories_management'); ?></span>
@@ -162,10 +162,10 @@
                     <ul class="sub">
 
                         <li><a href="<?php echo base_url(FOLDER_ADMIN);?>/map/categories_tbl"> <?php echo $this->lang->line('categories'); ?></a></li>
-                        <li><a href="<?php echo base_url(FOLDER_ADMIN);?>/map/sub_categories"> <?php echo $this->lang->line('sub_categories'); ?></a></li>
+                        <li><a href="<?php echo base_url(FOLDER_ADMIN);?>/map/create_categories"> <?php echo $this->lang->line('sub_categories'); ?></a></li>
 
                     </ul>
-                </li> -->
+                </li> 
               <!--   <li class="sub-menu">
                     <a href="<?php echo base_url(FOLDER_ADMIN);?>/calendar">
                         <i class="fa fa-th"></i>
@@ -217,6 +217,16 @@
                     <ul class="sub">
                         <li><a href="<?php echo base_url(FOLDER_ADMIN);?>/mayer/view_publication"> <?php echo $this->lang->line('mayer'); ?></a></li>
                         <li><a href="<?php echo base_url(FOLDER_ADMIN);?>/mayer/add_mayer_message"><?php echo $this->lang->line('mayer_add'); ?></a></li>
+                    </ul>
+                </li>
+                <li class="sub-menu">
+                    <a href="javascript:;">
+                        <i class="fa fa-bar-chart-o"></i>
+                        <span><?php echo $this->lang->line('user'); ?></span>
+                    </a>
+                    <ul class="sub">
+                        <li><a href="<?php echo base_url(FOLDER_ADMIN);?>/user"> <?php echo $this->lang->line('user_list'); ?></a></li>
+                        <li><a href="<?php echo base_url(FOLDER_ADMIN);?>/user/add"><?php echo $this->lang->line('user_add'); ?></a></li>
                     </ul>
                 </li>
               <!--   <li class="sub-menu">

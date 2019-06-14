@@ -39,6 +39,8 @@ class Admin extends Admin_Controller {
 		$this->form_validation->set_rules('name', 'user name', 'trim|required');
 		$this->form_validation->set_rules('email', 'user email', 'trim|required');
 		$this->form_validation->set_rules('country', 'Please Select Country', 'trim|required');
+		$this->form_validation->set_rules('start_date', 'Please Enter Start Date', 'trim|required');
+		$this->form_validation->set_rules('end_date', 'Please Enter End Date', 'trim|required');
 		$this->data['maxid'] = $this->general->get_tbl_data_result('"max"(user_id) as id','users');
 		if($id) {
 			$this->data['users'] = $this->general->get_tbl_data_result('*','users',array('user_id'=>$id));
@@ -58,7 +60,7 @@ class Admin extends Admin_Controller {
 				'end_date'=>$this->input->post('end_date'),
 				'country'=>$this->input->post('country')
 	      	);
-	      	echo "<pre>";print_r($data);die;
+	      	//echo "<pre>";print_r($data);die;
 	      	$insert=$this->user_model->add_user('users',$data);
 	      	if($insert!=""){
 	        	$this->session->set_flashdata('msg','User added Successfully !!');

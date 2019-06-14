@@ -114,47 +114,25 @@ class Mobapi extends Admin_Controller
 
   }
 
-  public function registerUser(){  //register user
-
-
-
+  public function registerUser() {  //register user
     $data=$this->input->post('data');
-    //var_dump($data);                     //getting data from api
-
-    if($data){                           //1.check data is empty / notS
-
+    if($data){  
       $data_array = json_decode($data, true);
-      //$email=$data_array['email'];
-
-
-      $register=$this->Api_model->register('mob_user',$data_array);       //inserting data in table & parsing 1 parameter data array with column name and value
-
-
+      $this->data['maxid'] = $this->general->get_tbl_data_result('"max"(user_id) as id','users');
+      $register=$this->Api_model->register('users',$data_array);       //inserting data in table & parsing 1 parameter data array with column name and value
       if($register){           //3.check if data inserted or not
-
-
         $response['error'] = 0;
         $response['message'] = 'Registered successfully';
-
-
       }else{
-
         $response['error'] = 1;
         $response['message'] = 'Registration failed';
-
-      }                          //3
-
-
+      }  
     }else{
       $response['error'] = 1 ;
       $response['message'] = 'No data';
-
     }
-
     echo json_encode($response);
   }
-
-
   public function check_registered_num(){
     $data=$this->input->post('data');
                     //getting data from api

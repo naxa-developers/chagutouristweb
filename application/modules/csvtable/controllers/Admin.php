@@ -15,6 +15,7 @@ class Admin extends Admin_Controller {
 		$this->load->model('Map_model');
 		$this->load->model('Table_model');
 		$this->load->library('form_validation');
+		$this->load->library('ciqrcode');
 		$this->form_validation->set_error_delimiters('<div class="error">', '</div>');
 	}
 	public function index()
@@ -34,7 +35,7 @@ class Admin extends Admin_Controller {
 	    //admin check
 	    $tbl_name=base64_decode($this->input->get('tbl'));
 	    $categoryname=substr($this->input->get('catname'), 2);
-	    
+	    //echo "<pre>"; print_r($tbl_name);die;
 	    if(isset($_POST['submit'])){
 	    	if($categoryname === "Tabular_Data") {
 	    		//if tabular data then we don't create the_geom field
@@ -60,7 +61,6 @@ class Admin extends Admin_Controller {
 
 				               	'a'.$i=> array(
 				                	'type' =>'varchar',
-
 				                ),
 				            );
 				            $add_column=$this->dbforge->add_column($tbl_name,$fields);
@@ -82,6 +82,7 @@ class Admin extends Admin_Controller {
 				        $filename=$fll['name'];
 				        $fields=$this->db->list_fields($tbl_name);
 				        unset($fields[0]);
+				        //echo"<pre>"; print_r($field_name);die;
 				        $field_name=implode(",",$fields);
 				        $c=$this->Table_model->table_copy($csv_file,$filename,$field_name,$tbl_name);
 			        }else{
@@ -92,16 +93,18 @@ class Admin extends Admin_Controller {
 		        }
 		        $this->body['csv_file']=$csv_file;
 		        $this->body['row']=$row;
+		        //echo "<pre>";print_r($this->body['row']);die;
 		        $this->template
 		                        ->enable_parser(FALSE)
 	                        ->build('admin/csv_row',$this->body);
 	      		// $this->load->view('admin/csv_row',$this->body);
 	    	}
 	    }elseif(isset($_POST['submit_row'])){
-	      	//var_dump($_POST);
+	    	//var_dump($_POST);die;
 	      	$fields = array(
 	        	'the_geom' => array('type' => 'geometry')
 	        );
+	       	//echo"<pre>"; print_r($fields);die;
 	        $this->dbforge->add_column($tbl_name, $fields);
 	        $lo=$_POST['long'];
 	        $la=$_POST['lat'];
