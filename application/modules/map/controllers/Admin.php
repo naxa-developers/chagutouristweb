@@ -13,10 +13,7 @@ class Admin extends Admin_Controller {
 		$this->load->dbforge();
 		$this->load->model('Dash_model');
 		$this->load->model('Map_model');
-	}
-	public function index()
-	{
-		# code...
+        $this->load->library('upload');
 	}
 	public function categories_tbl($language_slug=FALSE) {
 		$this->body= array();
@@ -48,6 +45,24 @@ class Admin extends Admin_Controller {
                         ->build('admin/categories_tbl',$this->body);
 		//}
 	}
+    public function add_all_details()
+    {   
+       $tbl = base64_decode($this->input->get('tbl'));
+       $this->data['table'] = $tbl;
+       $this->data['data'] = $this->general->get_tbl_data_result('*',$tbl);
+       //echo "<pre>";print_r($this->data['data']);die;
+       $admin_type=$this->session->userdata('user_type');
+        $this->data['admin']=$admin_type;
+            if($this->session->userdata('user_type')=='1'){
+            $this->data['disable']="";
+        }else{
+            $this->data['disable']="disabled";
+        }
+       $this->template
+                        ->enable_parser(FALSE)
+                        ->build('admin/manage_details',$this->data);
+       //echo "<pre>";print_r($this->data['data']);die;
+    }
 	public function edit_categories(){
 		$this->body=array();
 	    $tbl_namee= base64_decode($this->input->get('tbl'));
@@ -420,6 +435,37 @@ class Admin extends Admin_Controller {
 	                        ->enable_parser(FALSE)
 	                        ->build('admin/manage_style',$this->body);
           	}
+        }
+    }
+    public function add_images()
+    {
+       if($this->input->server('REQUEST_METHOD')=='POST')
+        {
+            $template='';
+            $this->data['id']= $this->input->post('id');
+            $this->data['table']= $this->input->post('nid');
+            $this->data['type']= $this->input->post('type');
+            $template=$this->load->view('map/frontend/add_images',$this->data,true);
+            print_r(json_encode(array('status'=>'success','template'=>$template,'message'=>'Successfully Selected')));
+            exit;
+        }else{
+            print_r(json_encode(array('status'=>'error','message'=>'Cannot Perform this Operation')));
+            exit;
+        }
+    }
+    public function add_images_tomap()
+    {
+        if($this->input->server('REQUEST_METHOD')=='POST')
+        {
+            $trans = $this->Map_model->image_add_more();
+            if($trans) {
+                print_r(json_encode(array('status'=>'success','message'=>'Image Added Successfully !!!')));
+            }else {
+                print_r(json_encode(array('status'=>'success','message'=>'Cannot Perform this Operation')));
+            }
+        }else{
+            print_r(json_encode(array('status'=>'error','message'=>'Cannot Perform this Operation')));
+            exit;
         }
     }
     public function delete_data(){

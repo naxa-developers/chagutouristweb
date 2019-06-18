@@ -375,5 +375,72 @@ public function get_icon(){
     $q=$this->db->get($tbl);
    return $q;
   }
-
+  public function image_add_more()
+  {
+    $error = true;
+    $loop = 0;
+    $id = $this->input->post('id');
+    $table = $this->input->post('nid');
+    $type = $this->input->post('type');
+    $gly = $_FILES['gly_path']['name'];
+    //echo "<pre>";print_r($table);die;
+    foreach($gly as $key => $value) {
+        $_FILES['gallery']['name'] = $_FILES['gly_path']['name'][$key];
+        $_FILES['gallery']['type'] = $_FILES['gly_path']['type'][$key];
+        $_FILES['gallery']['tmp_name'] = $_FILES['gly_path']['tmp_name'][$key];
+        $_FILES['gallery']['error'] = $_FILES['gly_path']['error'][$key];
+        $_FILES['gallery']['size'] = $_FILES['gly_path']['size'][$key];
+        if (!empty($_FILES))
+        {
+            $new_image_name = $_FILES['gly_path']['name'][$key];
+            //echo "<pre>";print_r($new_image_name);die;
+            $imgfile = $this->douploadgallery('gallery');
+            $imagename= base_url().'uploads/sliderimage/'.$imgfile;
+            //print_r($imagename);die;
+            //$this->resize_image(GALLERY_PATH, $imgfile, 'thumb_'.$imgfile, 157, 117); //55,74
+        } else
+        {
+            $imgfile = '';
+        }
+        $dataArray[] = array(
+                $imagename,
+        );
+    }
+    if($type == "image")
+    {
+      $tet =array("image"=>json_encode($dataArray,JSON_NUMERIC_CHECK));
+    }
+    if($type == "threesixty")
+    {
+      $tet =array("three_sixty_image"=>json_encode($dataArray,JSON_NUMERIC_CHECK));
+    }
+    if (!empty($dataArray))
+    {  
+      //echo "<pre>";print_r($tet);die;
+      //$this->db->update('h',$tet,array('id'=>$id));
+      //echo $this->db->last_query();die;
+      if($this->db->update($table,$tet,array('id'=>$id)))
+      { 
+        return $id;
+      }
+    }
+    return false;
+  }
+  public function douploadgallery($file) {
+    $config['upload_path'] = './'.GALLERY_PATH;
+    $config['allowed_types'] = 'png|jpg|gif|jpeg|JPEG';
+    $config['encrypt_name'] = TRUE;
+    $config['remove_spaces'] = TRUE;    
+    $config['max_size'] = '20000000';
+    $this->upload->initialize($config);
+    $this->load->library('upload', $config);
+    $this->upload->do_upload($file);
+    $data = $this->upload->data();
+    //echo "<pre>"; echo "file: ";print_r($file);echo "<br/>";echo "Data: ";print_r($data);exit;
+    $name_array = $data['file_name'];
+        // echo $name_array;exit;
+        // $names= implode(',', $name_array);   
+        // return $names;
+    return $name_array;
+  }
 }//end

@@ -175,6 +175,7 @@
                               <td><?php echo $value;?></td>
                             <?php } } ?>
 
+                              <td><a href="<?php echo base_url(FOLDER_ADMIN)?>/map/add_all_details?tbl=<?php echo base64_encode($v['category_table']);?>"><button type="submit" class="btn-sm btn-primary">Add Information</button></a></td>
                             <td><a href="<?php echo base_url(FOLDER_ADMIN)?>/map/data_tables?tbl_name=<?php echo base64_encode($v['category_table']);?>"><?php echo $this->lang->line('view'); ?></a> /
                               <a href="<?php echo base_url(FOLDER_ADMIN)?>/map/edit_categories?id=<?php echo base64_encode($v['id']);?>&& tbl=<?php echo base64_encode($v['category_table']);?>"><?php echo $this->lang->line('edit'); ?></a> /
                               <a onclick="return confirm('Are you sure you want to delete?')" href="<?php echo base_url(FOLDER_ADMIN)?>/map/delete_data?id=<?php echo  $v['id'];?>&& tbl=<?php echo ($tbl_name);?>&& cat_tbl=<?php echo $v['category_table']  ?>"><?php echo $this->lang->line('delete'); ?></a>
