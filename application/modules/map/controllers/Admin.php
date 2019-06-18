@@ -458,8 +458,25 @@ class Admin extends Admin_Controller {
         if($this->input->server('REQUEST_METHOD')=='POST')
         {
             $trans = $this->Map_model->image_add_more();
+            $type = $this->input->post('type');
+            if($type == "image")
+            {
+              $message ='Image Added Successfully !!!';
+            }
+            if($type == "threesixty")
+            {
+              $message ='Three Sixty Image Added Successfully !!!';
+            }
+            if($type == "audio")
+            {
+              $message ='Audio Added Successfully !!!';
+            }
+            if($type == "video")
+            {
+              $message ='Video Added Successfully !!!';
+            }
             if($trans) {
-                print_r(json_encode(array('status'=>'success','message'=>'Image Added Successfully !!!')));
+                print_r(json_encode(array('status'=>'success','message'=>$message)));
             }else {
                 print_r(json_encode(array('status'=>'success','message'=>'Cannot Perform this Operation')));
             }

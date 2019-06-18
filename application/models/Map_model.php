@@ -394,9 +394,17 @@ public function get_icon(){
         {
             $new_image_name = $_FILES['gly_path']['name'][$key];
             //echo "<pre>";print_r($new_image_name);die;
-            $imgfile = $this->douploadgallery('gallery');
-            $imagename= base_url().'uploads/sliderimage/'.$imgfile;
-            //print_r($imagename);die;
+            if($type == "image" || $type == "threesixty")
+            {
+              $imgfile = $this->douploadgallery('gallery');
+              $imagename= base_url().'uploads/sliderimage/'.$imgfile;
+            }
+            if($type == "audio" || $type == "video")
+            {
+              $imgfile = $this->file_do_uploa_audiod('gallery',$id);
+              //print_r($imgfile);die;
+              $imagename= base_url().'uploads/audiovideo/'.$imgfile;
+            }
             //$this->resize_image(GALLERY_PATH, $imgfile, 'thumb_'.$imgfile, 157, 117); //55,74
         } else
         {
@@ -414,6 +422,14 @@ public function get_icon(){
     {
       $tet =array("three_sixty_image"=>json_encode($dataArray,JSON_NUMERIC_CHECK));
     }
+    if($type == "audio")
+    {
+      $tet =array("audio"=>json_encode($dataArray,JSON_NUMERIC_CHECK));
+    }
+    if($type == "video")
+    {
+      $tet =array("video"=>json_encode($dataArray,JSON_NUMERIC_CHECK));
+    }
     if (!empty($dataArray))
     {  
       //echo "<pre>";print_r($tet);die;
@@ -425,6 +441,33 @@ public function get_icon(){
       }
     }
     return false;
+  }
+  public function file_do_uploa_audiod($filename,$id)
+  {
+    $configVideo['upload_path']          = './uploads/audiovideo/';
+    $configVideo['max_size'] = '10240';
+    $configVideo['allowed_types'] = 'avi|flv|wmv|mp3|mpeg|mpg|mp4|mpe|qt|mov';
+    $configVideo['overwrite'] = FALSE;
+    $configVideo['remove_spaces'] = TRUE;
+    $configVideo['file_name'] = $id.$_FILES['gallery']['name'];
+    $configVideo['overwrite']            = TRUE;
+    //$configVideo['file_name']           = $name;
+    //$configVideo['file_name'] = $filename;
+    $this->load->library('upload', $configVideo);
+    $this->upload->initialize($configVideo);
+    $data = $this->upload->data();
+    $name_array = $configVideo['file_name'];
+    //echo "<pre>";print_r($name_array); die;
+    $pathp = $data['full_path'];
+    if ( ! $this->upload->do_upload('gallery'))
+    {
+      $error = array('error' => $this->upload->display_errors());
+      return $error;
+    }
+    else
+    {
+     return $name_array;
+    }
   }
   public function douploadgallery($file) {
     $config['upload_path'] = './'.GALLERY_PATH;

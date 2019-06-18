@@ -65,6 +65,12 @@
                             <td>
                               <span data-id="<?php echo $v['id']  ?>" data-type="threesixty" data-title="Three Sixty Images" data-nid="<?php  echo $table; ?>" class="btn btn-primary btn-xs popupModal">Three Sixty Images</span>
                             </td>
+                            <td>
+                              <span data-id="<?php echo $v['id']  ?>" data-type="audio" data-title="Add Audio" data-nid="<?php  echo $table; ?>" class="btn btn-primary btn-xs popupModal">Audio</span>
+                            </td>
+                            <td>
+                              <span data-id="<?php echo $v['id']  ?>" data-type="video" data-title="Add Video" data-nid="<?php  echo $table; ?>" class="btn btn-primary btn-xs popupModal">Video</span>
+                            </td>
                               <td>
                               <a href="" >Add Images</a>
                                 <!-- <a href="<?php echo base_url()?>proj/edit_proj?id=<?php echo base64_encode($value['id']);?>&& tbl=<?php echo base64_encode($value['id']);?>"><?php echo $this->lang->line('edit'); ?></a> --> 
