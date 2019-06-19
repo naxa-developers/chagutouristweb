@@ -47,34 +47,6 @@
 
                           <td>Summary List</td>
 
-                        <?php }elseif($key == 'style'){?>
-
-                          <td>Style</td>
-
-                        <?php }elseif($key == 'column_control'){?>
-                              <td>Manage Column</td>
-                        <?php }elseif($key == 'popup_content'){?>
-
-                          <td>Popup</td>
-
-                        <?php }elseif($key == 'default_load'){?>
-
-                          <td>Default Load</td>
-
-                        <?php }elseif($key == 'public_view'){?>
-
-                          <td>Public view</td>
-
-                        <?php }elseif($key == 'allow_download'){?>
-
-                          <td>Allow Download</td>
-
-                        <?php }elseif($key == 'summary'){?>
-
-
-
-                        <?php }elseif($key == 'category_table'){?>
-
                         <?php }elseif($key == 'marker_type'){?>
 
 
@@ -107,73 +79,9 @@
                       <?php foreach($data as $v ){ ?>
                         <tr>
 
-                          <?php foreach($v as $key => $value) {
-                            if($key == 'summary_list'){   ?>
-                              <td><a href="<?php echo base_url(FOLDER_ADMIN)?>/map/update_summary?tbl=<?php echo $v['category_table'];?>"><button type="submit" class="btn-sm btn-success">Summary</button></a></td>
-
-                            <?php }elseif($key == 'style'){?>
-
-                              <td><a href="<?php echo base_url(FOLDER_ADMIN)?>/map/manage_style?tbl=<?php echo $v['category_table'];?>"><button type="submit" class="btn-sm btn-info">Style</button></a> </td>
-                            <?php }elseif($key == 'column_control'){ ?>
-                              <td>
-                                <a href="<?php echo base_url(FOLDER_ADMIN)?>/map/manage_column_control?tbl=<?php echo $v['category_table'];?>"><button type="submit" class="btn-sm btn-primary">Manage Column</button></a>
-                              </td>
-                            <?php }elseif($key == 'popup_content'){ ?>
-
-                              <td><a href="<?php echo base_url(FOLDER_ADMIN)?>/map/manage_popup?tbl=<?php echo $v['category_table'];?>"><button type="submit" class="btn-sm btn-primary">Popup</button></a></td>
-
-                            <?php }elseif($key == 'sub_categories'){?>
-
-                              <td><a href="<?php echo base_url(FOLDER_ADMIN)?>/map/sub_categories?tbl=<?php echo $v['category_table'];?>"><button type="submit" class="btn-sm btn-warning">sub-categories</button></a></td>
-
-                            <?php }elseif($key == 'default_load'){?>
-
-                              <?php if($v['default_load']=='1'){  ?>
-
-                                <td><label class="switch"><input type="checkbox" id="<?php echo $v['id'] ?>" class="default_switch" checked><span class="slider round"></span></label><span  style="color: #10b510;font-size: 0.8em;"  id="ChangeDefaultStatus_<?php echo $v['id'] ?>"></span></span></td>
-                              <?php }else{ ?>
-
-                                <td><label class="switch"><input type="checkbox" id="<?php echo $v['id'] ?>" class="default_switch" ><span class="slider round"></span></label><span  style="color: #10b510;font-size: 0.8em;"  id="ChangeDefaultStatus_<?php echo $v['id'] ?>"></span></span></td>
-
-                              <?php  } ?>
-                            <?php }elseif($key == 'public_view'){?>
-
-                              <?php if($v['public_view']=='1'){  ?>
-
-                                <td><label class="switch"><input type="checkbox" id="<?php echo $v['id'] ?>"  class="public_view" checked <?php echo $disable ?>><span class="slider round"></span></label>  <span style="color: #10b510;font-size: 0.8em;" id="Publicview_<?php echo $v['id'] ?>"></span></td>
-                              <?php }else{ ?>
-
-                                <td><label class="switch"><input type="checkbox" id="<?php echo $v['id'] ?>" class="public_view" <?php echo $disable ?>><span class="slider round"></span></label><span style="color: #10b510;font-size: 0.8em;"  id="Publicview_<?php echo $v['id'] ?>"></span></td>
-
-                              <?php  } ?>
-
-                              <!-- download control-->
-                            <?php }elseif($key == 'allow_download'){?>
-
-                              <?php if($v['allow_download']=='1'){  ?>
-
-                                <td><label class="switch"><input type="checkbox" id="<?php echo $v['id'] ?>" class="allow_download" checked <?php echo $disable ?>><span class="slider round"></span></label> <span  style="color: #10b510;font-size: 0.8em;"  id="changeAllowDownload_<?php echo $v['id'] ?>"></span></td>
-                              <?php }else{ ?>
-
-                                <td><label class="switch"><input type="checkbox" id="<?php echo $v['id'] ?>" class="allow_download" <?php echo $disable ?>><span class="slider round"></span></label><span  style="color: #10b510;font-size: 0.8em;"  id="changeAllowDownload_<?php echo $v['id'] ?>"></span></td>
-
-                              <?php  } ?>
-                              <!-- download control -->
-                            <?php }elseif($key == 'summary'){?>
-
-                            <?php }elseif($key == 'marker_type'){?>
-
-                            <?php }elseif($key == 'sub_col'){?>
-
-                            <?php }elseif($key == 'category_table'){?>
-
-                            <?php }elseif($key == 'category_photo'){?>
-
-                            <?php }elseif($key == 'ordering'){?>
-
-                            <?php }else{?>
+                          <?php foreach($v as $key => $value) { ?>
                               <td><?php echo $value;?></td>
-                            <?php } } ?>
+                            <?php  } ?>
 
                               <td><a href="<?php echo base_url(FOLDER_ADMIN)?>/map/add_all_details?tbl=<?php echo base64_encode($v['category_table']);?>"><button type="submit" class="btn-sm btn-primary">Add Information</button></a></td>
                             <td><a href="<?php echo base_url(FOLDER_ADMIN)?>/map/data_tables?tbl_name=<?php echo base64_encode($v['category_table']);?>"><?php echo $this->lang->line('view'); ?></a> /
