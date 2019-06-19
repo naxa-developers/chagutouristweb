@@ -47,7 +47,7 @@ class Mobapi extends Admin_Controller
             'token'=>'CTG'.$this->data['maxid'][0]['id'],
             'email'=>$this->input->post('email'),
             'gender'=>$this->input->post('gender'),
-            'purpose'=>$this->input->post('purpose'),
+            'purpose'=>$this->input->post('purpose_of_visit'),
             'contact_num'=>$this->input->post('contact_num'),
             'start_date'=>$this->input->post('start_date'),
             'end_date'=>$this->input->post('end_date'),
