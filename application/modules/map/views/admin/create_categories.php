@@ -130,10 +130,8 @@
                 <label for="exampleInputFile">Category Type</label>
                 <select name="category_type">
 
-                  <option value="Hazard_Data">Hazard & Vulnerability</option>
-                  <option value="Exposure_Data"> Resources</option>
-                  <option value="Baseline_Data">Base Data</option>
-                  <option value="Tabular_Data">Tabular Data</option>
+                  <option value="Nagarkot">Nagarkot</option>
+                  <option value="changuNarayan">Changu Narayan</option>
                 </select>
               </div>
               </div>
