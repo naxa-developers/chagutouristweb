@@ -22,7 +22,7 @@ class Mobapi extends Admin_Controller
 
 
 
-  public function check_registration(){ //checking of new user or already registered and reigistering
+  public function checkNregistration(){ //checking of new user or already registered and reigistering
 
     $data=$this->input->post('data');
     //var_dump($data);                     //getting data from api
@@ -31,8 +31,7 @@ class Mobapi extends Admin_Controller
 
       $data_array = json_decode($data, true);
       $email=$data_array['email'];
-
-
+      //var_dump($email);
       $getuser=$this->Api_model->getuser(); //get array of username from databasae
 
 
@@ -42,8 +41,20 @@ class Mobapi extends Admin_Controller
         $response['message'] = 'User is already exist';
 
       }else{
-
-        $register=$this->Api_model->register('mob_user',$data_array);       //inserting data in table & parsing 1 parameter data array with column name and value
+        $this->data['maxid'] = $this->general->get_tbl_data_result('"max"(user_id) as id','users');
+        $datafinal=array(
+            'username'=>$this->input->post('name'),
+            'token'=>'CTG'.$this->data['maxid'][0]['id'],
+            'email'=>$this->input->post('email'),
+            'gender'=>$this->input->post('gender'),
+            'purpose'=>$this->input->post('purpose'),
+            'contact_num'=>$this->input->post('contact_num'),
+            'start_date'=>$this->input->post('start_date'),
+            'end_date'=>$this->input->post('end_date'),
+            'country'=>$this->input->post('country')
+              );
+        //echo "<pre>";print_r($datafinal);die;
+        $register=$this->Api_model->register('users',$datafinal);       //inserting data in table & parsing 1 parameter data array with column name and value
 
 
         if($register){           //3.check if data inserted or not

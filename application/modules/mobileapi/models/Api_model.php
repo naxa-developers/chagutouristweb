@@ -13,7 +13,7 @@ Class Api_model extends CI_Model
  {
  $this->db->select('email');
  $this->db->distinct('email');
-   $query = $this->db->get('mob_user');
+   $query = $this->db->get('users');
    $array = array();
 
    foreach($query->result() as $row)
