@@ -105,6 +105,7 @@ class Admin extends Admin_Controller {
 	        	'the_geom' => array('type' => 'geometry')
 	        );
 	       	//echo"<pre>"; print_r($fields);die;
+	       	$this->load->dbforge();
 	        $this->dbforge->add_column($tbl_name, $fields);
 	        $lo=$_POST['long'];
 	        $la=$_POST['lat'];

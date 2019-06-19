@@ -44,15 +44,15 @@ class Mobapi extends Admin_Controller
       }else{
         $this->data['maxid'] = $this->general->get_tbl_data_result('"max"(user_id) as id','users');
         $datafinal=array(
-            'username'=>$this->input->post('name'),
+            'username'=>$data_array['name'],
             'token'=>'CTG'.$this->data['maxid'][0]['id'],
-            'email'=>$this->input->post('email'),
-            'gender'=>$this->input->post('gender'),
-            'purpose'=>$this->input->post('purpose_of_visit'),
-            'contact_num'=>$this->input->post('contact_num'),
-            'start_date'=>$this->input->post('start_date'),
-            'end_date'=>$this->input->post('end_date'),
-            'country'=>$this->input->post('country')
+            'email'=>$data_array['email'],
+            'gender'=>$data_array['gender'],
+            'purpose'=>$data_array['purpose_of_visit'],
+            //'contact_num'=>$data_array['contact_num'],
+            //'start_date'=>$data_array['start_date'],
+            //'end_date'=>$data_array['end_date'],
+            'country'=>$data_array['country']
               );
         //echo "<pre>";print_r($datafinal);die;
         $register=$this->Api_model->register('users',$datafinal);       //inserting data in table & parsing 1 parameter data array with column name and value
