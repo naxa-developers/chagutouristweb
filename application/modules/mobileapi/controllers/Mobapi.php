@@ -31,23 +31,16 @@ class Mobapi extends Admin_Controller
     }
 
   public function checkNregistration(){ //checking of new user or already registered and reigistering
-
     $data=$this->input->post('data');
     //var_dump($data);                     //getting data from api
-
     if($data){                           //1.check data is empty / notS
-
       $data_array = json_decode($data, true);
       $email=$data_array['email'];
       //var_dump($email);
       $getuser=$this->Api_model->getuser(); //get array of username from databasae
-
-
       if (in_array($email,$getuser, true)) {  //5.checking num exists or not
-
         $response['error'] = 0;
         $response['message'] = 'User is already exist';
-
       }else{
         $this->data['maxid'] = $this->general->get_tbl_data_result('"max"(user_id) as id','users');
         $datafinal=array(
@@ -63,76 +56,52 @@ class Mobapi extends Admin_Controller
               );
         //echo "<pre>";print_r($datafinal);die;
         $register=$this->Api_model->register('users',$datafinal);       //inserting data in table & parsing 1 parameter data array with column name and value
-
-
         if($register){           //3.check if data inserted or not
-
-
           $response['error'] = 0;
           $response['message'] = 'Registered successfully';
-
-
         }else{
-
           $response['error'] = 1;
           $response['message'] = 'Registration failed';
-
         }                          //3
-
       }
-
-
     }else{                           //2.if empty send no data response
-
-
       $response['error'] = 1 ;
       $response['message'] = 'No data';
-
-
     }
-
     echo json_encode($response);
   }
-
-  public function  loginCheck(){
-
-    $data=$this->input->post('data');
-    //var_dump($data);                     //getting data from api
-
+  public function  authCheck(){
+    $data=$this->input->post('data');   //getting data from api
     if($data){                           //1.check data is empty / notS
-
       $data_array = json_decode($data, true);
-      $email=$data_array['email'];
-
-
-      $getuser=$this->Api_model->getuser(); //get array of username from databasae
-
-
-      if (in_array($email,$getuser, true)) {  //5.checking num exists or not
-
-        $get_user_details=$this->Api_model->user_detail($email);
-
-        $response['error'] = 0;
-        $response['message'] = 'Valid user';
-        $response['data'] = $get_user_details;
-
+      $token=$data_array['token'];
+      $tokencheck=$this->general->get_tbl_data_result('token','users',array('token'=>$token));
+      if($tokencheck) {  //5.checking num exists or not
+        //$tokencheck=$this->Api_model->check_auth('users',$token); 
+        //$date = new DateTime("now");
+        $date =date('Y-m-d');
+        $token=$this->general->get_tbl_data_result('token','users',array('end_date >='=>$date,'token'=>$token));
+        //echo $this->db->last_query();die;
+        if($tokencheck)
+        {
+          $response['error'] = 0;
+          $response['message'] = 'Valid user';
+        }else{
+          $response['error'] = 1;
+          $response['message'] = 'Your token is expired Please Contact to service provider !!';
+          $response['data'] = null;
+        }
       }else{
-
         $response['error'] = 1;
         $response['message'] = 'Invalid user';       //inserting data in table & parsing 1 parameter data array with column name and value
         $response['data'] = null;
       }
-
     }else{
       $response['error'] = 1 ;
       $response['message'] = 'No data';
-
     }
-
     echo json_encode($response);
-
   }
-
   public function registerUser() {  //register user
     $data=$this->input->post('data');
     if($data){  

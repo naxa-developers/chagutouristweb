@@ -5,24 +5,27 @@ Class Api_model extends CI_Model
   {
     parent::__construct();
   }
-
-
-
-
+  // public function check_auth()
+  // {
+  //   $this->db->select('token');
+  //    $date = new DateTime("now");
+  //   $this->db->where('end_date >=', $date);
+  //   $query = $this->db->get('users');
+  //    return $array;
+  // }
   public function getuser()
- {
- $this->db->select('email');
- $this->db->distinct('email');
-   $query = $this->db->get('users');
-   $array = array();
+  {
+   $this->db->select('email');
+   $this->db->distinct('email');
+     $query = $this->db->get('users');
+     $array = array();
 
-   foreach($query->result() as $row)
-   {
-       $array[] = $row->email; // add each user id to the array
+     foreach($query->result() as $row)
+     {
+         $array[] = $row->email; // add each user id to the array
+     }
+     return $array;
    }
-
-   return $array;
- }
 
  public function get_mobile_no(){
 
