@@ -20,7 +20,15 @@ class Mobapi extends Admin_Controller
   }
 
 
-
+    public function language()
+    {
+      $data=$this->general->get_tbl_data_result('name,alias','publicationsubcat');//this is language table
+      $response['error'] = 0 ;
+      $response['message'] = 'List Of Unverified report';
+      $response['data'] = $data;
+      echo json_encode($response);
+      
+    }
 
   public function checkNregistration(){ //checking of new user or already registered and reigistering
 
