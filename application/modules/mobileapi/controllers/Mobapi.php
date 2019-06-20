@@ -7,7 +7,8 @@ class Mobapi extends Admin_Controller
     parent::__construct();
 
     $this->load->model('Api_model');
-
+    $this->load->model('Table_model');
+    
     $api_key = $this->input->post('api_key');
     if(APP_SECRET_KEY != $api_key)
     {
@@ -198,6 +199,33 @@ class Mobapi extends Admin_Controller
     echo json_encode($response);
     // echo "<pre>";
     // print_r($response);die;
+  }
+  public function geojson() {
+    $tbl=$_POST['table'];
+    if(!$this->db->table_exists($tbl)){
+      $response['msg']='Data table does not exists';
+      echo json_encode($response);
+    }else{
+      $d=$this->Table_model->get_lang($tbl);
+      /* get the object   */
+      $report = $this->Table_model->get_asjson($d,$tbl);
+      $dataset_data=$report->result_array();
+      foreach($dataset_data as $data){
+        $ddata=$data ;
+        unset($data['st_asgeojson']);
+        $features_cat[]= array(
+          'type' =>'Feature',
+          'properties'=>$data,
+          'geometry'=>json_decode($ddata['st_asgeojson'],JSON_NUMERIC_CHECK)
+        );
+      }
+      $dataset_array= array(
+        'type' => 'FeatureCollection',
+        'features' => $features_cat,
+      );
+      $dataset_geojson=json_encode($dataset_array);
+      echo $dataset_geojson;
+    }
   }
 }//end
 
