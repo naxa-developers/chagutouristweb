@@ -15,6 +15,7 @@ class Admin extends Admin_Controller {
         $this->load->model('Map_model');
 		$this->load->model('Table_model');
         $this->load->library('upload');
+        $this->load->library('ciqrcode');
 	}
 	public function categories_tbl($language_slug=FALSE) {
 		$this->body= array();
@@ -46,6 +47,41 @@ class Admin extends Admin_Controller {
                         ->build('admin/categories_tbl',$this->body);
 		//}
 	}
+    public function generateQrcode()
+    {
+        if($this->input->server('REQUEST_METHOD')=='POST')
+        {   
+            $id = $this->input->post('id');
+            $table = $this->input->post('nid');
+            $config['cacheable']    = true; //boolean, the default is true
+            $config['cachedir']     = './assets/'; //string, the default is application/cache/
+            $config['errorlog']     = './assets/'; //string, the default is application/logs/
+            //$config['imagedir']     = './uploads/location/qrcode/'; //direktori penyimpanan qr code
+            $config['quality']      = true; //boolean, the default is true
+            $config['size']         = '1024'; //interger, the default is 1024
+            $config['black']        = array(224,255,255); // array, default is array(255,255,255)
+            $config['white']        = array(70,130,180); // array, default is array(0,0,0)
+            $this->ciqrcode->initialize($config);
+     
+            $image_name_qr=$table.$id.'.png'; //buat name dari qr code sesuai dengan nim
+     
+            $params['data'] = $table.$id; //data yang akan di jadikan QR CODE
+            $params['level'] = 'H'; //H=High
+            $params['size'] = 10;
+            $params['savename'] = './uploads/qrcode/'.$image_name_qr;  //simpan image QR CODE ke folder assets/images/
+            $this->ciqrcode->generate($params);
+            $qrcode = base_url() . 'uploads/qrcode/'.$image_name_qr;
+            $img=array(
+                        'a10'=>$qrcode,
+                    );
+            $update_path=$this->Map_model->update_path($id,$img,$table);
+            print_r(json_encode(array('status'=>'success','message'=>'Qr Code generated Successfully !!')));
+            exit;
+        }else{
+            print_r(json_encode(array('status'=>'error','message'=>'Cannot Perform this Operation')));
+            exit;
+        }
+    }
     public function add_all_details()
     {   
        $tbl = base64_decode($this->input->get('tbl'));

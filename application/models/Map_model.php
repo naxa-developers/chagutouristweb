@@ -26,7 +26,11 @@ class Map_model extends CI_Model {
 
   }
 
+  public function update_path($id,$data,$tbl){
+    $this->db->where('id',$id);
+    $this->db->update($tbl,$data);
 
+  }
   public function get_jsn($tbl){
 
 

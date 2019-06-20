@@ -69,6 +69,10 @@
                               <span data-id="<?php echo $v['id']  ?>" data-type="audio" data-title="Add Audio" data-nid="<?php  echo $table; ?>" class="btn btn-primary btn-xs popupModal">Audio</span>
                             </td>
                             <td>
+                              <span data-id="<?php echo $v['id']  ?>" data-type="video" data-title="Add Video" data-nid="<?php  echo $table; ?>" class="btn btn-primary btn-xs GenerateQrcode">Generate Rcode</span>
+                              <span id="Message_<?php echo $v['id']  ?>"></span>
+                            </td>
+                            <td>
                               <span data-id="<?php echo $v['id']  ?>" data-type="video" data-title="Add Video" data-nid="<?php  echo $table; ?>" class="btn btn-primary btn-xs popupModal">Video</span>
                             </td>
                               <td>
@@ -148,5 +152,31 @@
             }
           }
      });
+  });
+  $(document).off('click','.GenerateQrcode');
+  $(document).on('click','.GenerateQrcode', function(){ 
+      event.preventDefault();
+      var id = $(this).data('id');
+      var title = $(this).data('title');
+      var nid = $(this).data('nid');
+      //$('.modal-title').html(title);
+      //$('#myModal').modal('show');
+      var action="<?php echo base_url(FOLDER_ADMIN) ?>/map/generateQrcode";
+      $.ajax({
+      type: "POST",
+      url: action,
+      dataType: 'html',
+      data: {id:id,nid:nid},
+      success: function(jsons)
+      {
+        data = jQuery.parseJSON(jsons); 
+        if(data.status=='success'){
+          $('#Message_'+id).html(data.message);
+          setTimeout(function(){
+            $('#Message_'+id).html("");
+           }, 700);
+        }
+      }
+    });
   });
 </script>

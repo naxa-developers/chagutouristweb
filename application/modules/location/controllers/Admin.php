@@ -269,7 +269,6 @@ class Admin extends Admin_Controller {
 			            'video'=>$file_path_audiofinal,
 			            'qrcode'=>$qrcode,
 			        );
-			        //echo "<pre>"; print_r($img);die;
 		            $update_path=$this->Location_model->update_path($insert,$img);
 		            $this->session->set_flashdata('msg','Publication successfully added');
 		          	redirect(FOLDER_ADMIN.'/location/view_location');
