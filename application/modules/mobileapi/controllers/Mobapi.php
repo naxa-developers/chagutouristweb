@@ -180,10 +180,6 @@ class Mobapi extends Admin_Controller
 
     echo  json_encode($response);
   }
-  public function map_categories()
-  {
-    
-  }
   public function categoryApi() {
     $category = $this->general->get_tbl_data_result('category_name,category_table,category_type,category_photo,summary_list','categories_tbl');
     $final=array();
@@ -191,14 +187,13 @@ class Mobapi extends Admin_Controller
     foreach($category as $data){
       $sum=$this->Api_model->get_sum_name($data['category_table'],$data['summary_list']);
       $sum_name=$sum['nepali_lang'];
-
       $da=array('summary_name'=>$sum_name);
       //}
       $a=array_merge($category[$i],$da);
       array_push($final,$a);
       $i++;
       }
-    $response['status']=200;
+    $response['status']=0;
     $response['data']=$final;
     echo json_encode($response);
     // echo "<pre>";
