@@ -402,7 +402,7 @@ public function get_icon(){
             if($type == "audio" || $type == "video")
             {
               $audiofile = $this->file_do_uploa_audiod('gallery',$id);
-              //print_r($imgfile);die;
+              //print_r($audiofile);die;
               $imagename= base_url().'uploads/audiovideo/'.$audiofile;
             }
             //$this->resize_image(GALLERY_PATH, $imgfile, 'thumb_'.$imgfile, 157, 117); //55,74
