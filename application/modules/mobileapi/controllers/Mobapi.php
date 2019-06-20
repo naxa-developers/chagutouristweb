@@ -182,8 +182,8 @@ class Mobapi extends Admin_Controller
     echo  json_encode($response);
   }
   public function categoryApi() {
-    $category = $this->general->get_tbl_data_result('category_name,category_table,category_photo as category_marker','categories_tbl');
-    $final=array()
+    $category = $this->general->get_tbl_data_result('category_name,category_table,category_photo as category_marker,summary_list','categories_tbl');
+    $final=array();
     $i=0;
     foreach($category as $data){
       $sum=$this->Api_model->get_sum_name($data['category_table'],$data['summary_list']);
