@@ -8,7 +8,7 @@ class Mobapi extends Admin_Controller
 
     $this->load->model('Api_model');
     $this->load->model('Table_model');
-    
+
     $api_key = $this->input->post('api_key');
     if(APP_SECRET_KEY != $api_key)
     {
@@ -182,8 +182,8 @@ class Mobapi extends Admin_Controller
     echo  json_encode($response);
   }
   public function categoryApi() {
-    $category = $this->general->get_tbl_data_result('category_name,category_table,category_type,category_photo,summary_list','categories_tbl');
-    $final=array();
+    $category = $this->general->get_tbl_data_result('category_name,category_table,category_photo as category_marker','categories_tbl');
+    $final=array()
     $i=0;
     foreach($category as $data){
       $sum=$this->Api_model->get_sum_name($data['category_table'],$data['summary_list']);
@@ -201,7 +201,7 @@ class Mobapi extends Admin_Controller
     // print_r($response);die;
   }
   public function geojson() {
-    $tbl=$_POST['table'];
+    $tbl=$_POST['cat_table'];
     if(!$this->db->table_exists($tbl)){
       $response['msg']='Data table does not exists';
       echo json_encode($response);
