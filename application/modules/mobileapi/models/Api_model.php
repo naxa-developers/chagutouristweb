@@ -45,7 +45,14 @@ Class Api_model extends CI_Model
 
  }
 
+ public function get_sum_name($tbl,$s){
 
+    $this->db->select('*');
+    $this->db->where('tbl_name',$tbl);
+    $this->db->where('eng_lang',$s);
+    $q=$this->db->get('tbl_lang');
+    return $q->row_array();
+  }
  public function register($tbl,$data){
 
   $this->db->insert($tbl,$data);

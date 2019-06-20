@@ -179,264 +179,30 @@ class Mobapi extends Admin_Controller
     }
 
     echo  json_encode($response);
-
   }
-
-public function delete_circle(){
-
-$email=$this->input->post('email');
-$mobile_no=$this->input->post('mobile_no');
-$circle=$this->Api_model->my_circle_detail($email);
-$data_array=json_decode($circle["my_circle"],TRUE);
-//var_dump(array_values($data_array));
-
-for($i=0;$i<sizeof($data_array);$i++){
-
-
-
-  if($mobile_no==$data_array[$i]['mobile_no'])
-   {
-
-     unset($data_array[$i]);
-
-
-
-
-    }
-
-   }
-  $sort_array=array_values($data_array);
-//var_dump($sort_array);
-
-   $circle_data=array(
-    "my_circle"=>json_encode($sort_array),
-   );
-
-   $delete_circle=$this->Api_model->update_circle($email,$circle_data);
-   if($delete_circle){
-     $response['error'] = 0 ;
-     $response['message'] = 'Contact successfully Removed from My circle';
-
-   }else{
-     $response['error'] = 0 ;
-     $response['message'] = 'Number cannot be removed';
-   }
-//var_dump($data_array);
-  echo json_encode($response);
-
-
- }
-
- public function add_my_circle(){
-
-   $data=$this->input->post('data');
-   $email=$this->input->post('email');
-   $circle=$this->Api_model->my_circle_detail($email);
-
-   if($circle['my_circle']==""){
-
-     $circle_data=array(
-      "my_circle"=>$data,
-     );
-
-     $add_circle=$this->Api_model->update_circle($email,$circle_data);
-     if($add_circle){
-       $response['error'] = 0 ;
-       $response['message'] = 'My circle Added successfully';
-
-     }else{
-       $response['error'] = 1 ;
-       $response['message'] = 'Error in Adding cicle';
-     }
-
-
-   }else{
-
-     $data_array=json_decode($data,TRUE);
-     $data_array_circle=json_decode($circle['my_circle'],TRUE);
-     $merge=array_merge($data_array_circle,$data_array);
-
-     $circle_data=array(
-      "my_circle"=>json_encode($merge),
-     );
-
-
-    $update_circle=$this->Api_model->update_circle($email,$circle_data);
-
-
-    if($update_circle){
-      $response['error'] = 0 ;
-      $response['message'] = 'My circle Updated successfully';
-
-    }else{
-      $response['error'] = 0 ;
-      $response['message'] = 'Error in Updating cicle';
-    }
-
-
-   }
-   echo json_encode($response);
-
-
-
-
- }
- public function insert_incident_report(){
-
-$data=$this->input->post('data');
-$data_array=json_decode($data,TRUE);
-//var_dump($data_array);
- $insert=$this->Api_model->register('incident_report',$data_array);
- //var_dump($insert);
-
-if($insert){
-
-  $response['error'] = 0 ;
-  $response['message'] = 'Incident Reported';
-
-}else{
-
-  $response['error'] = 1 ;
-  $response['message'] = 'Incident Report Unsuccessful';
-
-
-}
-echo json_encode($response);
-
-
- }
-
- public function get_unverified_report(){
-
-$data=$this->Api_model->get_report();
-$response['error'] = 0 ;
-$response['message'] = 'List Of Unverified report';
-$response['data'] = $data;
-echo json_encode($response);
-
-
- }
-
-public  function get_term_data(){
-
-  $data=$this->general->get_tbl_data_result('id,image,word,meaning,comment,language','dictionary_tbl',false,'word');
-  $response['error'] = 0 ;
-  $response['message'] = 'Data of Terminologies';
-  $response['data'] = $data;
-  echo json_encode($response);
-
-
-}
-
-public  function get_drrinfo_data(){
-
-
-  $data=$this->Api_model->get_drr_info();
-//   $photo=array(
-//     'p1'=>'a',
-//     'p2'=>'b'
-//   );
-//   $new=array_merge($data[0],$photo);
-// //echo sizeof($data);
-// for($i=0;$i<sizeof($data);$i++){
-//
-//   var_dump ($data[$i]["desc"]);
-// }
-
-  $response['error'] = 0 ;
-  $response['message'] = 'Data of Drr Info';
-  $response['data'] = $data;
-
-  echo json_encode($response);
-
-
-}
-
-public function get_img(){
-
-  $html="<ol>\r\n\t<li><span style=\"font-size:18px;\">this&nbsp;is bold text&nbsp;<strong>bold text&nbsp;</strong>and italic . <span style=\"background-color:Yellow;\">How about we do som colorful text</span></span></li>\r\n\t<li><font face=\"monospace\">Mark&nbsp; yellow</font></li>\r\n</ol>\r\n\r\n<p>paragaraph changed here now add some image down&nbsp; &nbsp;&nbsp;</p>\r\n\r\n<p><img alt=\"\" src=\"http://kmc.naxa.com.np/uploads/images/editor/images/23_thumb.jpg\" style=\"width: 375px; height: 500px;\" /></p>\r\n\r\n<p>Now for second image down</p>\r\n\r\n<p><img alt=\"\" src=\"http://kmc.naxa.com.np/uploads/images/editor/images/24_thumb.jpg\" style=\"width: 500px; height: 375px;\" /></p>\r\n\r\n<p>That all to text,</p>\r\n";
-  //preg_match_all('/<img[^>]+>/i',$html, $result);
-$content = preg_replace("/<img[^>]+\>/i", " ", $html);
-var_dump($content);
-die;
-  preg_match_all( '@src="([^"]+)"@' , $html, $match );
-  $src = array_pop($match);
- //print_r(strip_tags($html));
-//preg_replace("/\s|&nbsp;/",'',$string);
-//var_dump(preg_replace("/\s|&nbsp;/",' ',strip_tags($html)));
-
-  //var_dump($src );
-
-}
-
-  public function get_publication_data(){
-
-    $data=$this->Api_model->get_publication(); //echo $this->db->last_query();die;
-    $response['error'] = 0;
-    $response['message'] = 'Data of Publication';
-    $response['data'] = $data;
-    echo json_encode($response);
-  }
-
-  public function contact_category(){
-    $data=$this->Api_model->get_contact();
-
-    $response['error'] = 0;
-    $response['message'] = 'Tab List For Contacts';
-    $response['data'] = $data;
-    echo json_encode($response);
-
-  }
-  public function  inventory_data(){
-
-    $data=$this->Api_model->get_inventory();
-    $response['error'] = 0;
-    $response['message'] = 'Tab List For Contacts';
-    $response['data'] = $data;
-    echo json_encode($response);
-
-  }
-  public function readyapi()
+  public function map_categories()
   {
-    $data=$this->general->get_tbl_data_result('id,slug,name,description','beready');//echo $this->db->last_query();die;
-    $response['error'] = 0;
-    $response['message'] = 'Data of Ready Section';
-    $response['data'] = $data;
-    echo json_encode($response);
+    
   }
+  public function categoryApi() {
+    $category = $this->general->get_tbl_data_result('category_name,category_table,category_type,category_photo,summary_list','categories_tbl');
+    $final=array();
+    $i=0;
+    foreach($category as $data){
+      $sum=$this->Api_model->get_sum_name($data['category_table'],$data['summary_list']);
+      $sum_name=$sum['nepali_lang'];
 
-  public function quizapi_category()
-  {
-    $data=$this->general->get_tbl_data_result('*','quiz_category');
-    //echo "<pre>"; print_r($data);die;
-    $response['error'] = 0;
-    $response['message'] = 'Data of Ready Section';
-    $response['data'] = $data;
+      $da=array('summary_name'=>$sum_name);
+      //}
+      $a=array_merge($category[$i],$da);
+      array_push($final,$a);
+      $i++;
+      }
+    $response['status']=200;
+    $response['data']=$final;
     echo json_encode($response);
-  }
-  public function quizapi()
-  {
-    $id = $this->input->post('id');
-    $data['quiz']=$this->general->get_tbl_data_result('id,question,,cat_id,answer,wrong_answer','quiz',array('cat_id'=>$id));
-    //echo $this->db->last_query();die;
-    if (!empty($data['quiz'])) {
-        foreach ($data['quiz'] as $key => $value) {
-            $quizall[] = array(
-                'id' => $value['id'],
-                'question' => $value['question'],
-                'wrong_answer' => $value['wrong_answer'],
-                'right_answer' => $value['answer'],
-                'options' => $this->general->get_tbl_data_result('name,category_id,right_answer','quiz_options',array('category_id'=>$value['id'])),
-            );
-        }
-        print(json_encode($quizall));
-    } else {
-        $quizall = array(
-            'status' => 'No Data Found',
-            'message' => 'No Data Found',
-        );
-        print(json_encode($quizall));
-    }
+    // echo "<pre>";
+    // print_r($response);die;
   }
 }//end
 
