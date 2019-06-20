@@ -413,7 +413,7 @@ public function get_icon(){
         $dataArray[] = array(
                 $imagename,
         );
-        echo "<pre>";print_r($dataArray);die;
+        //echo "<pre>";print_r($dataArray);die;
     }
     if($type == "image")
     {
