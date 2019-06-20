@@ -209,6 +209,7 @@ class Mobapi extends Admin_Controller
       $d=$this->Table_model->get_lang($tbl);
       /* get the object   */
       $report = $this->Table_model->get_asjson($d,$tbl);
+      //echo "<pre>";print_r($report);die;
       $dataset_data=$report->result_array();
       foreach($dataset_data as $data){
         $ddata=$data ;

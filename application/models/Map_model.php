@@ -401,9 +401,9 @@ public function get_icon(){
             }
             if($type == "audio" || $type == "video")
             {
-              $imgfile = $this->file_do_uploa_audiod('gallery',$id);
+              $audiofile = $this->file_do_uploa_audiod('gallery',$id);
               //print_r($imgfile);die;
-              $imagename= base_url().'uploads/audiovideo/'.$imgfile;
+              $imagename= base_url().'uploads/audiovideo/'.$audiofile;
             }
             //$this->resize_image(GALLERY_PATH, $imgfile, 'thumb_'.$imgfile, 157, 117); //55,74
         } else
@@ -456,7 +456,7 @@ public function get_icon(){
     $this->load->library('upload', $configVideo);
     $this->upload->initialize($configVideo);
     $data = $this->upload->data();
-    $name_array = $configVideo['file_name'];
+    $name_array = $data['file_name'];
     //echo "<pre>";print_r($name_array); die;
     $pathp = $data['full_path'];
     if ( ! $this->upload->do_upload('gallery'))
