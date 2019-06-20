@@ -52,8 +52,7 @@ class Admin extends Admin_Controller {
        $this->data['table'] = $tbl;
        $d=$this->Table_model->get_lang($tbl);
        //echo"<pre>"; print_r($d);die;
-       $this->data['data'] = $this->Table_model->get_asjson($d,$tbl);//$this->general->get_tbl_data_result($d,$tbl);
-       //$this->data['data'] = $this->general->get_tbl_data_result($d,$tbl);
+       $this->data['data'] = $this->general->get_tbl_data_result('*',$tbl);
        //echo "<pre>";print_r($this->data['data']);die;
        $admin_type=$this->session->userdata('user_type');
         $this->data['admin']=$admin_type;
