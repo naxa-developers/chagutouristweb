@@ -414,10 +414,8 @@ public function get_icon(){
         {
             $imgfile = '';
         }
-        $dataArray[] = array(
-                $imagename,
-        );
-        //echo "<pre>";print_r($dataArray);die;
+        $dataArray[]= $imagename;
+        //echo "<pre>";print_r(json_encode($dataArray));die;
     }
     if($type == "image")
     {
