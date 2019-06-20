@@ -51,7 +51,7 @@ class Admin extends Admin_Controller {
        $tbl = base64_decode($this->input->get('tbl'));
        $this->data['table'] = $tbl;
        $d=$this->Table_model->get_lang($tbl);
-       //echo"<pre>"; print_r($d);die;
+       echo"<pre>"; print_r($d);die;
        $this->data['data'] = $this->general->get_tbl_data_result('*',$tbl);
        //echo "<pre>";print_r($this->data['data']);die;
        $admin_type=$this->session->userdata('user_type');
