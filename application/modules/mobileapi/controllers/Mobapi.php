@@ -30,7 +30,16 @@ class Mobapi extends Admin_Controller
       echo json_encode($response);
       
     }
-
+    public function mayerMessage()
+    {
+      $data=$this->general->get_tbl_data_result('*','mayermessage');//this is language table
+      $response['error'] = 0 ;
+      $response['message'] = 'Mayer message';
+      $response['data'] = $data;
+      echo json_encode($response);
+      
+    }
+    
   public function checkNregistration(){ //checking of new user or already registered and reigistering
     $data=$this->input->post('data');
     //var_dump($data);                     //getting data from api
