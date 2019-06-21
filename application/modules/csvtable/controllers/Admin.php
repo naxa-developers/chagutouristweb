@@ -53,6 +53,7 @@ class Admin extends Admin_Controller {
 		        }
 		        if( $this->db->table_exists($tbl_name) == FALSE ){
 		        	$this->dbforge->add_field('id');
+		        	$this->dbforge->add_field('place_type');
 		        	$create=$this->dbforge->create_table($tbl_name, FALSE);
 			        if($create==true){
 				        for($i=0;$i<sizeof($row);$i++){
@@ -80,7 +81,6 @@ class Admin extends Admin_Controller {
 				        );
 				        $lang_insert=$this->Dash_model->insert_lang('tbl_lang',$data_lang);
 				        $filename=$fll['name'];
-				        $filename=$fll['place_type'];
 				        $fields=$this->db->list_fields($tbl_name);
 				        unset($fields[0]);
 				        //echo"<pre>"; print_r($field_name);die;
