@@ -419,7 +419,7 @@ public function get_icon(){
     }
     if($type == "image")
     {
-      $tet =array("images"=>json_encode($dataArray,JSON_NUMERIC_CHECK));
+      $tet =array("image"=>json_encode($dataArray,JSON_NUMERIC_CHECK));
     }
     if($type == "threesixty")
     {
