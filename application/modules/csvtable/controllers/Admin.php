@@ -55,7 +55,6 @@ class Admin extends Admin_Controller {
 		        	$this->dbforge->add_field('id');
 		        	$create=$this->dbforge->create_table($tbl_name, FALSE);
 			        if($create==true){
-			        	$fields=array('place_type'=>'varchar');
 				        for($i=0;$i<sizeof($row);$i++){
 				            $fields =
 				            array(
