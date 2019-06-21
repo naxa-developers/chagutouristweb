@@ -80,10 +80,10 @@
                        <!--  <td>
                           <span data-id="<?php echo $v['id']  ?>" data-type="video" data-title="Add Video" data-nid="<?php  echo $table; ?>" class="btn btn-primary btn-xs GenerateQrcode">Generate Rcode</span>
                           <span id="Message_<?php echo $v['id']  ?>"></span>
-                        </td>
+                        </td>-->
                         <td>
-                          <span data-id="<?php echo $v['id']  ?>" data-type="video" data-title="Add Video" data-nid="<?php  echo $table; ?>" class="btn btn-primary btn-xs popupModal">Video</span>
-                        </td> -->
+                          <span data-id="<?php echo $v['id']  ?>" data-type="video" data-title="Add Video" data-nid="<?php  echo $v['category_table']; ?>" class="btn btn-primary btn-xs popupModal">Video</span>
+                        </td> 
                           <?php foreach($v as $key => $value) { ?>
                               <td><?php echo $value;?></td>
                             <?php  } ?>
