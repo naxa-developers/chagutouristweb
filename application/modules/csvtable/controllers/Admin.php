@@ -53,9 +53,9 @@ class Admin extends Admin_Controller {
 		        }
 		        if( $this->db->table_exists($tbl_name) == FALSE ){
 		        	$this->dbforge->add_field('id');
-		        	$this->dbforge->add_field('place_type');
 		        	$create=$this->dbforge->create_table($tbl_name, FALSE);
 			        if($create==true){
+			        	$fields=array('place_type'=>'varchar');
 				        for($i=0;$i<sizeof($row);$i++){
 				            $fields =
 				            array(
