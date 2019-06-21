@@ -492,6 +492,39 @@ class Admin extends Admin_Controller {
             exit;
         }
     }
+    public function add_images_category()
+    {
+        if($this->input->server('REQUEST_METHOD')=='POST')
+        {
+            $trans = $this->Map_model->image_add_to_category();
+            $type = $this->input->post('type');
+            if($type == "image")
+            {
+              $message ='Image Added Successfully !!!';
+            }
+            if($type == "threesixty")
+            {
+              $message ='Three Sixty Image Added Successfully !!!';
+            }
+            if($type == "audio")
+            {
+              $message ='Audio Added Successfully !!!';
+            }
+            if($type == "video")
+            {
+              $message ='Video Added Successfully !!!';
+            }
+            if($trans) {
+                print_r(json_encode(array('status'=>'success','message'=>$message)));
+            }else {
+                print_r(json_encode(array('status'=>'success','message'=>'Cannot Perform this Operation')));
+            }
+        }else{
+            print_r(json_encode(array('status'=>'error','message'=>'Cannot Perform this Operation')));
+            exit;
+        }
+    }
+    
     public function add_images_tomap()
     {
         if($this->input->server('REQUEST_METHOD')=='POST')

@@ -69,13 +69,13 @@
                       <?php foreach($data as $v ){ //echo "<pre>";print_r($v);die;?>
                       <tr>
                         <td>
-                          <span data-id="<?php echo $v['id']  ?>"  data-type="image"  data-title="Add Image" data-nid="<?php  echo $v['category_type']; ?>" class="btn btn-primary btn-xs popupModal">Add Images</span>
+                          <span data-id="<?php echo $v['id']  ?>"  data-type="image"  data-title="Add Image" data-nid="<?php  echo $v['category_table']; ?>" class="btn btn-primary btn-xs popupModal">Add Images</span>
                         </td>
                         <td>
-                          <span data-id="<?php echo $v['id']  ?>" data-type="threesixty" data-title="Three Sixty Images" data-nid="<?php  echo $v['category_type']; ?>" class="btn btn-primary btn-xs popupModal">Three Sixty Images</span>
+                          <span data-id="<?php echo $v['id']  ?>" data-type="threesixty" data-title="Three Sixty Images" data-nid="<?php  echo $v['category_table']; ?>" class="btn btn-primary btn-xs popupModal">Three Sixty Images</span>
                         </td>
                         <td>
-                          <span data-id="<?php echo $v['id']  ?>" data-type="audio" data-title="Add Audio" data-nid="<?php  echo $v['category_type']; ?>" class="btn btn-primary btn-xs popupModal">Audio</span>
+                          <span data-id="<?php echo $v['id']  ?>" data-type="audio" data-title="Add Audio" data-nid="<?php  echo $v['category_table']; ?>" class="btn btn-primary btn-xs popupModal">Audio</span>
                         </td>
                        <!--  <td>
                           <span data-id="<?php echo $v['id']  ?>" data-type="video" data-title="Add Video" data-nid="<?php  echo $table; ?>" class="btn btn-primary btn-xs GenerateQrcode">Generate Rcode</span>
@@ -261,7 +261,7 @@
       event.preventDefault();
       var formdata = new FormData($('form#imagesMoreAdd')[0]);
       //var formdata = new FormData($(this)[0]);
-      var urlaction="<?php echo base_url(FOLDER_ADMIN) ?>/map/add_images_tomap";
+      var urlaction="<?php echo base_url(FOLDER_ADMIN) ?>/map/add_images_category";
       console.log(formdata);
       jQuery.ajax({
         type: "POST",
