@@ -40,9 +40,9 @@
                 <table class="table table-hover" id="tb3">
                   <thead>
                     <tr>
-                     <td>Audio</td>
+                    <!--  <td>Audio</td>
                      <td>Video</td>
-                     <td>Three sixty Image</td>
+                     <td>Three sixty Image</td> -->
                     <?php
                      foreach($data[0] as $key => $value){ ?>
                      <?php  if($key == 'summary_list'){   ?>
@@ -68,7 +68,7 @@
                   <tbody>
                       <?php foreach($data as $v ){ //echo "<pre>";print_r($v);die;?>
                       <tr>
-                        <td>
+                        <!-- <td>
                           <span data-id="<?php echo $v['id']  ?>"  data-type="image"  data-title="Add Image" data-nid="<?php  echo $v['category_table']; ?>" class="btn btn-primary btn-xs popupModal">Add Images</span>
                         </td>
                         <td>
@@ -76,14 +76,14 @@
                         </td>
                         <td>
                           <span data-id="<?php echo $v['id']  ?>" data-type="audio" data-title="Add Audio" data-nid="<?php  echo $v['category_table']; ?>" class="btn btn-primary btn-xs popupModal">Audio</span>
-                        </td>
+                        </td> -->
                        <!--  <td>
                           <span data-id="<?php echo $v['id']  ?>" data-type="video" data-title="Add Video" data-nid="<?php  echo $table; ?>" class="btn btn-primary btn-xs GenerateQrcode">Generate Rcode</span>
                           <span id="Message_<?php echo $v['id']  ?>"></span>
-                        </td>-->
+                        </td>
                         <td>
                           <span data-id="<?php echo $v['id']  ?>" data-type="video" data-title="Add Video" data-nid="<?php  echo $v['category_table']; ?>" class="btn btn-primary btn-xs popupModal">Video</span>
-                        </td> 
+                        </td> -->
                           <?php foreach($v as $key => $value) { ?>
                               <td><?php echo $value;?></td>
                             <?php  } ?>
