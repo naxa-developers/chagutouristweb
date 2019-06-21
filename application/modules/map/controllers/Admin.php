@@ -110,7 +110,6 @@ class Admin extends Admin_Controller {
 	    $fields=$this->db->list_fields($tbl_name);
       	$this->form_validation->set_rules('category_name', 'Fill field', 'required');
       	$this->form_validation->set_rules('category_type', 'Fill field', 'required');
-  		//  }
     	if ($this->form_validation->run() == FALSE){
       		$e_id=base64_decode($this->input->get('id'));
    			$this->body['fields']=$fields;

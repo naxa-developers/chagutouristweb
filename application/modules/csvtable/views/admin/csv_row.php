@@ -29,9 +29,13 @@
             <div class="position-center">
               <h5><i class="fa fa-info-circle"></i> Note: Select a Csv File to Upload to Table</h5><br>
               <form role="form" method="POST" action="" enctype="multipart/form-data">
-
-
-
+                <div class="form-group">
+                  <label class="col-sm-3 control-label col-lg-3" for="inputSuccess">Select Category</label>
+                  <select name='long' class="form-control  m-bot15">
+                    <option value="Nagarkot">Nagarkot</option>
+                    <option value="changuNarayan">changuNarayan</option>
+                  </select>
+                </div>
                 <div class="form-group">
                   <label class="col-sm-3 control-label col-lg-3" for="inputSuccess">Select Longitude</label>
 

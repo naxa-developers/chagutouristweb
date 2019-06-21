@@ -76,7 +76,12 @@ public function get_sub_cat_style($tbl){
 
 }
 
+  public function create_place($category,$tbl){
 
+    $query= "UPDATE $tbl SET place_type = $category";
+    $this->db->query($query);
+
+  }
 
   public function create_geom($long,$lat,$tbl){
 

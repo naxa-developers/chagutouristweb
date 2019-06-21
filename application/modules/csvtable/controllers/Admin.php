@@ -104,14 +104,20 @@ class Admin extends Admin_Controller {
 	      	$fields = array(
 	        	'the_geom' => array('type' => 'geometry')
 	        );
+	        $fieldsone = array(
+	        	'place_type' => array('type' => 'varchar')
+	        );
 	       	//echo"<pre>"; print_r($fields);die;
 	       	$this->load->dbforge();
 	        $this->dbforge->add_column($tbl_name, $fields);
+	        $this->dbforge->add_column($tbl_name, $fieldsone);
 	        $lo=$_POST['long'];
 	        $la=$_POST['lat'];
+	        $category=$_POST['category'];
 	        $long='a'.$lo;
 		    $lat='a'.$la;
 		    $this->Dash_model->create_geom($long,$lat,$tbl_name);
+		    $this->Dash_model->create_place($category,$tbl_name);
 		    redirect(FOLDER_ADMIN.'/map/manage_column_control?tbl='.$tbl_name);
 		}else{
 		    // $this->load->view('admin/csv_file');
