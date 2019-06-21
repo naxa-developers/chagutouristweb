@@ -102,15 +102,16 @@ class Admin extends Admin_Controller {
 	    }elseif(isset($_POST['submit_row'])){
 	    	//var_dump($_POST);die;
 	      	$fields = array(
-	        	'the_geom' => array('type' => 'geometry')
-	        );
-	        $fieldsone = array(
+	        	'the_geom' => array('type' => 'geometry'),
 	        	'place_type' => array('type' => 'varchar')
 	        );
+	        // $fieldsone = array(
+	        // 	'place_type' => array('type' => 'varchar')
+	        // );
 	       	//echo"<pre>"; print_r($fields);die;
 	       	$this->load->dbforge();
 	        $this->dbforge->add_column($tbl_name, $fields);
-	        $this->dbforge->add_column($tbl_name, $fieldsone);
+	        //$this->dbforge->add_column($tbl_name, $fieldsone);
 	        $lo=$_POST['long'];
 	        $la=$_POST['lat'];
 	        $category=$_POST['category'];
