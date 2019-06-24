@@ -186,8 +186,8 @@ class Admin extends Admin_Controller {
 	}
  	public function add_location(){
  		$this->data=array();
-    	$this->form_validation->set_rules('location', 'Please Select Location ', 'trim|required');
-    	$this->form_validation->set_rules('type', 'Please select Type ', 'trim|required');
+    	$this->form_validation->set_rules('title', 'Please Enter Title ', 'trim|required');
+    	// $this->form_validation->set_rules('type', 'Please select Type ', 'trim|required');
     	$lang=$this->session->get_userdata('Language');
 	    if($lang['Language']=='en'){
 	        $language='en';
@@ -208,6 +208,7 @@ class Admin extends Admin_Controller {
 	      	}
 	      	$data=array(
 	        	'title'=>$this->input->post('title'),
+	        	'slug'=>$page_slug_new,
 	        	'description'=>$this->input->post('summary'),
 	        	'type_id'=>$this->input->post('type'),
 	        	'longitude'=>$this->input->post('longitude'),
@@ -277,7 +278,7 @@ class Admin extends Admin_Controller {
 		        }else{
 		            $code= strip_tags($img_upload['error']);
 		            $this->session->set_flashdata('msg', $code);
-		            redirect(FOLDER_ADMIN.'/location/add_locationn');
+		            redirect(FOLDER_ADMIN.'/location/add_location');
 		        }
 	        }
 	    }else{
@@ -436,11 +437,11 @@ class Admin extends Admin_Controller {
     }
     public function delete_publication(){
 	    $id = $this->input->get('id');
-	    $delete=$this->Location_model->delete_data($id, 'publication');
+	    $delete=$this->Location_model->delete_data($id, 'locationinformation');
 
 	    $this->session->set_flashdata('msg','Id number '.$id.' row data was deleted successfully');
 	    // redirect('view_publication');
-	    redirect(FOLDER_ADMIN.'/publication/view_publication');
+	    redirect(FOLDER_ADMIN.'/location/view_publication');
   	}
   	
   	public function delete_publication_sub_category(){

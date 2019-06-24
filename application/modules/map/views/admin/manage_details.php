@@ -55,7 +55,7 @@
                           <tbody>
                               <?php foreach($data as $v ){ ?>
                           <tr>
-                              <?php foreach($v as $key => $value) {
+                              <?php foreach($v as $key => $value) { //echo "<pre>"; print_r($value);die;
                                   ?>
                               <td><?php echo $value;?></td>
                             <?php }  ?>
@@ -69,7 +69,7 @@
                               <span data-id="<?php echo $v['id']  ?>" data-type="audio" data-title="Add Audio" data-nid="<?php  echo $table; ?>" class="btn btn-primary btn-xs popupModal">Audio</span>
                             </td>
                             <td>
-                              <span data-id="<?php echo $v['id']  ?>" data-type="video" data-title="Add Video" data-nid="<?php  echo $table; ?>" class="btn btn-primary btn-xs GenerateQrcode">Generate Rcode</span>
+                              <span data-id="<?php echo $v['id']  ?>" data-type="video" data-title="Add Video" data-nid="<?php  echo $table; ?>" class="btn btn-primary btn-xs GenerateQrcode">Generate QRcode</span>
                               <span id="Message_<?php echo $v['id']  ?>"></span>
                             </td>
                             <td>

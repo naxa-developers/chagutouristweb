@@ -27,10 +27,9 @@
                         <table class="table table-hover" id="tb3">
                             <thead>
                             <tr>
-                              <?php foreach($data[0] as $key => $value){
-
-
-                                            ?>
+                              <?php
+                                if($data){
+                                  foreach($data[0] as $key => $value){ ?>
                                 <td>
                                   <?php
                  									$cleanname = explode("_", $key);
@@ -38,20 +37,21 @@
                  										echo ucfirst($r)." ";
                  														      }?>
                                 </td>
-                              <?php  } ?>
+                              <?php  } }  ?>
                               <td>
                                 <?php echo $this->lang->line('operation'); ?>
                               </td>
                             </tr>
                             </thead>
                             <tbody>
-                            <?php foreach($data as $v ){ //echo "<pre>"; print_r($data);die; ?>
+                            <?php if($data){
+                             foreach($data as $v ){ //echo "<pre>"; print_r($data);die; ?>
                             <tr>
                             <td><?php echo $v['id'] ?></td>
                               <td><?php echo $v['description'] ?></td>
                               <td><?php echo $v['created_at'] ?></td>
                               <td>
-                              <button class="btnprint" id="print-element<?php echo $v['id'] ?>"> Print Barcode </button>
+                              <button class="btnprint" id="print-element<?php echo $v['id'] ?>"> Print Qr Code</button>
                              
                               </td>
                               <td><?php echo $v['language'] ?></td>
@@ -85,7 +85,7 @@
                                   <a class="btn btn-danger btn-sm" onclick="return confirm('Are you sure you want to delete?')" href="<?php echo base_url(FOLDER_ADMIN)?>/location/delete_publication?id=<?php echo  $v['id'];?>"><?php echo $this->lang->line('delete'); ?></a>
                               </td>
                             </tr>
-                          <?php  } ?>
+                          <?php  } } ?>
                             </tbody>
                         </table>
                       <?php } ?>
@@ -96,10 +96,10 @@
        </div>
     </section>
 </section>
-<?php foreach($data as $v ){ ?>
+<?php if($data){ foreach($data as $v ){ ?>
   <script type="text/javascript">
     $("#print-element<?php echo $v['id'] ?>").click(function() {
          $("#content-to-print<?php echo $v['id'] ?>").printThis();
     });
   </script>
-<?php } ?>
+<?php } } ?>

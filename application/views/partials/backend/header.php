@@ -201,12 +201,12 @@
                 <li class="sub-menu">
                     <a href="javascript:;">
                         <i class="fa fa-th"></i>
-                        <span><?php echo $this->lang->line('location'); ?></span>
+                        <span><?php echo $this->lang->line('category'); ?></span>
                     </a>
                     <ul class="sub">
                         <li><a href="<?php echo base_url(FOLDER_ADMIN);?>/location/view_location"> <?php echo $this->lang->line('location_list'); ?></a></li>
                         <li><a href="<?php echo base_url(FOLDER_ADMIN);?>/location/add_location"><?php echo $this->lang->line('locationadd'); ?></a></li>
-                        <li><a href="<?php echo base_url(FOLDER_ADMIN);?>/location/add_location_category"><?php echo $this->lang->line('add_location_category'); ?></a></li>
+                        <!-- <li><a href="<?php echo base_url(FOLDER_ADMIN);?>/location/add_location_category"><?php echo $this->lang->line('add_location_category'); ?></a></li> -->
                     </ul>
                 </li>
                 <li class="sub-menu">

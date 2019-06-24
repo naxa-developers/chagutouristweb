@@ -26,7 +26,7 @@ height: 460px;
                     </div>
                     <?php } ?>
                     <form role="form" method="POST" action="" enctype="multipart/form-data">
-                        <div class="form-group">
+                        <!-- <div class="form-group">
                             <div class="col-md-3">
                                 <label for="exampleInputFile"> Select Location </label>
                                 <select name="location" class="form-control">
@@ -55,7 +55,7 @@ height: 460px;
                                 </select>
                                 <?php echo form_error('type'); ?>
                             </div>
-                        </div>
+                        </div> -->
                         <div class="form-group">
                             <div class="col-md-3">
                                 <label for="exampleInputEmail1">सिर्षक </label>
