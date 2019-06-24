@@ -441,7 +441,7 @@ class Admin extends Admin_Controller {
 
 	    $this->session->set_flashdata('msg','Id number '.$id.' row data was deleted successfully');
 	    // redirect('view_publication');
-	    redirect(FOLDER_ADMIN.'/location/view_publication');
+	    redirect(FOLDER_ADMIN.'/location/view_location');
   	}
   	
   	public function delete_publication_sub_category(){
