@@ -30,6 +30,14 @@ class Mobapi extends Admin_Controller
       echo json_encode($response);
       
     }
+    public function place_details_api()
+    {
+      $data=$this->general->get_tbl_data_result('*','locationinformation');//this is language table
+      $response['error'] = 0 ;
+      $response['message'] = 'List Of Places';
+      $response['data'] = $data;
+      echo json_encode($response);
+    }
     public function mayerMessage()
     {
       $data=$this->general->get_tbl_data_result('*','mayermessage');//this is language table
