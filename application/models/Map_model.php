@@ -515,7 +515,7 @@ public function get_icon(){
   {
     $configVideo['upload_path']          = './uploads/audiovideo/';
     $configVideo['max_size'] = '10240';
-    $configVideo['allowed_types'] = 'avi|flv|wmv|mp3|mpeg|mpg|mp4|mpe|qt|mov';
+    $configVideo['allowed_types'] = 'avi|flv|wmv|mp3|mpeg|mpg|mp4|mpe|qt|mov|aac';
     $configVideo['overwrite'] = FALSE;
     $configVideo['remove_spaces'] = TRUE;
     $configVideo['file_name'] = $id.$_FILES['gallery']['name'];
