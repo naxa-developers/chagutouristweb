@@ -33,7 +33,7 @@ class Mobapi extends Admin_Controller
     public function place_details_api()
     {
       $data=$this->general->get_tbl_data_result('"id" as FID,"description" as Description,"image" as Photo,"image" as Primary image,"image" as Images,"language" as Language,"audio" as Audio,"video" as Videos,"longitude" as Longitude,"latitude" as Latitude,
-"qrcode"  as QR code,"title" as Name,"slug" as Place type','locationinformation');//this is language table
+"qrcode"  as QR code,"title" as Name,"slug" as place type','locationinformation');//this is language table
       $response['error'] = 0 ;
       $response['message'] = 'List Of Places';
       $response['data'] = $data;
