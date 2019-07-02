@@ -292,18 +292,6 @@
 
                     </ul>
                 </li> -->
-                <!-- <li class="sub-menu">
-                    <a href="javascript:;">
-                        <i class=" fa fa-bar-chart-o"></i>
-                        <span>Layers</span>
-                    </a>
-                    <ul class="sub">
-                        <li><a href="<?php echo base_url();?>layers_view">Layers</a></li>
-                        <li><a href="chartjs.html">Chartjs</a></li>
-                        <li><a href="flot_chart.html">Flot Charts</a></li>
-                        <li><a href="c3_chart.html">C3 Chart</a></li>
-                    </ul>
-                </li> -->
                 <?php if($admin==1){?>
                <!--  <li class="sub-menu">
                     <a href="<?php echo base_url(FOLDER_ADMIN);?>/site_setting/site_setting">
