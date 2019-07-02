@@ -215,7 +215,7 @@
                         <span><?php echo $this->lang->line('mayer'); ?></span>
                     </a>
                     <ul class="sub">
-                        <li><a href="<?php echo base_url(FOLDER_ADMIN);?>/mayer/view_publication"> <?php echo $this->lang->line('mayer'); ?></a></li>
+                        <li><a href="<?php echo base_url(FOLDER_ADMIN);?>/mayer/view_mayer_message"> <?php echo $this->lang->line('mayer'); ?></a></li>
                         <li><a href="<?php echo base_url(FOLDER_ADMIN);?>/mayer/add_mayer_message"><?php echo $this->lang->line('mayer_add'); ?></a></li>
                     </ul>
                 </li>
