@@ -485,7 +485,8 @@ public function get_icon(){
     }
     if($type == "image")
     {
-      $tet =array("a5"=>json_encode($dataArray,JSON_NUMERIC_CHECK));
+      $tet =array("a5"=>json_encode($dataArray,JSON_NUMERIC_CHECK),"a4"=>$dataArray[0]);
+      // echo"<pre>";print_r($tet);die;
     }
     if($type == "threesixty")
     {
