@@ -303,7 +303,7 @@ class Admin extends Admin_Controller {
 	        $language='nep';
 	    }
 	    $id=base64_decode($this->input->get('id'));
-	    $this->data['pub']=$this->general->get_tbl_data_result('*','publicationcat',array('language'=>$language),'id');
+	    $this->data['pub']=$this->general->get_tbl_data_result('*','locationinformation',array('language'=>$language),'id');
 	    if(isset($_POST['submit'])){
 	    	//echo "<pre>"; print_r($this->input->post());die;
 	      	if(!empty($_FILES['proj_pic']['name']) || !empty($_FILES['uploadedfile']['name']) || !empty($_FILES['proj_pic']['name'])){
@@ -325,17 +325,16 @@ class Admin extends Admin_Controller {
 				      	}else{
 				      		$cat =$this->input->post('category');
 				      	}
-			        $data=array(
-			        	//'slug'=>$page_slug_new,
-			        	'title'=>$this->input->post('title'),
-			        	'summary'=>$this->input->post('summary'),
-			        	'type'=>$this->input->post('type'),
-			        	'subcat'=>$this->input->post('subcat'),
-			        	'category'=>$cat,
-			        	'videolink'=>$this->input->post('videolink'),
-			        	'filecat'=>$this->input->post('filecat'),
-			        	'lang'=>$language,
-			      	);
+				      	$data=array(
+				        	'title'=>$this->input->post('title'),
+				        	'slug'=>$page_slug_new,
+				        	'description'=>$this->input->post('summary'),
+				        	'type_id'=>$this->input->post('type'),
+				        	'longitude'=>$this->input->post('longitude'),
+				        	'latitude'=>$this->input->post('latitude'),
+				        	'sort_order'=>$this->input->post('sort_order'),
+				        	'language'=>$language,
+				      	);
 		        	$insert=$this->Location_model->update_data($id,$data);
 			        if($insert==1){
 			        	if(!empty($audio)){
@@ -405,16 +404,12 @@ class Admin extends Admin_Controller {
 		      	}else{
 		      		$cat =$this->input->post('category');
 		      	}
-				$data=array(
-		        	'title'=>$this->input->post('title'),
-		        	'summary'=>$this->input->post('summary'),
-		        	'type'=>$this->input->post('type'),
-		        	'subcat'=>$this->input->post('subcat'),
-		        	'category'=>$cat,
-		        	'videolink'=>$this->input->post('videolink'),
-		        	'filecat'=>$this->input->post('filecat'),
-		        	'lang'=>$language
-		      	);
+				$img=array(
+		            'image'=>$image_path,//
+		            'audio'=>$file_path_audiofinal,
+		            'video'=>$file_path_audiofinal,
+		            'qrcode'=>$qrcode,
+		        );
 		        $update=$this->Location_model->update_data($id,$data);
 		        if($update==1){
 		          $this->session->set_flashdata('msg','Data successfully Updated');
