@@ -31,6 +31,17 @@ return $query->row_array();
 
 
 }
-
+ public function sitesMapLayerCount()
+  {
+    $this->db->select('category_type, count (id) as total');
+    $this->db->from('categories_tbl');
+    $this->db->group_by("category_type");
+    $query = $this->db->get();
+    if ($query->num_rows() > 0)
+    {
+        return $data=$query->result_array();
+    } 
+    return false;
+  }
 
 }

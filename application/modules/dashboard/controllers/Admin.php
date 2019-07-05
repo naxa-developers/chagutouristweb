@@ -13,13 +13,21 @@ class Admin extends Admin_Controller {
 	}
 	public function index()
 	{
+		$lang=$this->session->get_userdata('Language');
+       	if($lang['Language']=='en'){
+        	$language='en';
+      	}else{
+        	$language='nep';
+      	}
 		$this->body = array();
 		$this->body['user']=$this->Admin_dash_model->count_data('users');
 	    $this->body['map_data']=$this->Admin_dash_model->count_data('categories_tbl');
 	    $this->body['report']="";//$this->Admin_dash_model->count_data('report_tbl');
 	    $this->body['max']=$this->Admin_dash_model->max_views();
 	    //var_dump($this->body['max']);
-
+	    $this->body['mayermessage']=$this->general->get_tbl_data_result(('*'),'mayermessage',array('language'=>$language));
+	    $this->body['layercount']=$this->Admin_dash_model->sitesMapLayerCount();
+	    //echo "<pre>";print_r($this->body['layercount']);die;
 	    $home=$this->Admin_dash_model->count_views('home');
 	    $map=$this->Admin_dash_model->count_views('map');
 	    $reports=$this->Admin_dash_model->count_views('reports');

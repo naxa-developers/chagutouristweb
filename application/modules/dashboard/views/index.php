@@ -29,23 +29,25 @@ h1.sub{
         </div>
       </section>
     </div>
-
+<?php  if($layercount): 
+foreach ($layercount as $key => $value) {
+?>
     <div class="col-md-4">
       <section class="panel">
         <div class="panel-body">
           <div class="top-stats-panel">
             <div class="daily-visit">
-              <h4 class="widget-h"><?php echo $this->lang->line('users'); ?></h4>
+              <h4 class="widget-h"><?php echo $value['category_type'] ?></h4>
 
-              <h1 class="sub" id="count1"><?php echo $user ?></h1>
-
+              <h1 class="sub" id="count1"><?php echo $value['total']  ?></h1>
 
             </div>
           </div>
         </div>
       </section>
     </div>
-   <div class="col-md-4">
+  <?php } endif; ?>
+  <!--  <div class="col-md-4">
       <section class="panel">
         <div class="panel-body">
           <div class="top-stats-panel">
@@ -56,7 +58,7 @@ h1.sub{
           </div>
         </div>
       </section>
-    </div>
+    </div> -->
 
   </div>
 
@@ -82,13 +84,12 @@ h1.sub{
       <!--widget graph start-->
       <section class="panel">
         <div class="panel-body">
-
-         <img src="<?php echo $max['photo']?>" alt="visited" height=330; width=310;>
-         <!-- Tab panes -->
-
+            <video width="340" height="348" controls>
+              <source src=" <?php echo $mayermessage[0]['video'] ?>" type="video/mp4">
+              <source src="<?php echo $mayermessage[0]['video'] ?>" type="video/ogg">
+              Your browser does not support HTML5 video.
+            </video>
        </div>
-       <p class="text-center"><b><?php echo $this->lang->line('most_visited'); ?> </b></p>
-
 
      </section>
 

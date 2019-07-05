@@ -26,14 +26,17 @@
     <![endif]-->
 </head>
 
-<body class="lock-screen" onload="startTime()">
-
-    <div class="lock-wrapper" style="overflow:hidden; position:relative; margin-top: 35px;">
+<body class="lock-screen" onload="startTime()" >
+<div style="position: absolute; top: 0;left: 0;bottom: 0;right: 0; background:rgba(0,0,0,0.5); z-index: 2"></div>
+    <div class="lock-wrapper" style="overflow:hidden; position:relative; margin-top: 35px; background: #ffff; padding-top: 30px; z-index: 10;">
 
         <div id="time" style="color:rgba(0,0,0,0.5); font-weight:300; position:relative; object-fit:center; " ></div>
 
 
         <div class="lock-box text-center">
+        <div class="text-center mt-5 mb-5"> 
+             <img src="<?php echo SITE_SLOGAN_EN ?>" alt="admin" height=60; style="position: static;">
+        </div>
             <?php echo $template['body'];?>
         </div>
     </div>
