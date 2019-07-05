@@ -289,7 +289,7 @@ return $res->result_array();
   }
 
   public function update($id,$data,$tbl){ // update the edited table
-
+    //echo "<pre>"; print_r($data);die;
     $this->db->where('id',$id);
     $q=$this->db->update($tbl,$data);
     if($q){

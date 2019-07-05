@@ -76,8 +76,7 @@
                               <span data-id="<?php echo $v['id']  ?>" data-type="video" data-title="Add Video" data-nid="<?php  echo $table; ?>" class="btn btn-primary btn-xs popupModal">Video</span>
                             </td>
                               <td>
-                              <a href="" >Add Images</a>
-                                <!-- <a href="<?php echo base_url()?>proj/edit_proj?id=<?php echo base64_encode($value['id']);?>&& tbl=<?php echo base64_encode($value['id']);?>"><?php echo $this->lang->line('edit'); ?></a> --> 
+                                <a href="<?php echo base_url(FOLDER_ADMIN)?>/map/editMapLayer?id=<?php echo base64_encode($v['id']);?>&& tbl=<?php echo base64_encode($table);?>"><?php echo $this->lang->line('edit'); ?></a> 
                                 </td>
                           </tr>
                         <?php  }?>

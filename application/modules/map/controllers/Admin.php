@@ -103,6 +103,31 @@ class Admin extends Admin_Controller {
                         ->build('admin/manage_details',$this->data);
        //echo "<pre>";print_r($this->data['data']);die;
     }
+    public function editMapLayer()
+    {
+       $id= base64_decode($this->input->get('id'));
+       $table= base64_decode($this->input->get('tbl'));
+       $this->data['chaangesmapdata']=$this->general->get_tbl_data_result(('*'),$table,array('id'=>$id));
+       if(isset($_POST['submit'])){
+            $data=array(
+                'a1'=>$this->input->post('a1'),
+                'a3'=>$this->input->post('a3')
+            );
+            //echo "<pre>"; print_r($data);die;
+            $insert=$this->Dash_model->update($id,$data,$table);
+            if($insert!=""){
+                $this->session->set_flashdata('msg','Map Fields data updated successfully added');
+                redirect(FOLDER_ADMIN.'/map/add_all_details?tbl='.base64_encode($table));
+            }
+        }else{
+            $admin_type=$this->session->userdata('user_type');
+            $this->data['admin']=$admin_type;
+            $this->template
+                            ->enable_parser(FALSE)
+                            ->build('admin/editMapLayersData',$this->data);
+        }
+
+    }
 	public function edit_categories(){
 		$this->body=array();
 	    $tbl_namee= base64_decode($this->input->get('tbl'));
