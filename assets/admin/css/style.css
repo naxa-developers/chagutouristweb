@@ -4133,7 +4133,7 @@ tr.odd.gradeX td.sorting_1,tr.even.gradeX td.sorting_1,table.display tr.even.gra
 }
 /*lock screen*/
 .lock-screen {
-    background: #1FB3A3 url("../images/changu.jpg") no-repeat fixed 0 0 / cover;
+    background: #1FB3A3 url("../images/changu.JPG") no-repeat fixed 0 0 / cover;
 }
 .lock-wrapper {
     margin:10% auto;
