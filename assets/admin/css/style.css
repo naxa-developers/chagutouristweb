@@ -145,7 +145,7 @@ a,a:hover,a:focus {
     width:240px;
     height:100%;
     position:fixed;
-    background:#32323a;
+    background:#245525;
     -webkit-transition:all .3s ease-in-out;
     -moz-transition:all .3s ease-in-out;
     -o-transition:all .3s ease-in-out;
@@ -224,7 +224,7 @@ ul.sidebar-menu {
     display:block;
 }
 ul.sidebar-menu li ul.sub li {
-    background:#28282e;
+    background:#245525;
     margin-bottom:0;
     margin-left:0;
     margin-right:0;
