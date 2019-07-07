@@ -55,20 +55,20 @@
       <div class="col-lg-12">
         <section class="panel">
           <header class="panel-heading">
-            <b> Add Category</b>
+            <b> <?php echo $this->lang->line('add_category'); ?></b>
           </header>
           <div class="panel-body">
             <div class="position-center">
               <form role="form" method="POST" action="" enctype="multipart/form-data">
             <div class="form-group nam">
-              <label for="exampleInputEmail1">Category Name</label>
-              <input type="text" name="cat_name" class="form-control" id="exampleInputEmail1" placeholder="Category Name" required>
+              <label for="exampleInputEmail1">ATTRACTION AND UTILITIES NAME</label>
+              <input type="text" name="cat_name" class="form-control" id="exampleInputEmail1" placeholder="ATTRACTION AND UTILITIES Name" required>
             </div>
 
 
 
             <div class="form-group ">
-              <label class="control-label col-md-3">Category Image</label>
+              <label class="control-label col-md-3">ATTRACTION AND UTILITIES ICONS</label>
               <div class="col-md-12">
                 <br>
                     <div> 
@@ -127,7 +127,7 @@
             <div class='row' >
               <div class="form-group col-md-12 ">
                 <div class="kk">
-                <label for="exampleInputFile">Category Type</label>
+                <label for="exampleInputFile">PLACES TYPE</label>
                 <select name="category_type">
 
                   <option value="Nagarkot">Nagarkot</option>

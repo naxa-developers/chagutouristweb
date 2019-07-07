@@ -7,14 +7,14 @@ $lang['project_partners']="Project Partners";
 $lang['featured_datasets']="Featured Datasets";
 $lang['select_featured_datasets']="Select Featured Datasets";
 $lang['choose_featured_datasets']="Choose Featured Datasets";
-$lang['categories_management']="Map Management";
-$lang['categories']="Map Layer Management";
+$lang['categories_management']="Attractions and Utilities";
+$lang['categories']="Add Attraction and Utilities";
 $lang['sub_categories']="Sub Layer Management";
 
 //categories_tbl
 //$lang['categories']="Map";
 $lang['switch_language']="SWITCH LANGUAGE";
-$lang['add_category']="Add Category";
+$lang['add_category']="Add Attraction and Utilities";
 $lang['view_in_map']="View in Map";
 
 
@@ -286,10 +286,10 @@ $lang['homepagelabel']="Manage Page Labels.";
 $lang['about_us_data'] = "About Us Data";
 $lang['about_us_category'] = "About Us Category";
 $lang['language_setting'] = "Language Setting";
-$lang['category'] = "Category Management";
-$lang['locationadd'] = "Location Add";
-$lang['location_list'] = "Location Lists";
-$lang['add_location_category'] = "Add Location category";
+$lang['category'] = "Places Management";
+$lang['locationadd'] = "Places Add";
+$lang['location_list'] = "Places Lists";
+$lang['add_location_category'] = "Add Location Places";
 $lang['mayer'] = "Mayor Message";
 $lang['mayer_add'] = "Add Mayor";
 $lang['user'] = "User Management";

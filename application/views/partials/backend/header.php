@@ -162,7 +162,7 @@
                     <ul class="sub">
 
                         <li><a href="<?php echo base_url(FOLDER_ADMIN);?>/map/categories_tbl"> <?php echo $this->lang->line('categories'); ?></a></li>
-                        <li><a href="<?php echo base_url(FOLDER_ADMIN);?>/map/create_categories"> <?php echo $this->lang->line('sub_categories'); ?></a></li>
+                        <!-- <li><a href="<?php echo base_url(FOLDER_ADMIN);?>/map/create_categories"> <?php echo $this->lang->line('sub_categories'); ?></a></li> -->
 
                     </ul>
                 </li> 

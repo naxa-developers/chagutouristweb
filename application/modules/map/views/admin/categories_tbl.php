@@ -11,14 +11,14 @@
               <?php echo $this->lang->line('categories'); ?>
               <span class="tools pull-right">
                 <a href="<?php echo base_url(FOLDER_ADMIN)?>/map/create_categories"><button type="submit" name="upload_data" class="btn btn-danger" style="background-color: #1fb5ad;border-color: #1fb5ad;margin-top: -7px;"><i class="fa fa-plus"></i> <?php echo $this->lang->line('add_category'); ?></button></a>
-                <a href="<?php echo base_url()?>admin_category?tbl=" target="_blank"><button type="submit" name="upload_data" class="btn btn-danger" style="background-color: #1fb5ad;border-color: #1fb5ad;margin-top: -7px;"><i class="fa fa-map-marker"></i> <?php echo $this->lang->line('view_in_map'); ?></button></a>
-                <a href="change_order_caegory" target="_blank"><button type="submit" name="upload_data" class="btn btn-danger" style="background-color: #1fb5ad;border-color: #1fb5ad;margin-top: -7px;"><i class="fa fa-list"></i><?php echo $this->lang->line('change_order'); ?> </button></a>
+               <!--  <a href="<?php echo base_url()?>admin_category?tbl=" target="_blank"><button type="submit" name="upload_data" class="btn btn-danger" style="background-color: #1fb5ad;border-color: #1fb5ad;margin-top: -7px;"><i class="fa fa-map-marker"></i> <?php echo $this->lang->line('view_in_map'); ?></button></a>
+                <a href="change_order_caegory" target="_blank"><button type="submit" name="upload_data" class="btn btn-danger" style="background-color: #1fb5ad;border-color: #1fb5ad;margin-top: -7px;"><i class="fa fa-list"></i><?php echo $this->lang->line('change_order'); ?> </button></a> -->
                 </span>
-                <span class="tools pull-right">
+                <!-- <span class="tools pull-right">
                   <?php echo $this->lang->line('switch_language'); ?>
                   <a class="nav-link" href="<?php echo base_url(FOLDER_ADMIN);?>/map/categories_tbl"><img src="<?php echo base_url();?>assets/img/nep.png" height="15"></a>
                   <a class="nav-link" href="<?php echo base_url(FOLDER_ADMIN);?>/map/categories_tbl"><img src="<?php echo base_url();?>assets/img/uk.png" height="15"></a>
-               </span>
+               </span> -->
 
             </header>
             <div class="panel-body">
