@@ -217,7 +217,7 @@ class Admin extends Admin_Controller {
 					//echo "<pre>";print_r($this->input->post());die;	
 			      	//$page_slug_new = strtolower (preg_replace('/[[:space:]]+/', '-', $this->input->post('name')));
 			      	$data=array(
-			        	'title'=>$this->input->post('name'),
+			        	'name'=>$this->input->post('name'),
 			        	'description'=>$this->input->post('description'),
 			        	'language'=>$emerg_lang,
 			        	//'slug'=>$page_slug_new,
