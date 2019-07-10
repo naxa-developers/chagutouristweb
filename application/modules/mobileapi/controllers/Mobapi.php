@@ -34,7 +34,7 @@ class Mobapi extends Admin_Controller
     {
       $lang = $this->input->post('language');
       $language=$lang['Language'];
-      $data=$this->general->get_tbl_data_result('*','touristinformation',array('language',$language));//this is language table
+      $data=$this->general->get_tbl_data_result('*','touristinformation',array('language'=>$language));//this is language table
       $response['error'] = 0 ;
       $response['message'] = 'List Of Tourist Information';
       $response['data'] = $data;
