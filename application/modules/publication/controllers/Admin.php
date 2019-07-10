@@ -243,7 +243,7 @@ class Admin extends Admin_Controller {
 			      	//admin check
 			      	$this->template
 			                        ->enable_parser(FALSE)
-			                        ->build('admin/touristInformation',$this->data);
+			                        ->build('admin/touristinformation',$this->data);
 			    }
 			}
 			public function deletetouristInformation(){
