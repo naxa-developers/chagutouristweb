@@ -232,11 +232,11 @@ class Admin extends Admin_Controller {
 			      //admin check
 			    	$id = base64_decode($this->input->get('id'));
 			    	if($id) {
-						$this->data['drrdataeditdata'] = $this->general->get_tbl_data_result('id, title as name','touristinformation',array('id'=>$id));
+						$this->data['drrdataeditdata'] = $this->general->get_tbl_data_result('id,name','touristinformation',array('id'=>$id));
 			    	}else{
 			    		$this->data['drrdataeditdata'] = array();	
 			    	}
-			    	$this->data['publicationdata'] = $this->general->get_tbl_data_result('id,title as name','touristinformation',array('language'=>$emerg_lang));
+			    	$this->data['publicationdata'] = $this->general->get_tbl_data_result('id,name','touristinformation',array('language'=>$emerg_lang));
 			    	//echo "<pre>";print_r($this->data['publicationdata']);die;	
 			      	$admin_type=$this->session->userdata('user_type');
 			      	$this->data['admin']=$admin_type;
