@@ -4,22 +4,29 @@
       <div class="col-lg-12">
         <section class="panel">
           <header class="panel-heading">
-           ATTRACTION AND UTILITIES CATEGORY
+           Tourist Infrmation
             <form role="form"  method="POST" action="" enctype="multipart/form-data">
                 <input type="hidden" name="id" value="<?php echo !empty($drrdataeditdata[0]['id'])?$drrdataeditdata[0]['id']:'' ?>">
                 <div class="form-group position-center">
-
-                  <label for="name">ATTRACTION AND UTILITIES Category Name:</label>
-                  <input type="text" name="name" class="form-control" id="name" value="<?php echo !empty($drrdataeditdata[0]['name'])?$drrdataeditdata[0]['name']:'' ?>" placeholder="ENTER ATTRACTION AND UTILITIES CATEGORY NAME">
+                  <label for="name">Tourist Infrmation Name:</label>
+                  <input type="text" name="name" class="form-control" id="name" value="<?php echo !empty($drrdataeditdata[0]['title'])?$drrdataeditdata[0]['title']:'' ?>" placeholder="Enter Tourist Infrmation Title">
                   <?php echo form_error('name'); ?>
                 </div>
-              <div class="panel-body">
-                <div class="position-center">
-                <div class="form-group">
-                    <button type="submit" name="submit" class="btn btn-info"><?php if($drrdataeditdata) { echo "Update";}else{echo "Submit";} ?></button>
+                <div class="form-group position-center">
+                <label for="name">Select Places Type:</label>
+                 <select name="subcat" class="form-control">
+                  <?php foreach ($mapcategorry as $key => $value) { ?>
+                    <option value="<?php echo $value['slug']; ?>"><?php echo $value['name']; ?></option>
+                    <?php } ?>
+                  </select>
                   </div>
-                  </div>
-                </div>
+                  <div class="panel-body">
+                    <div class="position-center">
+                      <div class="form-group">
+                        <button type="submit" name="submit" class="btn btn-info"><?php if($drrdataeditdata) { echo "Update";}else{echo "Submit";} ?></button>
+                      </div>
+                      </div>
+                    </div>
                     </div>
                   </form>
                 </div>
@@ -29,7 +36,7 @@
         </div>
 
           <header class="panel-heading">
-             <b> ATTRACTION AND UTILITIES CATEGORY</b>
+             <b><?php echo $this->lang->line('publications'); ?></b>
           </header>
           <div class="panel-body">
             <?php
@@ -73,8 +80,8 @@
                       <td><?php echo $value;?></td>
                     <?php }  ?>
                       <td>
-                        <a href="<?php echo base_url(FOLDER_ADMIN)?>/publication/add_map_sub_category?id=<?php echo base64_encode($v['id']);?>"><?php echo $this->lang->line('edit'); ?></a> /
-                        <a onclick="return confirm('Are you sure you want to delete?')" href="<?php echo base_url(FOLDER_ADMIN)?>/publication/deleteMapcategory?id=<?php echo  $v['id'];?>"><?php echo $this->lang->line('delete'); ?></a></td>
+                        <a href="<?php echo base_url(FOLDER_ADMIN)?>/publication/touristInformation?id=<?php echo base64_encode($v['id']);?>"><?php echo $this->lang->line('edit'); ?></a> /
+                        <a onclick="return confirm('Are you sure you want to delete?')" href="<?php echo base_url(FOLDER_ADMIN)?>/publication/deletetouristInformation?id=<?php echo  $v['id'];?>"><?php echo $this->lang->line('delete'); ?></a></td>
                   </tr>
                 <?php  }?>
                   </tbody>

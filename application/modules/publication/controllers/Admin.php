@@ -207,6 +207,53 @@ class Admin extends Admin_Controller {
 			    // redirect('view_publication');
 			    redirect(FOLDER_ADMIN.'/publication/add_map_sub_category');
 		  	}
+		  	public function touristInformation(){
+			 	$this->data=array();
+			 	$lang=$this->session->get_userdata('Language');
+		        $emerg_lang=$lang['Language'];
+			 	$this->data['mapcategorry'] = $this->general->get_tbl_data_result('id,title as name,slug','locationinformation',array('language'=>$emerg_lang));
+			 	$this->form_validation->set_rules('name', 'TOURIST INFRMATION NAME', 'trim|required');
+				if ($this->form_validation->run() == TRUE){
+					echo "<pre>";print_r($this->input->post());die;	
+			      	$page_slug_new = strtolower (preg_replace('/[[:space:]]+/', '-', $this->input->post('name')));
+			      	$data=array(
+			        	'title'=>$this->input->post('name'),
+			        	'description'=>$this->input->post('description'),
+			        	'language'=>$emerg_lang,
+			        	'slug'=>$page_slug_new,
+			      	);
+
+			      	$insert=$this->Publication_model->add_publiactioncat('touristinformation',$data);
+			      	if($insert!=""){
+				        $this->session->set_flashdata('msg','Map successfully added');
+				        redirect(FOLDER_ADMIN.'/publication/touristinformation');
+			        }
+			    }else{
+			      //admin check
+			    	$id = base64_decode($this->input->get('id'));
+			    	if($id) {
+						$this->data['drrdataeditdata'] = $this->general->get_tbl_data_result('id,title as name','touristinformation',array('id'=>$id));
+			    	}else{
+			    		$this->data['drrdataeditdata'] = array();	
+			    	}
+			    	$this->data['publicationdata'] = $this->general->get_tbl_data_result('id,title as name','touristinformation',array('language'=>$emerg_lang));
+			    	//echo "<pre>";print_r($this->data['publicationdata']);die;	
+			      	$admin_type=$this->session->userdata('user_type');
+			      	$this->data['admin']=$admin_type;
+			      	//admin check
+			      	$this->template
+			                        ->enable_parser(FALSE)
+			                        ->build('admin/touristInformation',$this->data);
+			    }
+			}
+			public function deletetouristInformation(){
+			    $id = $this->input->get('id');
+			    $delete=$this->Publication_model->delete_data($id, 'touristinformation');
+
+			    $this->session->set_flashdata('msg','Id number '.$id.' row data was deleted successfully');
+			    // redirect('view_publication');
+			    redirect(FOLDER_ADMIN.'/publication/touristInformation');
+		  	}
  	public function add_publication(){
  		$this->data=array();
     	$this->form_validation->set_rules('category', 'Please Select About ', 'trim|required');
