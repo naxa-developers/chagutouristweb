@@ -32,9 +32,10 @@ class Mobapi extends Admin_Controller
     }
     public function touristInformation()
     {
-      $data=$this->general->get_tbl_data_result('*','touristinformation');//this is language table
+      $lang = $this->input->post('language');
+      $data=$this->general->get_tbl_data_result('*','touristinformation',array('language',$lang));//this is language table
       $response['error'] = 0 ;
-      $response['message'] = 'List Of Tourist IN=nformation';
+      $response['message'] = 'List Of Tourist Information';
       $response['data'] = $data;
       echo json_encode($response);
     }

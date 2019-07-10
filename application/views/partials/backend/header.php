@@ -87,7 +87,7 @@
                 <?php
                 $urll=$this->uri->segment(1);
                 if($this->session->userdata('Language')==NULL){
-                    $this->session->set_userdata('Language','nep');
+                    $this->session->set_userdata('Language','en');
                 }
                 $lang=$this->session->get_userdata('Language');
                 $language_data = $this->general->get_tbl_data_result('name,alias','publicationsubcat'); ?>
@@ -162,6 +162,7 @@
                     <ul class="sub">
 
                         <li><a href="<?php echo base_url(FOLDER_ADMIN);?>/map/categories_tbl"> <?php echo $this->lang->line('categories'); ?></a></li>
+                        <li><a href="<?php echo base_url(FOLDER_ADMIN);?>/publication/add_map_sub_category">Add Attraction Category</a></li>
                         <!-- <li><a href="<?php echo base_url(FOLDER_ADMIN);?>/map/create_categories"> <?php echo $this->lang->line('sub_categories'); ?></a></li> -->
 
                     </ul>
@@ -206,7 +207,7 @@
                     <ul class="sub">
                         <li><a href="<?php echo base_url(FOLDER_ADMIN);?>/location/view_location"> <?php echo $this->lang->line('location_list'); ?></a></li>
                         <li><a href="<?php echo base_url(FOLDER_ADMIN);?>/location/add_location"><?php echo $this->lang->line('locationadd'); ?></a></li>
-                        <!-- <li><a href="<?php echo base_url(FOLDER_ADMIN);?>/location/add_location_category"><?php echo $this->lang->line('add_location_category'); ?></a></li> -->
+                        
                     </ul>
                 </li>
                 <li class="sub-menu">

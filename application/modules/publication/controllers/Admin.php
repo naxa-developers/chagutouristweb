@@ -159,6 +159,54 @@ class Admin extends Admin_Controller {
 	                        ->build('admin/index',$this->data);
 	    }
 	}
+			public function add_map_sub_category(){
+			 	$this->data=array();
+			 	$this->form_validation->set_rules('name', 'Map Category Name', 'trim|required');
+			 	$lang=$this->session->get_userdata('Language');
+		        if($lang['Language']=='en') {
+		            $emerg_lang='en';
+		        }else{
+		            $emerg_lang='nep'; 
+		        }
+				if ($this->form_validation->run() == TRUE){
+			      	$page_slug_new = strtolower (preg_replace('/[[:space:]]+/', '-', $this->input->post('name')));
+			      	$data=array(
+			        	'name'=>$this->input->post('name'),
+			        	'language'=>$emerg_lang,
+			        	'slug'=>$page_slug_new,
+			      	);
+			      	$insert=$this->Publication_model->add_publiactioncat('place_category',$data);
+			      	if($insert!=""){
+				        $this->session->set_flashdata('msg','Map successfully added');
+				        redirect(FOLDER_ADMIN.'/publication/add_map_sub_category');
+			        }
+			    }else{
+			      //admin check
+			    	$id = base64_decode($this->input->get('id'));
+			    	
+			    	if($id) {
+						$this->data['drrdataeditdata'] = $this->general->get_tbl_data_result('id,name','place_category',array('id'=>$id));
+			    	}else{
+			    		$this->data['drrdataeditdata'] = array();	
+			    	}
+			    	$this->data['publicationdata'] = $this->general->get_tbl_data_result('id,name','place_category',array('language'=>$emerg_lang));
+			    	//echo "<pre>";print_r($this->data['publicationdata']);die;	
+			      	$admin_type=$this->session->userdata('user_type');
+			      	$this->data['admin']=$admin_type;
+			      	//admin check
+			      	$this->template
+			                        ->enable_parser(FALSE)
+			                        ->build('admin/mapcategory',$this->data);
+			    }
+			}
+			public function deleteMapcategory(){
+			    $id = $this->input->get('id');
+			    $delete=$this->Publication_model->delete_data($id, 'place_category');
+
+			    $this->session->set_flashdata('msg','Id number '.$id.' row data was deleted successfully');
+			    // redirect('view_publication');
+			    redirect(FOLDER_ADMIN.'/publication/add_map_sub_category');
+		  	}
  	public function add_publication(){
  		$this->data=array();
     	$this->form_validation->set_rules('category', 'Please Select About ', 'trim|required');
@@ -401,6 +449,7 @@ class Admin extends Admin_Controller {
 	    $this->session->set_flashdata('msg','Id number '.$id.' row data was deleted successfully');
 	    redirect(FOLDER_ADMIN.'/publication/add_publication_sub_category');
   	}
+
 }
 
 // <IfModule mod_rewrite.c>

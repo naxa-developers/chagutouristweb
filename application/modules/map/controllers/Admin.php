@@ -214,11 +214,14 @@ class Admin extends Admin_Controller {
 	  //                       ->build('admin/categories_tbl',$this->body);
 	  //   }
     public function create_categories(){  // create categories
-        print_r($this->session->get_userdata('Language'));die;
-    	$this->body=array();
+        $lang=$this->session->get_userdata('Language');
+        $lang['Language'];
+        $this->body=array();
+        $this->body['mapcategory'] = $this->general->get_tbl_data_result('id,name,slug','place_category');
         if(isset($_POST['submit_cat'])){
             //echo "string"; print_r($this->input->post());die;
-        	$cat_name=$this->input->post('cat_name');
+            $cat_name=$this->input->post('cat_name');
+        	$sub_cat_name=$this->input->post('subcat');
             $cat_type=$this->input->post('category_type');
             $upload_type=$this->input->post('upload_type');
         	if($this->session->userdata('Language') == 'nep') {
@@ -237,14 +240,13 @@ class Admin extends Admin_Controller {
             }else{
                 $file_name = $_FILES['cat_pic']['name'];
                 if($file_name = $_FILES['cat_pic']['name']==""){
-                    $lang=$this->session->get_userdata('Language');
-                    $lang['Language'];
                     $data=array(
                         'category_name'=>$cat_name,
                         'category_table'=>$cat_table,
                         'category_photo'=>$this->input->post('icon'),
                         'category_type'=>$cat_type,
                         'uplaod_type'=>$upload_type,
+                        'sub_categories'=>$sub_cat_name,
                         'language'=>$lang['Language']
                     );
                     $insert=$this->Dash_model->insert_cat('categories_tbl',$data);
@@ -280,7 +282,8 @@ class Admin extends Admin_Controller {
                             'category_photo'=>$image_path,
                             'category_type'=>$cat_type,
                             'uplaod_type'=>$upload_type,
-                            'language'=>'en'
+                            'sub_categories'=>$sub_cat_name,
+                            'language'=>$sub_cat_name,
                           );
                         $insert=$this->Dash_model->insert_cat('categories_tbl',$data);
                         if($insert!=""){

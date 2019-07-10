@@ -13,12 +13,8 @@ class Admin extends Admin_Controller {
 	}
 	public function index()
 	{
-		$lang=$this->session->get_userdata('Language');
-       	if($lang['Language']=='en'){
-        	$language='en';
-      	}else{
-        	$language='nep';
-      	}
+		$lang=$this->session->get_userdata('Language'); //print_r($lang['Language']);die;
+        $language=$lang['Language'];
 		$this->body = array();
 		$this->body['user']=$this->Admin_dash_model->count_data('users');
 	    $this->body['map_data']=$this->Admin_dash_model->count_data('categories_tbl');
