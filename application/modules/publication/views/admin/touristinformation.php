@@ -8,8 +8,8 @@
             <form role="form"  method="POST" action="" enctype="multipart/form-data">
                 <input type="hidden" name="id" value="<?php echo !empty($drrdataeditdata[0]['id'])?$drrdataeditdata[0]['id']:'' ?>">
                 <div class="form-group position-center">
-                  <label for="name">Tourist Information Point:</label>
-                  <input type="text" name="description" class="form-control" id="description" value="<?php echo !empty($drrdataeditdata[0]['description'])?$drrdataeditdata[0]['description']:'' ?>" placeholder="Enter Tourist Information Title">
+                  <label for="name">Tourist Information Point :</label>
+                  <input type="text" name="description" class="form-control" id="description" value="<?php echo !empty($drrdataeditdata[0]['description'])?$drrdataeditdata[0]['description']:'' ?>" placeholder="Enter Tourist Information Points">
                   <?php echo form_error('name'); ?>
                 </div>
                 <div class="form-group position-center">
