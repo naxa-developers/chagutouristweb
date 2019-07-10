@@ -58,14 +58,7 @@ class Admin extends Admin_Controller {
 	{
 		if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 			$lang=$this->input->post('language');
-			if($lang=='nep')
-			{
-				$this->session->set_userdata('Language','nep');
-			}
-			if($lang=='en')
-			{
-				$this->session->set_userdata('Language','en');
-			}
+			$this->session->set_userdata('Language',$lang);
 			print_r(json_encode(array('status'=>'success','message'=>'Language Set successfully')));
 			 exit;
 		}

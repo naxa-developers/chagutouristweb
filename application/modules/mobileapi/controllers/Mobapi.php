@@ -200,7 +200,7 @@ class Mobapi extends Admin_Controller
   }
   public function categoryApi() {
     $lang =  $this->input->post('language');
-    $category = $this->general->get_tbl_data_result('category_name,category_table,category_photo as category_marker,summary_list','categories_tbl',array('language'=>$lang));
+    $category = $this->general->get_tbl_data_result('category_name,category_table,category_photo as category_marker,languagu,summary_list','categories_tbl',array('language'=>$lang));
     $final=array();
     $i=0;
     foreach($category as $data){

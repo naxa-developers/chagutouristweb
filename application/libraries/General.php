@@ -149,6 +149,8 @@ class General {
     		$whr = '1';
     	}elseif($lang== 'nep'){
     		$whr = '2';
+    	}elseif($lang== 'ch'){
+    		$whr = '2';
     	}
     	if ($whr) {
 			$this->ci->db->where('id',$whr);
@@ -172,6 +174,8 @@ class General {
     		$whr = '1';
     	}elseif($lang== 'nep'){
     		$whr = '2';
+    	}elseif($lang== 'ch'){
+    		$whr = '1';
     	}
     	if ($whr) {
 			$this->ci->db->where('id',$whr);

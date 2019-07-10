@@ -214,7 +214,7 @@ class Admin extends Admin_Controller {
 	  //                       ->build('admin/categories_tbl',$this->body);
 	  //   }
     public function create_categories(){  // create categories
-
+        print_r($this->session->get_userdata('Language'));die;
     	$this->body=array();
         if(isset($_POST['submit_cat'])){
             //echo "string"; print_r($this->input->post());die;
@@ -237,13 +237,15 @@ class Admin extends Admin_Controller {
             }else{
                 $file_name = $_FILES['cat_pic']['name'];
                 if($file_name = $_FILES['cat_pic']['name']==""){
+                    $lang=$this->session->get_userdata('Language');
+                    $lang['Language'];
                     $data=array(
                         'category_name'=>$cat_name,
                         'category_table'=>$cat_table,
                         'category_photo'=>$this->input->post('icon'),
                         'category_type'=>$cat_type,
                         'uplaod_type'=>$upload_type,
-                        'language'=>'en'
+                        'language'=>$lang['Language']
                     );
                     $insert=$this->Dash_model->insert_cat('categories_tbl',$data);
                     if($insert!=""){
