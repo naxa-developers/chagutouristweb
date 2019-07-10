@@ -8,15 +8,16 @@
             <form role="form"  method="POST" action="" enctype="multipart/form-data">
                 <input type="hidden" name="id" value="<?php echo !empty($drrdataeditdata[0]['id'])?$drrdataeditdata[0]['id']:'' ?>">
                 <div class="form-group position-center">
-                  <label for="name">Tourist Infrmation Name:</label>
-                  <input type="text" name="name" class="form-control" id="name" value="<?php echo !empty($drrdataeditdata[0]['title'])?$drrdataeditdata[0]['title']:'' ?>" placeholder="Enter Tourist Infrmation Title">
+                  <label for="name">Tourist Information Point:</label>
+                  <input type="text" name="description" class="form-control" id="description" value="<?php echo !empty($drrdataeditdata[0]['description'])?$drrdataeditdata[0]['description']:'' ?>" placeholder="Enter Tourist Information Title">
                   <?php echo form_error('name'); ?>
                 </div>
                 <div class="form-group position-center">
                 <label for="name">Select Places Type:</label>
-                 <select name="subcat" class="form-control">
+                 <select name="name" class="form-control">
+                 <?php $dbname= !empty($drrdataeditdata[0]['name'])?$drrdataeditdata[0]['name']:'' ?>
                   <?php foreach ($mapcategorry as $key => $value) { ?>
-                    <option value="<?php echo $value['slug']; ?>"><?php echo $value['name']; ?></option>
+                    <option value="<?php echo $value['slug']; ?>" <?php if($dbname == $value['name']){ echo "selected=selected";} ?>><?php echo $value['name']; ?></option>
                     <?php } ?>
                   </select>
                   </div>

@@ -214,13 +214,13 @@ class Admin extends Admin_Controller {
 			 	$this->data['mapcategorry'] = $this->general->get_tbl_data_result('id,title as name,slug','locationinformation',array('language'=>$emerg_lang));
 			 	$this->form_validation->set_rules('name', 'TOURIST INFRMATION NAME', 'trim|required');
 				if ($this->form_validation->run() == TRUE){
-					echo "<pre>";print_r($this->input->post());die;	
-			      	$page_slug_new = strtolower (preg_replace('/[[:space:]]+/', '-', $this->input->post('name')));
+					//echo "<pre>";print_r($this->input->post());die;	
+			      	//$page_slug_new = strtolower (preg_replace('/[[:space:]]+/', '-', $this->input->post('name')));
 			      	$data=array(
 			        	'title'=>$this->input->post('name'),
 			        	'description'=>$this->input->post('description'),
 			        	'language'=>$emerg_lang,
-			        	'slug'=>$page_slug_new,
+			        	//'slug'=>$page_slug_new,
 			      	);
 
 			      	$insert=$this->Publication_model->add_publiactioncat('touristinformation',$data);
