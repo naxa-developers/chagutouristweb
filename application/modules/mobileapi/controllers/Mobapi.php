@@ -99,17 +99,16 @@ class Mobapi extends Admin_Controller
   }
   public function  authCheck(){
     $data=$this->input->post('data');   //getting data from api
-    if($data){                           //1.check data is empty / notS
+    if($data){                           //1.check data is empty / not
       $data_array = json_decode($data, true);
       $token=$data_array['token'];
       $tokencheck=$this->general->get_tbl_data_result('token','users',array('token'=>$token));
       if($tokencheck) {  //5.checking num exists or not
         //$tokencheck=$this->Api_model->check_auth('users',$token); 
-        //$date = new DateTime("now");
         $date =date('Y-m-d');
         $token=$this->general->get_tbl_data_result('token','users',array('end_date >='=>$date,'token'=>$token));
         //echo $this->db->last_query();die;
-        if($tokencheck)
+        if($token)
         {
           $response['error'] = 0;
           $response['message'] = 'Valid user';
