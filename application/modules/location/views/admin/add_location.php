@@ -26,36 +26,6 @@ height: 460px;
                     </div>
                     <?php } ?>
                     <form role="form" method="POST" action="" enctype="multipart/form-data">
-                        <!-- <div class="form-group">
-                            <div class="col-md-3">
-                                <label for="exampleInputFile"> Select Location </label>
-                                <select name="location" class="form-control">
-                                    <option value="">----- Select About------</option>
-                                    <?php if($destination){
-                                        foreach ($destination as $key=> $value){ ?>
-                                        <option value="<?php echo $value['id'] ?>">
-                                            <?php echo $value['name'] ?>
-                                        </option>
-                                        <?php } } ?>
-                                </select>
-                                <?php echo form_error('location'); ?>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <div class="col-md-3">
-                                <label for="exampleInputFile"> Type </label>
-                                <select name="type" class="form-control">
-                                    <option value="">----- Select Type------</option>
-                                    <?php if($pub){
-                                        foreach ($pub as $key=> $value){ ?>
-                                        <option value="<?php echo $value['id'] ?>">
-                                            <?php echo $value['name'] ?>
-                                        </option>
-                                        <?php } } ?>
-                                </select>
-                                <?php echo form_error('type'); ?>
-                            </div>
-                        </div> -->
                         <div class="form-group">
                             <div class="col-md-3">
                                 <label for="exampleInputEmail1">सिर्षक </label>

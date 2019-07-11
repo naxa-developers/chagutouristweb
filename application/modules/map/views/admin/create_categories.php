@@ -137,7 +137,7 @@
               </div>
                <div class="form-group col-md-12 ">
                 <div class="kk">
-                <label for="exampleInputFile">PLACES CATEGORY</label>
+                <label for="exampleInputFile"> SELECT ATTRACTION CATEGORY</label>
                   <select name="subcat">
                   <?php foreach ($mapcategory as $key => $value) { ?>
                     <option value="<?php echo $value['slug']; ?>"><?php echo $value['name']; ?></option>

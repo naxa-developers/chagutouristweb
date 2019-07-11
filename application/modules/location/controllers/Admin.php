@@ -189,17 +189,15 @@ class Admin extends Admin_Controller {
     	$this->form_validation->set_rules('title', 'Please Enter Title ', 'trim|required');
     	// $this->form_validation->set_rules('type', 'Please select Type ', 'trim|required');
     	$lang=$this->session->get_userdata('Language');
-	    if($lang['Language']=='en'){
-	        $language='en';
-	    }else{
-	        $language='nep';
-	    }
+	    $language=$lang['Language'];
 		if ($this->form_validation->run() == TRUE){
 	      	$file_name = $_FILES['proj_pic']['name'];
 	      	$audio=$_FILES['audio']['name'];
+	      	$video=$_FILES['video']['name'];
 	      	//echo "<pre>"; print_r($this->input->post());die;
 	    	$ext = pathinfo($file_name, PATHINFO_EXTENSION);
 	      	$ext_file_audio = pathinfo($audio, PATHINFO_EXTENSION);
+	      	$ext_file_video = pathinfo($video, PATHINFO_EXTENSION);
 	      	$page_slug_new = strtolower (preg_replace('/[[:space:]]+/', '-', $this->input->post('title')));
 	      	if($this->input->post('category') == "other"){
 	      		$cat = "1000";
@@ -240,6 +238,12 @@ class Admin extends Admin_Controller {
 
 	      	// qr code end
 	      	if($insert!=""){
+	      		if(!empty($video)){
+	      			$file_upload_video=$this->Location_model->file_do_uploa_video($video,$insert);
+
+	      		}else{
+	      			$file_upload_video='';
+	      		}
 	      		if(!empty($audio)){
 	      			$file_upload_audio=$this->Location_model->file_do_uploa_audiod($audio,$insert);
 
@@ -251,25 +255,31 @@ class Admin extends Admin_Controller {
 	      		}else{
 	      			$img_upload['status']='';
 	      		}
-	      		//echo "<pre>"; print_r($img_upload['status']);die;
-		        if($img_upload['status']== 1  || $file_upload_audio || $file_upload){
+	      		//echo "<pre>"; print_r($file_upload_video);die;
+		        if($img_upload['status']== 1  || $file_upload_audio || $file_upload_video){
 		            if($img_upload['status']== 1){
-		          		$image_path=base_url() . 'uploads/location/'.$insert.'.'.$ext;
+		          		$image_path=base_url() . 'uploads/publication/'.$insert.'.'.$ext;
 		          		//print_r($image_path);die;
 		            }else{
 		          		$image_path='';
 		          	}
 		          	if($file_upload_audio == 1) {
-		          		$file_path_audiofinal=base_url() . 'uploads/location/file/'.$insert.'.'.$ext_file_audio;//base_url().$file_upload_audio;
+		          		$file_path_audiofinal=base_url() . 'uploads/publication/file/'.$insert.'.'.$ext_file_audio;//base_url().$file_upload_audio;
 		          	}else{
 		          		$file_path_audiofinal='';
+		          	}
+		          	if($file_upload_audio == 1) {
+		          		$file_path_videofinal=base_url() . 'uploads/publication/file/'.$insert.'.'.$ext_file_video;//base_url().$file_upload_audio;
+		          	}else{
+		          		$file_path_videofinal='';
 		          	}
 		          	$img=array(
 			            'image'=>$image_path,//
 			            'audio'=>$file_path_audiofinal,
-			            'video'=>$file_path_audiofinal,
+			            'video'=>$file_path_videofinal,
 			            'qrcode'=>$qrcode,
 			        );
+			       	//echo"<pre>"; print_r($img);die;
 		            $update_path=$this->Location_model->update_path($insert,$img);
 		            $this->session->set_flashdata('msg','Publication successfully added');
 		          	redirect(FOLDER_ADMIN.'/location/view_location');
@@ -297,48 +307,49 @@ class Admin extends Admin_Controller {
     public function edit_publication(){
 	    $this->data=array();
 	    $lang=$this->session->get_userdata('Language');
-	    if($lang['Language']=='en'){
-	        $language='en';
-	    }else{
-	        $language='nep';
-	    }
+	    $language=$lang['Language'];
 	    $id=base64_decode($this->input->get('id'));
 	    $this->data['pub']=$this->general->get_tbl_data_result('*','locationinformation',array('language'=>$language),'id');
 	    if(isset($_POST['submit'])){
 	    	//echo "<pre>"; print_r($this->input->post());die;
-	      	if(!empty($_FILES['proj_pic']['name']) || !empty($_FILES['uploadedfile']['name']) || !empty($_FILES['proj_pic']['name'])){
-	      		//echo "inside";die;
+	    	$old_old_videofile  = $this->input->post('old_video');
+	      	$old_audio  = $this->input->post('old_audio');
+	      	$old_image  = $this->input->post('old_image');
+	      	if(!empty($_FILES['proj_pic']['name']) || !empty($_FILES['audio']['name']) || !empty($_FILES['video']['name'])){
 		            $file_name = !empty($_FILES['proj_pic']['name'])?$_FILES['proj_pic']['name']:'';
 			      	$attachment=	!empty($_FILES['uploadedfile']['name'])?$_FILES['uploadedfile']['name']:'';
-			      	$audio=!empty($_FILES['audio']['name'])?$_FILES['audio']['name']:'';
+			      	$audio=$_FILES['audio']['name'];
 			      	//echo "<pre>"; print_r($audio);die;
 			      	$page_slug_new = strtolower (preg_replace('/[[:space:]]+/', '-', $this->input->post('title')));
-
+			      	$video=$_FILES['video']['name'];
+					$ext_file_video = pathinfo($video, PATHINFO_EXTENSION);
 			    	$ext = pathinfo($file_name, PATHINFO_EXTENSION);
 			      	$ext_file = pathinfo($attachment, PATHINFO_EXTENSION);
 			      	$ext_file_audio = pathinfo($audio, PATHINFO_EXTENSION);
 			      	$old_uploadedfile  = $this->input->post('old_uploadedfile');
+			      	$old_old_videofile  = $this->input->post('old_video');
 			      	$old_audio  = $this->input->post('old_audio');
 			      	$old_image  = $this->input->post('old_image');
-			      		if($this->input->post('category') == "other"){
-				      		$cat = "1000";
-				      	}else{
-				      		$cat =$this->input->post('category');
-				      	}
-				      	$data=array(
-				        	'title'=>$this->input->post('title'),
-				        	'slug'=>$page_slug_new,
-				        	'description'=>$this->input->post('summary'),
-				        	'type_id'=>$this->input->post('type'),
-				        	'longitude'=>$this->input->post('longitude'),
-				        	'latitude'=>$this->input->post('latitude'),
-				        	'sort_order'=>$this->input->post('sort_order'),
-				        	'language'=>$language,
-				      	);
+			      	$data=array(
+			        	'title'=>$this->input->post('title'),
+			        	'slug'=>$page_slug_new,
+			        	'description'=>$this->input->post('summary'),
+			        	'type_id'=>$this->input->post('type'),
+			        	'longitude'=>$this->input->post('longitude'),
+			        	'latitude'=>$this->input->post('latitude'),
+			        	'sort_order'=>$this->input->post('sort_order'),
+			        	'language'=>$language,
+			      	);
 		        	$insert=$this->Location_model->update_data($id,$data);
 			        if($insert==1){
+			        	if(!empty($video)){
+			      			$file_upload_video=$this->Location_model->file_do_uploa_video($video,$insert);
+			      			//print_r($file_upload_video);die;
+			      		}else{
+			      			$file_upload_video='';
+			      		}
 			        	if(!empty($audio)){
-		      			$file_upload_audio=$this->Location_model->file_do_uploa_audiod($audio,$id);
+		      				$file_upload_audio=$this->Location_model->file_do_uploa_audiod($audio,$id);
 			      		}else{
 			      			$file_upload_audio='';
 			      		}
@@ -352,12 +363,22 @@ class Admin extends Admin_Controller {
 			      		}else{
 			      			$file_upload['status']='';
 			      		}
-				        if($img_upload['status']== 1 || $file_upload['status']== 1  || $file_upload_audio || $file_upload){
+				        if($img_upload['status']== 1 || $file_upload['status']== 1  || $file_upload_audio || $file_upload_video){
 				            if($img_upload['status']== 1){
 				            	unlink($old_image);
 				          		$image_path=base_url() . 'uploads/publication/'.$id.'.'.$ext;
 				            }else{
-				          		$image_path='';
+				          		$image_path=$old_image;
+				          	}
+				          	if($file_upload_video == 1) {
+				          		$file_path_videofinal=base_url() . 'uploads/publication/file/'.$insert.'.'.$ext_file_video;//base_url().$file_upload_audio;
+				          	}else{
+				          		$file_path_videofinal=$old_old_videofile;
+				          	}
+				          	if($file_upload_audio == 1) {
+				          		$file_path_audiofinal=base_url() . 'uploads/publication/file/'.$insert.'.'.$ext_file_audio;//base_url().$file_upload_audio;
+				          	}else{
+				          		$file_path_audiofinal=$ext_file_audio;
 				          	}
 				          	//print_r($image_path); die;
 				          	if($file_upload== 1) {
@@ -366,62 +387,55 @@ class Admin extends Admin_Controller {
 				          	}else{
 				          		$file_pathd='';
 				          	}
-				          	if($file_upload_audio) {
-				          		unlink($old_audio);
-				          		$file_path_audiofinal=base_url().$file_upload_audio;
-				          	}else{
-				          		$file_path_audiofinal='';
-				          	}
+				          	// if($file_upload_audio) {
+				          	// 	unlink($old_audio);
+				          	// 	$file_path_audiofinal=base_url().$file_upload_audio;
+				          	// }else{
+				          	// 	$file_path_audiofinal=$old_audio;
+				          	// }
 				        $img=array(
-				            'photo'=>$image_path,
-				            'file'=>$file_pathd,
+				            'image'=>$image_path,
+				            //'file'=>$file_pathd,
 				            'audio'=>$file_path_audiofinal,
+				            'video'=>$file_path_videofinal,
 				        ); 	
-				         	// 	$img_upload=$this->Location_model->do_upload($file_name,$id);
-					        // 	if($img_upload==1){
-					        //   $image_path=base_url() . 'uploads/publication/'.$id.'.'.$ext ;
-					        //   $img=array(
-					        //     'photo'=>$image_path,
-					        //   );
 				        //echo "<pre>"; print_r($img);die;
 			            $update_path=$this->Location_model->update_path($id,$img);
-			            $this->session->set_flashdata('msg','Publication successfully Updated');
+			            $this->session->set_flashdata('msg','Location successfully Updated');
 			            // redirect('view_publication');
-			            redirect(FOLDER_ADMIN.'/publication/view_publication');
+			            redirect(FOLDER_ADMIN.'/location/view_location');
 			          }else{
 			            $code= strip_tags($img_upload['error']);
 			            $this->session->set_flashdata('msg', $code);
 			            // redirect('add_publication');
-		          		redirect(FOLDER_ADMIN.'/publication/add_publication');
+		          		redirect(FOLDER_ADMIN.'/location/add_publication');
 
 			          }
 			        }else{
 			          //db error
 			        }
 	        }else{
-	        	if($this->input->post('category') == "other"){
-		      		$cat = "1000";
-		      	}else{
-		      		$cat =$this->input->post('category');
-		      	}
-				$img=array(
-		            'image'=>$image_path,//
-		            'audio'=>$file_path_audiofinal,
-		            'video'=>$file_path_audiofinal,
-		            'qrcode'=>$qrcode,
-		        );
+		        $data=array(
+			        	'title'=>$this->input->post('title'),
+			        	'description'=>$this->input->post('summary'),
+			        	'type_id'=>$this->input->post('type'),
+			        	'longitude'=>$this->input->post('longitude'),
+			        	'latitude'=>$this->input->post('latitude'),
+			        	'sort_order'=>$this->input->post('sort_order'),
+			        	'language'=>$language,
+			      	);
+		        //echo "<pre>";print_r($data);die;
 		        $update=$this->Location_model->update_data($id,$data);
 		        if($update==1){
 		          $this->session->set_flashdata('msg','Data successfully Updated');
 		          // redirect('view_publication');
-		          redirect(FOLDER_ADMIN.'/publication/view_publication');
+		          redirect(FOLDER_ADMIN.'/location/view_location');
 		        }	    
-	      }
+		     }
 	    }else{
 
-	      $this->data['edit_data']=$this->Location_model->get_edit_data(base64_decode($this->input->get('id')),'publication');
-	      //admin check
-	      // echo "<pre>"; print_r($this->data['edit_data']);die;
+	      $this->data['edit_data']=$this->Location_model->get_edit_data($id,'locationinformation');
+	      //echo "<pre>"; print_r($this->data['edit_data']);die;
 	      $admin_type=$this->session->userdata('user_type');
 	      $this->data['admin']=$admin_type;
 	      //admin check

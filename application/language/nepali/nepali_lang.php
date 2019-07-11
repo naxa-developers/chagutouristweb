@@ -1,3 +1,5 @@
-<?php
-$lang['test'] = 'testSASA';
+<?php
+
+$lang['test'] = 'testSASA';
+
 ?>

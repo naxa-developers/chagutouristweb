@@ -64,7 +64,40 @@ else
 
     }
   }
+  
+  public function file_do_uploa_video($filename,$name)
+  {
+          $configVideo['upload_path']          = './uploads/publication/file/';
+          $configVideo['max_size'] = '10240';
+          $configVideo['allowed_types'] = 'avi|flv|wmv|mp3|mpeg|mpg|mp4|mpe|qt|mov|m4a';
+          $configVideo['overwrite'] = FALSE;
+          $configVideo['remove_spaces'] = TRUE;
+          //$video_name = $date.$_FILES['audio']['name'];
+            $configVideo['overwrite']            = TRUE;
+            $configVideo['file_name']           = $name;
+          //$configVideo['file_name'] = $filename;
 
+          $this->load->library('upload', $configVideo);
+          $this->upload->initialize($configVideo);
+          $data = $this->upload->data();
+          //echo"<pre>";print_r($data); die;
+          $pathp = $data['full_path'];
+        
+          if ( ! $this->upload->do_upload('video'))
+          {
+            $error = array('error' => $this->upload->display_errors());
+            return $error;
+
+
+          }
+          else
+          {
+
+
+           return 1;
+
+    }
+  }
   public function file_do_uploa_audiod($filename,$name)
   {
         $configVideo['upload_path']          = './uploads/publication/file/';
@@ -149,7 +182,7 @@ else
   public function update_data($id,$data){
 
     $this->db->where('id',$id);
-    $q=$this->db->update('publication',$data);
+    $q=$this->db->update('locationinformation',$data);
     if($q){
       return 1;
     }else{

@@ -8,9 +8,9 @@
             <section class="panel">
               <section class="panel">
                   <header class="panel-heading">
-                      <b> <?php echo $this->lang->line('project_partners'); ?></b>
+                      <b> ATTRACTION LAYER MANAGEMENT</b>
                       <span class="tools pull-right">
-                        <a href="<?php echo base_url()?>add_proj"><button type="submit" name="upload_data" class="btn btn-danger" style="background-color: #1fb5ad;border-color: #1fb5ad;margin-top: -7px;"><i class="fa fa-plus"></i> <?php echo $this->lang->line('add_project_partners'); ?></button></a>
+                       
                        </span>
                   </header>
                   <div class="panel-body">

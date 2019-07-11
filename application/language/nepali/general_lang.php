@@ -268,4 +268,17 @@ $lang['whodoeswhatdetails']="DIMS को  मुख्य प्रणाली 
 $lang['homepagemanagement']="गृहपृष्ठ व्यवस्थापन";
 $lang['sliderhome']="स्लाइडर प्रबन्ध गर्नुहोस्";
 $lang['homepagelabel']="पृष्ठ लेबल प्रबन्ध गर्नुहोस्";
+
+$lang['about_us_data'] = "About Us Data";
+$lang['about_us_category'] = "About Us Category";
+$lang['language_setting'] = "Language Setting";
+$lang['category'] = "Places Management";
+$lang['locationadd'] = "Places Add";
+$lang['location_list'] = "Places Lists";
+$lang['add_location_category'] = "Add Location Places";
+$lang['mayer'] = "Mayor's Message";
+$lang['mayer_add'] = "Add Mayor";
+$lang['user'] = "User Management";
+$lang['user_add'] = "Add User";
+$lang['user_list'] = "User Lists";
 ?>

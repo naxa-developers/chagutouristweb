@@ -26,77 +26,58 @@ height: 460px;
                     </div>
                     <?php } ?>
                     <form role="form" method="POST" action="" enctype="multipart/form-data">
-                        <!-- <div class="form-group">
-                            <div class="col-md-3">
-                                <label for="exampleInputFile"> Select Location </label>
-                                <select name="location" class="form-control">
-                                    <option value="">----- Select About------</option>
-                                    <?php if($destination){
-                                        foreach ($destination as $key=> $value){ ?>
-                                        <option value="<?php echo $value['id'] ?>">
-                                            <?php echo $value['name'] ?>
-                                        </option>
-                                        <?php } } ?>
-                                </select>
-                                <?php echo form_error('location'); ?>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <div class="col-md-3">
-                                <label for="exampleInputFile"> Type </label>
-                                <select name="type" class="form-control">
-                                    <option value="">----- Select Type------</option>
-                                    <?php if($pub){
-                                        foreach ($pub as $key=> $value){ ?>
-                                        <option value="<?php echo $value['id'] ?>">
-                                            <?php echo $value['name'] ?>
-                                        </option>
-                                        <?php } } ?>
-                                </select>
-                                <?php echo form_error('type'); ?>
-                            </div>
-                        </div> -->
                         <div class="form-group">
                             <div class="col-md-3">
                                 <label for="exampleInputEmail1">सिर्षक </label>
-                                <input type="text" name="title" class="form-control" id="exampleInputEmail1" placeholder="Enter Title">
+                                <input type="text" name="title" class="form-control" id="exampleInputEmail1" placeholder="Enter Title" value="<?php echo $edit_data['title'] ?>">
                                 <?php echo form_error('title'); ?>
                             </div>
                         </div>
                         <div class="form-group">
                             <div class="col-md-3">
                                 <label for="exampleInputEmail1">Sort Order </label>
-                                <input type="text" name="sort_order" class="form-control" id="exampleInputEmail1" placeholder="Enter Title">
+                                <input type="text" name="sort_order" class="form-control" id="exampleInputEmail1" placeholder="Enter Title" value="<?php echo $edit_data['sort_order'] ?>">
                                 <?php echo form_error('sort_order'); ?>
                             </div>
                         </div>
                         <div class="form-group">
                             <div class="col-md-3">
                                 <label for="exampleInputEmail1">longitude </label>
-                                <input type="text" id="longitude" name="longitude" class="form-control" id="exampleInputEmail1" placeholder="Enter Title">
+                                <input type="text" id="longitude" name="longitude" class="form-control" value="<?php echo $edit_data['longitude'] ?>" id="exampleInputEmail1" placeholder="Enter Title">
                                 <?php echo form_error('longitude'); ?>
                             </div>
                         </div>
                         <div class="form-group">
                             <div class="col-md-3">
                                 <label for="exampleInputEmail1">Latitude </label>
-                                <input type="text" id="latitude" name="latitude" class="form-control" id="exampleInputEmail1" placeholder="Enter Latitude">
+                                <input type="text" id="latitude" name="latitude" value="<?php echo $edit_data['latitude'] ?>" class="form-control" id="exampleInputEmail1" placeholder="Enter Latitude">
                                 <?php echo form_error('latitude'); ?>
                             </div>
                         </div>
-                        <div class="form-group">
-                           <div class="col-md-3" id="AudioUrl" >
-                                <label for="exampleInputFile">Location Audio</label>
-                                <input type="file" name="audio" id="exampleInputFile"> 
-                            </div>
-                        </div>
-                        
-                        <div class="form-group">
-                           <div class="col-md-3" id="videoUrl" >
-                                <label for="exampleInputFile">Location Video</label>
-                                <input type="file" name="video" id="exampleInputFile"> 
-                            </div>
-                        </div>
+                        <div class="col-md-3" id="AudioUrl">
+                            <label for="exampleInputFile">Location Audio</label>
+                            <input type="file" name="audio"  id="exampleInputFile" >
+                          </div>
+                        <?php if($edit_data['audio']): ?>
+                          
+                          <div class="col-md-3" id="AudioUrl">
+                            <label for="exampleInputFile">Old Location Audio File name</label>
+                            <input type="hidden" name="old_audio" value="<?php echo $edit_data['audio'] ?>">
+                            <i><?php echo $edit_data['audio'] ?></i>
+                          </div>
+                        <?php endif; ?>
+                        <div class="col-md-3" id="AudioUrl">
+                            <label for="exampleInputFile">Location Video</label>
+                           <input type="file" name="video" id="exampleInputFile"> 
+                          </div>
+                         <?php if($edit_data['video']): ?>
+                          
+                          <div class="col-md-3" id="AudioUrl">
+                            <label for="exampleInputFile">Old Location Video File name</label>
+                            <input type="hidden" name="old_video" value="<?php echo $edit_data['video'] ?>">
+                            <i><?php echo $edit_data['video'] ?></i>
+                          </div>
+                        <?php endif; ?>
                         <div class="form-group">
                             <div class="col-md-12">
                             <label for="exampleInputFile">Drag Marker To Get Location</label>
@@ -106,7 +87,7 @@ height: 460px;
                         <div class="form-group">
                             <div class="col-sm-12">
                                 <label class="control-label">Summary</label>
-                                <textarea class="form-control ckeditor" name="summary" rows="10"></textarea>
+                                <textarea class="form-control ckeditor" name="summary" rows="10"><?php echo $edit_data['description'] ?></textarea>
                             </div>
                         </div>
                         <div class="form-group">
@@ -121,10 +102,17 @@ height: 460px;
                                 </div>
                             </div>
                         </div>
+                          <?php if($edit_data['image']):  ?>
+                              <div class="col-md-6">
+                                  <label for="image">Old Image : </label>
+                                  <img src="<?php  echo $edit_data['image']; ?>" alt="Image Logo" height="100px" width="200px">
+                                  <input type="hidden" class="btn btn-primary" id="image" name="old_image" value="<?php echo $edit_data['image'] ?>">
+                              </div>
+                          <?php endif; ?>
                         <div class="form-group">
                             <div class="col-md-4">
                                 <label class="control-label" for="">&nbsp;&nbsp;&nbsp;</label>
-                                <button type="submit" name="submit" class="btn btn-info" style="margin-top: 15px;">Submit</button>
+                                <button type="submit" name="submit" class="btn btn-info" style="margin-top: 15px;">Update</button>
                             </div>
                         </div>
                         <div class="clearfix"></div>

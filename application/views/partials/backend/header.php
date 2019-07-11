@@ -193,10 +193,10 @@
                         <span><?php echo $this->lang->line('about_us'); ?></span>
                     </a>
                     <ul class="sub">
-                        <li><a href="<?php echo base_url(FOLDER_ADMIN);?>/publication/view_publication"> <?php echo $this->lang->line('about_us_data'); ?></a></li>
+                       <!--  <li><a href="<?php echo base_url(FOLDER_ADMIN);?>/publication/view_publication"> <?php echo $this->lang->line('about_us_data'); ?></a></li> -->
                         <li><a href="<?php echo base_url(FOLDER_ADMIN);?>/publication/add_publication_category"><?php echo $this->lang->line('about_us_category'); ?></a></li>
                         <li><a href="<?php echo base_url(FOLDER_ADMIN);?>/publication/add_publication_sub_category"><?php echo $this->lang->line('language_setting'); ?></a></li>
-                        <li><a href="<?php echo base_url(FOLDER_ADMIN);?>/publication/touristinformation">Tourist Information</a></li>
+                        <li><a href="<?php echo base_url(FOLDER_ADMIN);?>/publication/touristinformation">Tourist Information Guide</a></li>
                         
 
                     </ul>
