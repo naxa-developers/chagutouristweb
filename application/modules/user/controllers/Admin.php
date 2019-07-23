@@ -22,7 +22,7 @@ class Admin extends Admin_Controller {
         }else{
             $emerg_lang='nep'; 
         }
-        $this->data['data'] = $this->general->get_tbl_data_result('user_id,username,token,email,gender,purpose,contact_num,start_date,end_date,country','users',array('user_id >'=>2) ,"user_id", "DESC");
+        $this->data['data'] = $this->general->get_tbl_data_result('user_id,username,token,email,gender,purpose,contact_num,start_date,end_date,country','users',array('user_id >'=>2) ,"user_id  ", "DESC");
         //echo"<pre>"; print_r($this->data['data']);die;
         $admin_type=$this->session->userdata('user_type');
         $this->data['admin']=$admin_type;

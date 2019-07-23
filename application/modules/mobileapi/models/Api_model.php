@@ -111,7 +111,20 @@ return $query->result_array();
 
 }
 
+  
+public function getcategories(){
 
+  $this->db->select('d.category_name,d.category_table,d.category_photo as category_marker,d.language,d.summary_list,c.name as subcategories,c.slug');
+  $this->db->from('categories_tbl as d');
+  $this->db->join('place_category as c','c.slug = d.sub_categories','LEFT');
+
+  $query = $this->db->get();
+  if ($query->num_rows() > 0)
+  {
+      return $data=$query->result_array();
+  }
+  return false;
+}
 public function get_drr_info(){
 
   $this->db->select('d.id as id,d.short_desc,d.description as desc,d.image as photo,c.name as categoryname,cs.name as subcatname');
