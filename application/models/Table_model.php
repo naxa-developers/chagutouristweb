@@ -131,7 +131,14 @@ public function get_max_id($tbl){
       "catname"=>$id,
       );
      $this->db->insert('place_rating',$ndata);
-    return $u;
+       $this->db->select('AVG(pr.rating) as total');
+       $this->db->from(''.$tbl.' as p');
+       $this->db->join('place_rating as pr','pr.catname = p.rating','LEFT');
+       $query = $this->db->get();
+       if ($query->num_rows() > 0)
+       {
+          return $data=$query->result_array();
+       } 
     }else{
       return false;
     }

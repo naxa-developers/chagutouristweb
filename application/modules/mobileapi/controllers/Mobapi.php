@@ -282,7 +282,7 @@ class Mobapi extends Admin_Controller
       if($report){
         $response['error'] = 0 ;
         $response['message'] = 'Thanks For Rating Us';
-        $response['average'] = "4";
+        $response['average'] = $report[0]['total'];
       }else{
         $response['error'] = 1 ;
         $response['message'] = 'Unable to rate !';
