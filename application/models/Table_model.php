@@ -107,11 +107,31 @@ public function get_max_id($tbl){
 
  }
  public function updateRating($id,$data,$tbl){
-
    $this->db->where('id',$id);
    $u=$this->db->update($tbl,$data);
    if($u){
-      return $u;
+    $ndata =array(
+      "rating"=>$this->input->post('rating'),
+      "catname"=>$this->input->post('category_table'),
+      );
+     $this->db->insert('places_rating',$ndata);
+    return $u;
+    }else{
+      return false;
+    }
+
+ }
+  public function updatePlcaeRating($id,$data,$tbl){
+   $this->db->where('id',$id);
+   $u=$this->db->update($tbl,$data);
+   //echo $this->db->last_query();die;
+   if($u){
+    $ndata =array(
+      "rating"=>$this->input->post('rating'),
+      "catname"=>$id,
+      );
+     $this->db->insert('place_rating',$ndata);
+    return $u;
     }else{
       return false;
     }

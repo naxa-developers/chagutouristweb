@@ -260,11 +260,13 @@ class Mobapi extends Admin_Controller
       $rating = $this->input->post('rating');
       $id = $this->input->post('id');
       $tbl = $this->input->post('category_table');
-      $d =array('a0'=>$rating);
+      $d =array('a0'=>$tbl);
       $report = $this->Table_model->updateRating($id,$d,$tbl);
       if($report){
         $response['error'] = 0 ;
         $response['message'] = 'Thanks For Rating Us';
+        $response['message'] = 'Thanks For Rating Us';
+        $response['average'] = "4";
       }else{
         $response['error'] = 1 ;
         $response['message'] = 'Unable to rate !';
@@ -275,11 +277,12 @@ class Mobapi extends Admin_Controller
   {
       $rating = $this->input->post('rating');
       $id = $this->input->post('id');
-      $d =array('rating'=>$rating);
-      $report = $this->Table_model->updateRating($id,$d,'locationinformation');
+      $d =array('rating'=>$id);
+      $report = $this->Table_model->updatePlcaeRating($id,$d,'locationinformation');
       if($report){
         $response['error'] = 0 ;
         $response['message'] = 'Thanks For Rating Us';
+        $response['average'] = "4";
       }else{
         $response['error'] = 1 ;
         $response['message'] = 'Unable to rate !';
