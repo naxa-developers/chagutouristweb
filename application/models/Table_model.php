@@ -66,12 +66,10 @@ public function get_asjson($d,$tbl){
   $this->db->select($v['eng_lang'].' AS '.pg_escape_string(preg_replace('/[^A-Za-z0-9\-]/', ' ', $v['nepali_lang'])));
   //$this->db->select($v['eng_lang'].' AS '. $v['nepali_lang']);
   }
-  $this->db->select('ST_AsGeoJSON(the_geom)');
+  $this->db->select('ST_AsGeoJSON(the_geom),id');
   $this->db->order_by('id','ASC');
   $q=$this->db->get($tbl);
   return $q;
-
-
 }
 
 public function get_lang($tbl){
