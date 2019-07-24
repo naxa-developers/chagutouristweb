@@ -106,5 +106,15 @@ public function get_max_id($tbl){
    return $u;
 
  }
+ public function updateRating($id,$data,$tbl){
 
+   $this->db->where('id',$id);
+   $u=$this->db->update($tbl,$data);
+   if($u){
+      return $u;
+    }else{
+      return false;
+    }
+
+ }
 }//end

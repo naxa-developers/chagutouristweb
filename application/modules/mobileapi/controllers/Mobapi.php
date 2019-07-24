@@ -255,6 +255,22 @@ class Mobapi extends Admin_Controller
       echo $dataset_geojson;
     }
   }
+  public function starRating()
+  {
+      $rating = $this->input->post('rating');
+      $id = $this->input->post('id');
+      $tbl = $this->input->post('category_table');
+      $d =array('a0'=>$rating);
+      $report = $this->Table_model->updateRating($id,$d,$tbl);
+      if($report){
+        $response['error'] = 0 ;
+        $response['message'] = 'Thanks For Rating Us';
+      }else{
+        $response['error'] = 1 ;
+        $response['message'] = 'Unable to rate !';
+      }
+      echo json_encode($response);
+  }
 }//end
 
 
