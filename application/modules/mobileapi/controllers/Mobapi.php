@@ -41,7 +41,7 @@ class Mobapi extends Admin_Controller
     }
     public function place_details_api()
     {
-      $data=$this->general->get_tbl_data_result('"id" as FID,"description" as Description,"image" as Photo,"image" as Primary image,"image" as Images,"language" as Language,"audio" as Audio,"video" as Videos,"longitude" as Longitude,"latitude" as Latitude,"qrcode"  as QR code,"title" as Name,"slug" as place type','locationinformation');//this is language table
+      $data=$this->general->get_tbl_data_result('id,"rating" as FID,"description" as Description,"image" as Photo,"image" as Primary image,"image" as Images,"language" as Language,"audio" as Audio,"video" as Videos,"longitude" as Longitude,"latitude" as Latitude,"qrcode"  as QR code,"title" as Name,"slug" as place type','locationinformation');//this is language table
       $response['error'] = 0 ;
       $response['message'] = 'List Of Places';
       $response['data'] = $data;
@@ -262,6 +262,21 @@ class Mobapi extends Admin_Controller
       $tbl = $this->input->post('category_table');
       $d =array('a0'=>$rating);
       $report = $this->Table_model->updateRating($id,$d,$tbl);
+      if($report){
+        $response['error'] = 0 ;
+        $response['message'] = 'Thanks For Rating Us';
+      }else{
+        $response['error'] = 1 ;
+        $response['message'] = 'Unable to rate !';
+      }
+      echo json_encode($response);
+  }
+  public function placeRating()
+  {
+      $rating = $this->input->post('rating');
+      $id = $this->input->post('id');
+      $d =array('rating'=>$rating);
+      $report = $this->Table_model->updateRating($id,$d,'locationinformation');
       if($report){
         $response['error'] = 0 ;
         $response['message'] = 'Thanks For Rating Us';
