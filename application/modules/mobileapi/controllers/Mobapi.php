@@ -277,7 +277,7 @@ class Mobapi extends Admin_Controller
   {
       $rating = $this->input->post('rating');
       $id = $this->input->post('id');
-      $d =array('rating'=>$id);
+      $d =array('location_id'=>$id);
       $report = $this->Table_model->updatePlcaeRating($id,$d,'locationinformation');
       if($report){
         $kdada=array("rating"=>$report[0]['total']);
