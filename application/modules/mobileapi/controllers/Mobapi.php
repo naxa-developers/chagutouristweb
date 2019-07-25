@@ -282,8 +282,8 @@ class Mobapi extends Admin_Controller
       if($report){
         $kdada=array("rating"=>$report[0]['total']);
         //print_r($kdada);die;
-        $report = $this->Table_model->placeRating($id,$kdada,'locationinformation');
-        if($report){
+        $trans = $this->Table_model->placeRating($id,$kdada,'locationinformation');
+        if($trans){
           $response['error'] = 0;
           $response['message'] = 'Thanks For Rating Us';
           $response['average'] = $report[0]['total'];
