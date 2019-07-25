@@ -280,11 +280,16 @@ class Mobapi extends Admin_Controller
       $d =array('rating'=>$id);
       $report = $this->Table_model->updatePlcaeRating($id,$d,'locationinformation');
       if($report){
-        $response['error'] = 0 ;
-        $response['message'] = 'Thanks For Rating Us';
-        $response['average'] = $report[0]['total'];
+        $kdada=array("rating"=>$report[0]['total']);
+        //print_r($kdada);die;
+        $report = $this->Table_model->placeRating($id,$kdada,'locationinformation');
+        if($report){
+          $response['error'] = 0;
+          $response['message'] = 'Thanks For Rating Us';
+          $response['average'] = $report[0]['total'];
+        }
       }else{
-        $response['error'] = 1 ;
+        $response['error'] = 1;
         $response['message'] = 'Unable to rate !';
       }
       echo json_encode($response);
