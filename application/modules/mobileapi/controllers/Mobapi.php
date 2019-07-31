@@ -106,12 +106,15 @@ class Mobapi extends Admin_Controller
       if($tokencheck) {  //5.checking num exists or not
         //$tokencheck=$this->Api_model->check_auth('users',$token); 
         $date =date('Y-m-d');
+        $expiredate=$this->general->get_tbl_data_result('end_date as expiredate','users',array('token'=>$token));
+        //print_r($expiredate[0]['expiredate']);die;
         $token=$this->general->get_tbl_data_result('token','users',array('end_date >='=>$date,'token'=>$token));
         //echo $this->db->last_query();die;
         if($token)
         {
           $response['error'] = 0;
           $response['message'] = 'Valid user';
+          $response['date'] = $expiredate[0]['expiredate'];
         }else{
           $response['error'] = 1;
           $response['message'] = 'Your token is expired Please Contact to service provider !!';
