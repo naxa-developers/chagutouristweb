@@ -21,7 +21,8 @@
 
                 </div>
                 <div class="panel-body"> <?php //print_r(base64_decode($categoryname));die; ?>
-                <a href="<?php echo base_url(FOLDER_ADMIN) ?>/csvtable/csv_tbl/?tbl='.<?php echo $tbl ;?>.'&& id='.<?php echo $tbl ;?>.'&& catname='.<?php echo $categoryname ;?>">    <button type="button" class="btn btn-info btn-lg btn-block">Upload Csv</button></a>
+                <!-- <a href="<?php echo base_url(FOLDER_ADMIN) ?>/csvtable/upload_csv_emerg/?tbl='.<?php echo $tbl ;?>.'&& id='.<?php echo $tbl ;?>.'&& catname='.<?php echo $categoryname ;?>">    <button type="button" class="btn btn-info btn-lg btn-block">Upload Csv</button></a> -->
+                <a href="<?php echo base_url(FOLDER_ADMIN) ?>/csvtable/upload_layer/?tbl='.<?php echo $tbl ;?>.'&& id='.<?php echo $tbl ;?>.'&& catname='.<?php echo $categoryname ;?>">    <button type="button" class="btn btn-info btn-lg btn-block">Upload Csv</button></a>
 
                 </div>
             </section>

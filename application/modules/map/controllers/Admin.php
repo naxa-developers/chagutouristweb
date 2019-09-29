@@ -28,6 +28,7 @@ class Admin extends Admin_Controller {
 			$lang=$this->session->get_userdata('Language');
 		}
 		$this->body['data']=$this->Dash_model->get_tables_data_cat('categories_tbl',$lang['Language']);
+        // echo"<pre>";print_r($this->body['data']);die;
 		$this->body['tbl_name']='categories_tbl';
 		//admin check
 		$admin_type=$this->session->userdata('user_type');
@@ -220,7 +221,8 @@ class Admin extends Admin_Controller {
         $this->body['mapcategory'] = $this->general->get_tbl_data_result('id,name,slug','place_category');
         if(isset($_POST['submit_cat'])){
             //echo "string"; print_r($this->input->post());die;
-            $cat_name=$this->input->post('cat_name');
+            $cat_name=$this->input->post('subcat');
+            // print_r($cat_name);die;
         	$sub_cat_name=$this->input->post('subcat');
             $cat_type=$this->input->post('category_type');
             $upload_type=$this->input->post('upload_type');
@@ -231,7 +233,8 @@ class Admin extends Admin_Controller {
     			$e='tbl_'.$c.$d.'_tbl';
         		$cat_table=$e;
         	}else{
-        		$cat_table=strtolower(str_replace(" ","_",$cat_name));
+        		$cat_table=strtolower(str_replace(" ","-",$cat_name));
+                // print_r($cat_table);die;
         	}
             if( $this->db->table_exists($cat_table)==true ){
                 $this->session->set_flashdata('msg', 'Category Already Exists !! Please use another category name');
@@ -257,7 +260,7 @@ class Admin extends Admin_Controller {
                             $m='New Data Map('.$cat_name.')has been added in '.SITE_NAME_EN.' Webpage.Plese follow link to view new Map Data <br>'.base_url().'category?tbl='.$cat_table;
                             $this->Newsletter->send_mail($m,$mail_subject);
                             $this->session->set_flashdata('msg','Important!!!Create Table for the category '.$cat_name);
-                            redirect(FOLDER_ADMIN.'/map/csv_data_tbl?tbl='.base64_encode($cat_name).'&& id='.base64_encode($insert).'&& tbl_name='.base64_encode($cat_table). '&& catname='.$this->input->post('category_type'));
+                            redirect(FOLDER_ADMIN.'/map/csv_data_tbl?tbl='.base64_encode($cat_name).'&& id='.base64_encode($insert).'&& tbl_name='.base64_encode($cat_table). '&& catname='.$this->input->post('$sub_cat_name'));
 
                         }else{
                             $this->load->model('Newsletter');

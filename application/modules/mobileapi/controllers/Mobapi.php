@@ -232,22 +232,40 @@ class Mobapi extends Admin_Controller
   }
   public function geojson() {
     $tbl=$_POST['cat_table'];
+    // print_r($_POST['cat_table']);die;
     if(!$this->db->table_exists($tbl)){
       $response['msg']='Data table does not exists';
       echo json_encode($response);
     }else{
       $d=$this->Table_model->get_lang($tbl);
       /* get the object   */
-      $report = $this->Table_model->get_asjson($d,$tbl);
-      //echo "<pre>";print_r($report);die;
-      $dataset_data=$report->result_array();
-      foreach($dataset_data as $data){
+      $report = $this->general->get_tbl_data_result('*',$_POST['cat_table'], array('type'=>$_POST['type']));
+      // echo"<pre>";print_r($report);die;
+      foreach($report as $data){
         $ddata=$data ;
-        unset($data['st_asgeojson']);
+        // unset($data['st_asgeojson']);
         $features_cat[]= array(
           'type' =>'Feature',
-          'properties'=>$data,
-          'geometry'=>json_decode($ddata['st_asgeojson'],JSON_NUMERIC_CHECK)
+          'properties'=>
+          [
+            'Name'=>$data['name'],
+            'Type'=>$data['name'],
+            'Descrption'=>$data['description'],
+            'Primary'=>$data['primary_image'],
+            '360_Images'=>$data['three_sixty_images'],
+            'Videos'=>$data['videos'],
+            'Audio'=>$data['audio'],
+            'Language'=>$data['language'],
+            'QR_code'=>$data['qr_code'],
+            'Latitude'=>$data['latitude'],
+            'Longitude'=>$data['longitude'],
+            'place_type'=>$data['placetype'],
+            'id'=>$data['id'],
+          ],
+          "geometry" => [
+                        $data['longitude'],
+                        $data['latitude']
+                    ]
         );
       }
       $dataset_array= array(

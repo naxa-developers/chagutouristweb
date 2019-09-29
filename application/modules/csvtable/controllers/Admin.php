@@ -51,6 +51,9 @@ class Admin extends Admin_Controller {
 		      	for($i=0;$i<$n;$i++){
 		        	array_push($row,trim($frow[$i]," "));
 		        }
+		       	// echo "<pre>";
+		        // print_r($row);
+		        // die;
 		        if( $this->db->table_exists($tbl_name) == FALSE ){
 		        	$this->dbforge->add_field('id');
 		        	$create=$this->dbforge->create_table($tbl_name, FALSE);
@@ -60,7 +63,7 @@ class Admin extends Admin_Controller {
 				            array(
 
 				               	'a'.$i=> array(
-				                	'type' =>'varchar',
+				                	'type' =>'text',
 				                ),
 				            );
 				            $add_column=$this->dbforge->add_column($tbl_name,$fields);
@@ -72,6 +75,7 @@ class Admin extends Admin_Controller {
 				            );
 				            $lang_insert=$this->Dash_model->insert_lang('tbl_lang',$data_lang);
 				        }
+				        
 				        $geom_index=sizeof($row)+1;
 				        $data_lang=array(
 				            'eng_lang'=>'the_geom',
@@ -122,7 +126,7 @@ class Admin extends Admin_Controller {
     }
     public function upload_csv_emerg() {
     	$this->body=array();
-		$table_name = $this->input->get('tbl');
+		$table_name = "historical_sites";
 		$cat= $this->input->get('cat');
 		 $lanuage=$this->session->get_userdata('Language');
 		if($lanuage['Language']=='en') {
@@ -134,14 +138,14 @@ class Admin extends Admin_Controller {
 			$max_id=$this->Table_model->get_max_id($table_name);
 			$fields=$this->db->list_fields($table_name);
 			unset($fields[0]);
-			if($table_name == 'emergency_contact'){
-			  	unset($fields[10]);
-			}elseif($table_name == 'emergency_personnel'){
-				unset($fields[8]);
-			}else{
-				unset($fields[11]);
+			// if($table_name == 'emergency_contact'){
+			//   	unset($fields[10]);
+			// }elseif($table_name == 'emergency_personnel'){
+			// 	unset($fields[8]);
+			// }else{
+			// 	unset($fields[11]);
 
-			}
+			// }
 		  	$field_name=implode(",",$fields);
 		  	$f=$_FILES["uploadedfile"];
 		  	$path=$f["tmp_name"];
@@ -195,10 +199,10 @@ class Admin extends Admin_Controller {
 		  	// $this->load->view('admin/footer');
 		}
   	}
-  	public function upload_dictionary()
+  	public function upload_layer()
   	{
+  		$table_name = strtolower(str_replace("-","_",base64_decode($this->input->get('tbl'))));
   		$this->data=array();
-  		$table_name = "dictionary_tbl";
 		$lanuage=$this->session->get_userdata('Language');
 		if($lanuage['Language']=='en') {
             $lang='en';
@@ -208,17 +212,7 @@ class Admin extends Admin_Controller {
 		if (isset($_POST['submit'])) {
 			$max_id=$this->Table_model->get_max_id($table_name);
 			$fields=$this->db->list_fields($table_name);
-			unset($fields[0]);
-			// unset($fields[5]);
-			 unset($fields[3]);
-			if($table_name == 'dictionary_tbl'){
-
-			  	//unset($fields[5]);
-			  	unset($fields[3]);
-			}else{
-				//unset($fields[5]);
-			  	unset($fields[3]);
-			}
+			unset($fields[13]);
 		  	$field_name=implode(",",$fields);
 		  	// echo "<pre>"; print_r($field_name)
 		  	$f=$_FILES["uploadedfile"];
@@ -233,9 +227,9 @@ class Admin extends Admin_Controller {
 		      	$up=$this->Table_model->update_cat($max_id['id'],$data,$table_name);
 		    	$this->session->set_flashdata('msg','Csv Was successfully Added');
 		    	if($table_name == 'dictionary_tbl'){
-		        	redirect(FOLDER_ADMIN.'/dictionary');
+		        	redirect(FOLDER_ADMIN.'/map/categories_tbl');
 			    }else{
-			        redirect(FOLDER_ADMIN.'/dictionary');
+			        redirect(FOLDER_ADMIN.'/map/categories_tbl');
 			    }
 		  	}
 		}else {

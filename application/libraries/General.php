@@ -141,7 +141,7 @@ class General {
 	}
 	public function get_homepage_info() {
 		if($this->ci->session->userdata('Language')==NULL){
-      		$this->ci->session->set_userdata('Language','nep');
+      		$this->ci->session->set_userdata('Language','en');
     	}
     	$lang=$this->ci->session->userdata('Language');
     	if($lang== 'en')
@@ -166,7 +166,7 @@ class General {
 	public function get_site_settings_info() {
 		//pp($this->ci->session->userdata('Language'));
 		if($this->ci->session->userdata('Language')==NULL){
-      		$this->ci->session->set_userdata('Language','nep');
+      		$this->ci->session->set_userdata('Language','en');
     	}
     	$lang=$this->ci->session->userdata('Language');// pp($lang);
     	if($lang== 'en')
