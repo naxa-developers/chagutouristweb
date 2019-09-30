@@ -251,8 +251,9 @@ class Mobapi extends Admin_Controller
         $geometry =array(
           "type"=>"Point",
           "coordinates"=>[
-             $data['latitude'],
-             $data['longitude']
+            $data['longitude'],
+            $data['latitude']
+             
           ],
         );
         $features_cat[]= array(
