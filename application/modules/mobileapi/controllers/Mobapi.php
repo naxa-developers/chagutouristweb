@@ -230,6 +230,10 @@ class Mobapi extends Admin_Controller
     // echo "<pre>";
     // print_r($response);die;
   }
+  public function geojson_test()
+  {
+    
+  }
   public function geojson() {
     $tbl=$_POST['cat_table'];
     // print_r($_POST['cat_table']);die;
@@ -248,19 +252,21 @@ class Mobapi extends Admin_Controller
           'type' =>'Feature',
           'properties'=>
           [
+            'FID'=>$data['id'],
             'Name'=>$data['name'],
             'Type'=>$data['name'],
             'Descrption'=>$data['description'],
-            'Primary'=>$data['primary_image'],
-            '360_Images'=>$data['three_sixty_images'],
+            'Primary image'=>$data['primary_image'],
+            'Images'=>$data['three_sixty_images'],
             'Videos'=>$data['videos'],
+            '360 Image'=>$data['three_sixty_images'],
             'Audio'=>$data['audio'],
             'Language'=>$data['language'],
-            'QR_code'=>$data['qr_code'],
+            'QR Code'=>$data['qr_code'],
             'Latitude'=>$data['latitude'],
             'Longitude'=>$data['longitude'],
-            'place_type'=>$data['placetype'],
-            'id'=>$data['id'],
+            'place type'=>$data['placetype'],
+            // 'id'=>$data['id'],
           ],
           "geometry" => [
                         $data['longitude'],
