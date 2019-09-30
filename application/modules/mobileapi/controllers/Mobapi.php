@@ -248,6 +248,13 @@ class Mobapi extends Admin_Controller
       foreach($report as $data){
         $ddata=$data ;
         // unset($data['st_asgeojson']);
+        $geometry =array(
+          "type"=>"Point",
+          "coordinates"=>[
+             $data['latitude'],
+             $data['longitude']
+          ],
+        );
         $features_cat[]= array(
           'type' =>'Feature',
           'properties'=>
@@ -268,17 +275,14 @@ class Mobapi extends Admin_Controller
             'place type'=>$data['placetype'],
             // 'id'=>$data['id'],
           ],
-          "geometry" => [
-                        $data['longitude'],
-                        $data['latitude']
-                    ]
+          "geometry" => $geometry,
         );
       }
       $dataset_array= array(
         'type' => 'FeatureCollection',
         'features' => $features_cat,
       );
-      $dataset_geojson=json_encode($dataset_array);
+      $dataset_geojson=json_encode($dataset_array, JSON_NUMERIC_CHECK);
       echo $dataset_geojson;
     }
   }
