@@ -218,7 +218,7 @@ class Admin extends Admin_Controller {
         $lang=$this->session->get_userdata('Language');
         $lang['Language'];
         $this->body=array();
-        $this->body['mapcategory'] = $this->general->get_tbl_data_result('id,name,slug','place_category');
+        $this->body['mapcategory'] = $this->general->get_tbl_data_result('id,name,slug,status','place_category',array('status'=>'1'));
         if(isset($_POST['submit_cat'])){
             //echo "string"; print_r($this->input->post());die;
             $cat_name=$this->input->post('subcat');
