@@ -265,7 +265,7 @@ class Mobapi extends Admin_Controller
             'Type'=>$data['name'],
             'Description'=>$data['description'],
             'Primary image'=>$data['primary_image'],
-            'Images'=>$data['three_sixty_images'],
+            'Images'=>$data['images'],
             'Videos'=>$data['videos'],
             '360 Image'=>$data['three_sixty_images'],
             'Audio'=>$data['audio'],
