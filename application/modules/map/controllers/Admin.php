@@ -236,7 +236,7 @@ class Admin extends Admin_Controller {
         		$cat_table=strtolower(str_replace(" ","-",$cat_name));
                 // print_r($cat_table);die;
         	}
-            if( $this->db->table_exists($cat_table)==true ){
+            if( $this->db->table_exists($cat_table)==false ){
                 $this->session->set_flashdata('msg', 'Category Already Exists !! Please use another category name');
                 //echo "here";die;
                 redirect(FOLDER_ADMIN.'/map/categories_tbl');
