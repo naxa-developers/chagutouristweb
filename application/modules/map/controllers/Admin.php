@@ -109,10 +109,11 @@ class Admin extends Admin_Controller {
        $id= base64_decode($this->input->get('id'));
        $table= base64_decode($this->input->get('tbl'));
        $this->data['chaangesmapdata']=$this->general->get_tbl_data_result(('*'),$table,array('id'=>$id));
+       // echo"<pre>";print_r($this->data['chaangesmapdata']);die;
        if(isset($_POST['submit'])){
             $data=array(
-                'a1'=>$this->input->post('a1'),
-                'a3'=>$this->input->post('a3')
+                'name'=>$this->input->post('name'),
+                'description'=>$this->input->post('description')
             );
             //echo "<pre>"; print_r($data);die;
             $insert=$this->Dash_model->update($id,$data,$table);

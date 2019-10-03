@@ -14,13 +14,13 @@
                         <div class="form-group">
                             <div class="col-md-12">
                                 <label for="exampleInputEmail1">Title </label>
-                                <input type="text" name="a1" class="form-control" id="exampleInputEmail1" placeholder="Enter Title" value="<?php  echo $chaangesmapdata[0]['a1']; ?>">
+                                <input type="text" name="name" class="form-control" id="exampleInputEmail1" placeholder="Enter Title" value="<?php  echo $chaangesmapdata[0]['name']; ?>">
                             </div>
                         </div>
                         <div class="form-group">
                             <div class="col-sm-12">
                                 <label class="control-label">Description</label>
-                                <textarea class="form-control ckeditor" name="a3" rows="10"><?php  echo $chaangesmapdata[0]['a3'] ?></textarea>
+                                <textarea class="form-control ckeditor" name="description" rows="10"><?php  echo $chaangesmapdata[0]['description'] ?></textarea>
                             </div>
                         </div>
                         <div class="form-group">
