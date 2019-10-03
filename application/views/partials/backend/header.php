@@ -74,8 +74,8 @@
 <!--logo start-->
     <div class="brand">
         <a href="<?php echo base_url(FOLDER_ADMIN)?>/dashboard"  class="logo">
-            <img src="<?php echo SITE_SLOGAN_EN ?>" alt="admin" height=60; style="width: auto !important;">
-           <!--  <div class="cnm"><?php echo SITE_NAME_EN ?></div> -->
+           <!--  <img src="<?php echo SITE_SLOGAN_EN ?>" alt="admin" height=60; style="width: auto !important;"> -->
+            <div class="cnm"><?php echo SITE_NAME_EN ?></div>
         </a>
         <div class="sidebar-toggle-box">
             <div class="fa fa-bars"></div>
