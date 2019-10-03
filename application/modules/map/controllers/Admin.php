@@ -73,7 +73,7 @@ class Admin extends Admin_Controller {
             $this->ciqrcode->generate($params);
             $qrcode = base_url() . 'uploads/qrcode/'.$image_name_qr;
             $img=array(
-                        'a10'=>$qrcode,
+                        'qr_code'=>$qrcode,
                     );
             $update_path=$this->Map_model->update_path($id,$img,$table);
             print_r(json_encode(array('status'=>'success','message'=>'Qr Code generated Successfully !!')));
