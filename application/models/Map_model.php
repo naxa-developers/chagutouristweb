@@ -485,20 +485,20 @@ public function get_icon(){
     }
     if($type == "image")
     {
-      $tet =array("a5"=>json_encode($dataArray,JSON_NUMERIC_CHECK),"a4"=>$dataArray[0]);
+      $tet =array("images"=>json_encode($dataArray,JSON_NUMERIC_CHECK),"primary_image"=>$dataArray[0]);
       // echo"<pre>";print_r($tet);die;
     }
     if($type == "threesixty")
     {
-      $tet =array("a7"=>json_encode($dataArray,JSON_NUMERIC_CHECK));
+      $tet =array("three_sixty_images"=>json_encode($dataArray,JSON_NUMERIC_CHECK));
     }
     if($type == "audio")
     {
-      $tet =array("a8"=>json_encode($dataArray,JSON_NUMERIC_CHECK));
+      $tet =array("audio"=>json_encode($dataArray,JSON_NUMERIC_CHECK));
     }
     if($type == "video")
     {
-      $tet =array("a6"=>json_encode($dataArray,JSON_NUMERIC_CHECK));
+      $tet =array("videos"=>json_encode($dataArray,JSON_NUMERIC_CHECK));
     }
     if (!empty($dataArray))
     {  
