@@ -82,7 +82,7 @@ foreach ($layercount as $key => $value) {
     <div class="col-md-12">
       <!--widget graph start-->
       <header class="panel-heading">
-         Mayer Message<span class="tools pull-right">
+         Mayor's Message<span class="tools pull-right">
             <a href="javascript:;" class="fa fa-chevron-down"></a>
           </span>
         </header>
