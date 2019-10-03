@@ -237,7 +237,7 @@ return $res->result_array();
   }
   public function get_tables_data_cat($tbl,$lang){ //get data of table
 
-    $this->db->select('id,category_name,category_photo,category_table,category_type,uplaod_type');
+    $this->db->select('id,category_name,category_photo,category_table,category_type,uplaod_type,sub_categories');
     $this->db->where('language',$lang);
     $this->db->order_by('id','ASC');
     $q=$this->db->get($tbl);
