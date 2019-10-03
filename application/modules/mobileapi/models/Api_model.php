@@ -114,10 +114,10 @@ return $query->result_array();
   
 public function getcategories(){
 
-  $this->db->select('d.category_name,d.category_table,d.category_photo as category_marker,d.language,d.summary_list,c.name as subcategories,c.slug');
-  $this->db->from('categories_tbl as d');
-  $this->db->join('place_category as c','c.slug = d.sub_categories','LEFT');
-
+  $this->db->select('category_name,category_table,category_photo as category_marker,language,d.summary_list,sub_col as subcategories,sub_categories as slug');
+  $this->db->from('categories_tbl');
+  // $this->db->join('place_category as c','c.slug = d.sub_categories','LEFT');
+  // echo $this->db->last_query();die;
   $query = $this->db->get();
   if ($query->num_rows() > 0)
   {
