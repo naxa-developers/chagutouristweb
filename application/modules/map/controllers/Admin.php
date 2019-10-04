@@ -89,7 +89,7 @@ class Admin extends Admin_Controller {
        $this->data['table'] = $tbl;
        $d=$this->Table_model->get_lang($tbl);
        //echo"<pre>"; print_r($d);die;
-       $this->data['data'] = $this->general->get_tbl_data_result('id,name,description,qr_code,primary_image',$tbl);
+       $this->data['data'] = $this->general->get_tbl_data_result('id,qr_code,primary_image',$tbl);
        //$t =$this->Table_model->get_asjson($d,$tbl);
        //echo "<pre>";print_r($t);die;
        $admin_type=$this->session->userdata('user_type');

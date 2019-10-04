@@ -61,12 +61,13 @@
                             <?php }  ?>
                             <td>
                               <button class="btnprint" id="print-element<?php echo $v['id'] ?>"> Print Qr Code</button>
-                            </td>
+                            
                             <div id="content-to-print<?php echo $v['id'] ?>">
                                   Name : <?php echo $v['name'] ?>
-                                  <img src="<?php echo $v['primary_image'] ?>"><br>
+                                  <img src="<?php echo $v['primary_image'] ?>" height='210px'><br>
                                   <img src="<?php echo $v['qr_code'] ?>">
                               </div>
+                            </td>
                             <td>
                               <span data-id="<?php echo $v['id']  ?>"  data-type="image"  data-title="Add Image" data-nid="<?php  echo $table; ?>" class="btn btn-primary btn-xs popupModal">Add Images</span>
                             </td>
