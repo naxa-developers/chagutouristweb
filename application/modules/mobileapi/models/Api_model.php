@@ -165,7 +165,7 @@ public function get_publication(){
   }
 
   public function get_inventory(){
-    $this->db->select('in.*,inc.name as category_name,inc.slug as category_slug,inc.image as category_image,insc.name as subcat_name,insc.slug as sub_cat_slug');
+    $this->db->select('in.*,inc.name as category_name,inc.slug as category_slug,inc.image as category_image,insc.name as subcat_name,insc.slug as sub_cat_slug, language');
     $this->db->from('inventory as in');
     $this->db->join('inventorycategory as inc','inc.id=in.category','LEFT');
     $this->db->join('inventorycat as insc','insc.id=in.subcat','LEFT');
