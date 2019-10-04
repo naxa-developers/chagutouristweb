@@ -115,7 +115,7 @@ return $query->result_array();
 public function getcategories(){
 
   // $this->db->select('category_name,category_table,category_photo as category_marker,language,d.summary_list,sub_col as subcategories,sub_categories as slug');
-  $this->db->select('category_name, category_photo as  category_marker, category_table, category_type,summary_list, sub_categories as slug, sub_col as subcategories');
+  $this->db->select('category_name, category_photo as  category_marker, category_table, category_type,summary_list, sub_categories as slug, sub_col as subcategories,language');
   $this->db->from('categories_tbl');
   // $this->db->join('place_category as c','c.slug = d.sub_categories','LEFT');
   // echo $this->db->last_query();die;
@@ -165,7 +165,7 @@ public function get_publication(){
   }
 
   public function get_inventory(){
-    $this->db->select('in.*,inc.name as category_name,inc.slug as category_slug,inc.image as category_image,insc.name as subcat_name,insc.slug as sub_cat_slug, language');
+    $this->db->select('in.*,inc.name as category_name,inc.slug as category_slug,inc.image as category_image,insc.name as subcat_name,insc.slug as sub_cat_slug');
     $this->db->from('inventory as in');
     $this->db->join('inventorycategory as inc','inc.id=in.category','LEFT');
     $this->db->join('inventorycat as insc','insc.id=in.subcat','LEFT');
