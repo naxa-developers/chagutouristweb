@@ -63,7 +63,7 @@
                               <button class="btnprint" id="print-element<?php echo $v['id'] ?>"> Print Qr Code</button>
                             
                             <div id="content-to-print<?php echo $v['id'] ?>">
-                                  Name : <?php echo $v['name'] ?>
+                                  Name : <?php echo $v['name'] ?><br>
                                   <img src="<?php echo $v['primary_image'] ?>" height='210px'><br>
                                   <img src="<?php echo $v['qr_code'] ?>">
                               </div>
