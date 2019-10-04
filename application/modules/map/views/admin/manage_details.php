@@ -65,7 +65,7 @@
                             <div id="content-to-print<?php echo $v['id'] ?>">
                                   Name : <?php echo $v['name'] ?><br>
                                   <?php $first = reset($v['images']); ?>
-                                  <img src="<?php echo $first ?>" height='210px'><br>
+                                  <img src="<?php echo $first; ?>" height='210px'><br>
                                   <img src="<?php echo $v['qr_code'] ?>">
                               </div>
                             </td>
