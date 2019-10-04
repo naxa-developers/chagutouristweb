@@ -36,6 +36,10 @@
         <div class="lock-box text-center">
         <div class="text-center mt-5 mb-5"> 
              <img src="<?php echo SITE_SLOGAN_EN ?>" alt="admin" height=60; style="position: static;">
+             </div>
+        <div>
+            <?php echo SITE_NAME_EN ?>
+        </div>
         </div>
             <?php echo $template['body'];?>
         </div>
