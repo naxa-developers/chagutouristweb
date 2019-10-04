@@ -33,7 +33,7 @@ class Mobapi extends Admin_Controller
     public function touristInformation()
     {
       $lang = $this->input->post('language');
-      $data=$this->general->get_tbl_data_result('*','touristinformation',array('language'=>$lang));//this is language table
+      $data=$this->general->get_tbl_data_result('*','touristinformation');//this is language table
       $response['error'] = 0 ;
       $response['message'] = 'List Of Tourist Information';
       $response['data'] = $data;
@@ -219,6 +219,7 @@ class Mobapi extends Admin_Controller
       $sum=$this->Api_model->get_sum_name($data['category_table'],$data['summary_list']);
       $sum_name=$sum['nepali_lang'];
       $da=array('summary_name'=>$sum_name);
+      
       //}
       $a=array_merge($category[$i],$da);
       array_push($final,$a);
