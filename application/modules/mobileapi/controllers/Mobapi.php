@@ -264,7 +264,7 @@ class Mobapi extends Admin_Controller
             'FID'=>$data['id'],
             'Name'=>$data['name'],
             'Type'=>$data['name'],
-            'Description'=>$data['description'],
+            'Description'=>strip_tags($data['description']),
             'Primary image'=>$data['primary_image'],
             'Images'=>$data['images'],
             'Videos'=>$data['videos'],
