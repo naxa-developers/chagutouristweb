@@ -1,4 +1,14 @@
 <!--main content start-->
+<style type="text/css">
+  table.dataTable tbody th, table.dataTable tbody td {
+     padding: 8px 10px;
+     word-break: break-all;
+  }
+  table.dataTable tbody th, table.dataTable tbody td img {
+   max-width:100px;
+   height:auto;
+  }
+</style>
 <script type="text/javascript" src="js/jquery-1.11.3-jquery.min.js"></script>
 <section id="main-content">
     <section class="wrapper">
@@ -64,8 +74,9 @@
                             
                             <div id="content-to-print<?php echo $v['id'] ?>">
                                   Name : <?php echo $v['name'] ?><br>
-                                  <?php $first = reset(array($v['images']); ?>
-                                  <img src="<?php echo $first; ?>" height='210px'><br>
+
+                                  <?php $first =array_values($v['images']); ?>
+                                  <img src="<?php echo reset($first); ?>" height='210px'><br>
                                   <img src="<?php echo $v['qr_code'] ?>">
                               </div>
                             </td>
